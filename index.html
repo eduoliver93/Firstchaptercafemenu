@@ -119,9 +119,9 @@
     position: sticky;
     top: 0;
     z-index: 50;
-    background-color: rgba(247, 245, 239, 0.95);
-    backdrop-filter: blur(8px);
-    padding: 3.5rem 0 1rem 0;
+    /* CORREÇÃO: Fundo bege sólido, sem blur para não bugar a renderização do gato */
+    background-color: var(--bg); 
+    padding: 4.5rem 0 1rem 0; /* Aumentei o top para o gato caber folgado */
     margin: 0 -1rem 2rem -1rem;
     border-bottom: 1px solid var(--line);
   }
@@ -130,6 +130,8 @@
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
+    /* CORREÇÃO: Isso permite que o gato suba sem ser cortado */
+    overflow-y: visible; 
     -webkit-overflow-scrolling: touch;
     gap: 0.6rem;
     list-style: none;
@@ -164,27 +166,30 @@
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   }
 
-  /* O GATINHO CORRIGIDO */
+  /* O GATINHO */
   .nav-cat-gif {
     position: absolute;
-    height: 65px; /* Aumentado para ficar bem visível */
+    height: 60px;
     width: auto;
     max-width: none;
     flex-shrink: 0;
-    top: -55px; /* Ajustado para a nova altura */
+    /* CORREÇÃO: Usar translateY em vez de top evita bugs de renderização */
+    bottom: 100%; 
     left: 50%;
-    transform: translateX(-50%) translateY(10px);
+    transform: translate(-50%, 10px); 
     opacity: 0;
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     pointer-events: none;
     z-index: 100;
-  }
-  .nav-btn.active .nav-cat-gif {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
+    margin-bottom: 5px;
   }
 
-  section.menu-block { scroll-margin-top: 130px; }
+  .nav-btn.active .nav-cat-gif {
+    opacity: 1;
+    transform: translate(-50%, 0); 
+  }
+
+  section.menu-block { scroll-margin-top: 150px; }
 
   /* ============ ESTRUTURA DO MENU ============ */
   section.menu-block{
