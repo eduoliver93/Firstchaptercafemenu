@@ -10,13 +10,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   /* ============================================================
-     PALETA E TIPOGRAFIA (Idênticas ao PDF)
+     PALETA E TIPOGRAFIA
      ============================================================ */
   :root{
-    --bg:        #f7f5ef; /* Papel */
-    --ink:       #111111; /* Traço preto */
-    --ink-soft:  #555555; /* Cinza para descrições */
-    --line:      #c4c0b6; /* Linha pontilhada */
+    --bg:        #f7f5ef;
+    --ink:       #111111;
+    --ink-soft:  #555555;
+    --line:      #c4c0b6;
     --media-bg:  #ebe7de; 
 
     --serif: 'Cormorant Garamond', Georgia, serif;
@@ -35,15 +35,8 @@
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
-    /* Textura sutil de papel */
     background-image: radial-gradient(rgba(120,110,90,.06) 1px, transparent 1px);
     background-size: 4px 4px;
-  }
-
-  /* Cursor de caneta (Desktop) */
-  @media (hover:hover) and (pointer:fine){
-    body{ cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path d='M3 21l3-9 9-9 3 3-9 9-9 3z' fill='none' stroke='%23111' stroke-width='1.2' stroke-linejoin='round'/></svg>") 3 21, auto; }
-    a, .item-media, label, button{ cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path d='M3 21l3-9 9-9 3 3-9 9-9 3z' fill='%23111' stroke='%23111' stroke-width='1.2' stroke-linejoin='round'/></svg>") 3 21, pointer; }
   }
 
   @keyframes floatLogo {
@@ -51,16 +44,10 @@
     50% { transform: translateY(-5px); }
   }
 
-  /* Animação de entrada das ilustrações do PDF */
-  @keyframes drawIllustration {
-    from { opacity: 0; filter: drop-shadow(0 0 10px rgba(255,255,255,1)) grayscale(100%) contrast(1.2); transform: translateY(20px); }
-    to { opacity: 1; filter: drop-shadow(0 0 0 rgba(255,255,255,0)) grayscale(100%) contrast(1.2); transform: translateY(0); }
-  }
-
   .wrap{
     max-width: 900px;
     margin: 0 auto;
-    padding: 2rem 1.5rem 5rem;
+    padding: 1rem 1rem 4rem;
     position: relative;
     z-index: 1;
   }
@@ -75,8 +62,8 @@
   }
   
   .logo-header img {
-    width: 130px;
-    height: 130px;
+    width: 110px;
+    height: 110px;
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid var(--ink);
@@ -86,114 +73,94 @@
 
   .hero{
     text-align: center;
-    padding: 1rem 0 2rem;
+    padding: 0 0 1.5rem;
     border-bottom: 1px solid var(--ink);
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
   }
 
   .hero h1{
     font-family: var(--sans);
     font-weight: 500;
-    font-size: clamp(2rem, 6vw, 3.5rem);
-    letter-spacing: .2em;
+    font-size: 1.8rem;
+    letter-spacing: .15em;
     text-transform: uppercase;
-    line-height: 1;
-    margin-bottom: 1.5rem;
+    line-height: 1.1;
+    margin-bottom: 1rem;
   }
 
   .hero .hours, .hero .address{
-    font-size: .75rem;
-    letter-spacing: .15em;
+    font-size: .8rem;
+    letter-spacing: .1em;
     text-transform: uppercase;
-    margin-bottom: .5rem;
+    margin-bottom: .4rem;
+    font-weight: 500;
   }
-  .hero .address{ color: var(--ink-soft); }
+  .hero .address{ color: var(--ink-soft); font-size: .75rem; }
   .hero .address a{ color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--ink); }
 
   /* ============================================================
-     NAVEGAÇÃO STICKY
+     NAVEGAÇÃO (BOTÕES COM ABAS)
      ============================================================ */
   nav.toc{
-    position: sticky;
-    top: 0;
+    position: relative; 
     z-index: 20;
-    background: rgba(247,245,239,.96);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--line);
-    padding: .8rem 0;
-    margin-bottom: 3rem;
+    background: transparent;
+    margin-bottom: 1.5rem;
   }
 
   nav.toc ul{
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: .4rem 1.5rem;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 0.6rem;
     list-style: none;
-    padding: 0 1rem;
+    padding: 0 0 0.5rem 0;
+    scrollbar-width: none;
   }
+  nav.toc ul::-webkit-scrollbar { display: none; }
+
+  nav.toc li { flex: 0 0 auto; }
 
   nav.toc a{
-    font-size: .65rem;
+    display: block;
+    font-size: .8rem; 
     font-weight: 500;
-    letter-spacing: .15em;
+    letter-spacing: .05em;
     text-transform: uppercase;
     color: var(--ink-soft);
     text-decoration: none;
-    transition: color .2s, border-bottom .2s;
-    padding-bottom: 2px;
+    padding: 0.7rem 1.2rem;
+    border: 1px solid var(--line);
+    border-radius: 50px; 
+    background: transparent;
+    transition: all 0.3s var(--ease-out);
+    cursor: pointer;
   }
 
-  nav.toc a:hover, nav.toc a.active {
-    color: var(--ink);
-    border-bottom: 1px solid var(--ink);
-  }
-
-  /* ============================================================
-     ILUSTRAÇÕES DO PDF
-     ============================================================ */
-  .pdf-illustration {
-    display: block;
-    margin: 3rem auto;
-    max-width: 100%;
-    height: auto;
-    /* Deixa a imagem em preto e branco puro para combinar com o papel */
-    filter: grayscale(100%) contrast(1.2);
-    animation: drawIllustration 1.5s var(--ease-out) forwards;
-    opacity: 0;
-  }
-
-  .illustration-wrapper {
-    position: relative;
-  }
-  
-  .illustration-side {
-    display: none;
-  }
-
-  /* No Desktop, as ilustrações flutuam nas laterais com efeito Parallax */
-  @media (min-width: 1050px) {
-    .illustration-side {
-      display: block;
-      position: absolute;
-      width: 160px;
-      top: 50px;
-      filter: grayscale(100%) contrast(1.2);
-      animation: drawIllustration 1.5s var(--ease-out) forwards;
-      opacity: 0;
-      /* O JS vai controlar o movimento de parallax */
-      will-change: transform;
-    }
-    .illustration-side.left { left: -190px; }
-    .illustration-side.right { right: -190px; }
+  nav.toc a.active {
+    color: var(--bg); 
+    background-color: var(--ink); 
+    border-color: var(--ink); 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   }
 
   /* ============================================================
-     ESTRUTURA DO MENU
+     ESTRUTURA DO MENU (SISTEMA DE ABAS)
      ============================================================ */
   section.menu-block{
-    padding: 1rem 0 4rem;
-    scroll-margin-top: 70px;
+    display: none; 
+    padding: 1rem 0 3rem;
+    animation: fadeIn 0.4s ease;
+  }
+
+  section.menu-block.active {
+    display: block;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   .section-header {
@@ -203,20 +170,19 @@
 
   .section-header h2{
     font-weight: 500;
-    font-size: 1.2rem;
-    letter-spacing: .25em;
+    font-size: 1.6rem;
+    letter-spacing: .2em;
     text-transform: uppercase;
-    margin-bottom: .5rem;
+    margin-bottom: .3rem;
   }
   
   .section-header .sub{
-    font-size: .65rem;
-    letter-spacing: .15em;
+    font-size: .75rem;
+    letter-spacing: .1em;
     text-transform: uppercase;
     color: var(--ink-soft);
   }
 
-  /* Grid dos itens (Vertical) */
   .menu-grid {
     display: grid;
     grid-template-columns: 1fr; 
@@ -224,25 +190,29 @@
   }
 
   @media (min-width: 700px) {
-    .menu-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem 3rem; }
+    .menu-grid { grid-template-columns: 1fr 1fr; gap: 2rem 3rem; }
   }
 
   /* Card do Item */
   .item-card {
     display: flex;
     flex-direction: column;
-    gap: .5rem;
+    gap: .8rem;
   }
 
   /* Área de Mídia (Foto/Vídeo Vertical) */
   .item-media {
     position: relative;
     width: 100%;
-    aspect-ratio: 3 / 4; /* Formato Vertical */
+    aspect-ratio: 4 / 5; /* Formato Vertical */
     background: var(--media-bg);
-    border: 1px solid var(--line);
+    border: 1px dashed var(--line); /* Borda tracejada para indicar que é um espaço reservado */
     overflow: hidden;
     cursor: pointer;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .item-media img {
@@ -250,16 +220,12 @@
     height: 100%;
     object-fit: cover;
     transition: transform .5s var(--ease-out);
+    /* Esconde a borda tracejada se tiver imagem */
+    border-radius: 6px;
   }
 
-  .item-media:hover img {
-    transform: scale(1.03);
-  }
-
-  /* Placeholder (Caso falte alguma foto) */
-  .item-media .placeholder {
-    position: absolute;
-    inset: 0;
+  /* Placeholder visual */
+  .placeholder {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -267,33 +233,33 @@
     gap: .5rem;
     color: #a8a396;
   }
-  .item-media .placeholder svg {
+  .placeholder svg {
     width: 32px; height: 32px;
     stroke: currentColor; fill: none; stroke-width: 1.5;
   }
-  .item-media .placeholder span {
-    font-size: .65rem; letter-spacing: .1em; text-transform: uppercase;
+  .placeholder span {
+    font-size: .75rem; letter-spacing: .1em; text-transform: uppercase;
   }
 
-  /* Badge de Vídeo */
   .video-badge {
     position: absolute;
     top: .5rem; right: .5rem;
-    background: rgba(17,17,17,.8);
+    background: rgba(17,17,17,.85);
     color: #fff;
-    font-size: .55rem;
+    font-size: .65rem;
     letter-spacing: .1em;
     text-transform: uppercase;
-    padding: .2rem .5rem;
+    padding: .3rem .6rem;
     border-radius: 3px;
-    display: flex;
+    display: none; /* Escondido por padrão, JS mostra se tiver vídeo */
     align-items: center;
-    gap: .3rem;
+    gap: .4rem;
     backdrop-filter: blur(4px);
+    z-index: 2;
   }
-  .video-badge svg { width: 10px; height: 10px; fill: #fff; }
+  .video-badge svg { width: 12px; height: 12px; fill: #fff; }
 
-  /* Informações do Item */
+  /* Textos dos Itens */
   .item-info {
     display: flex;
     flex-direction: column;
@@ -303,78 +269,107 @@
     display: flex;
     align-items: baseline;
     width: 100%;
-    margin-bottom: .2rem;
+    margin-bottom: .3rem;
+    justify-content: space-between;
+    gap: 1rem;
   }
 
   .item-name {
-    font-size: .85rem;
+    font-size: 1.05rem; 
     font-weight: 500;
-    letter-spacing: .1em;
+    letter-spacing: .05em;
     text-transform: uppercase;
-    white-space: nowrap;
+    line-height: 1.3;
   }
 
-  .item-dots {
-    flex-grow: 1;
-    border-bottom: 1px dotted var(--line);
-    margin: 0 .6rem;
-    position: relative;
-    top: -.2rem;
-  }
+  .item-dots { display: none; }
 
   .item-price {
     font-family: var(--serif);
-    font-size: 1.1rem;
+    font-size: 1.3rem; 
     font-weight: 600;
+    white-space: nowrap;
   }
 
   .item-desc {
-    font-size: .75rem;
+    font-size: .9rem; 
     color: var(--ink-soft);
     line-height: 1.6;
   }
 
   .item-extras {
-    font-size: .7rem;
+    font-size: .8rem;
     font-style: italic;
     color: var(--ink-soft);
-    margin-top: .2rem;
+    margin-top: .3rem;
   }
   
   .item-allerg {
-    font-size: .65rem;
+    font-size: .75rem;
     color: #888;
-    margin-top: .2rem;
+    margin-top: .4rem;
+    background: rgba(0,0,0,0.03);
+    padding: .4rem;
+    border-radius: 4px;
+    display: inline-block;
   }
 
-  /* Filtros e Rodapé */
+  @media (min-width: 700px) {
+    .item-header { justify-content: flex-start; gap: 0; }
+    .item-name { font-size: .95rem; white-space: nowrap; }
+    .item-dots {
+      display: block;
+      flex-grow: 1;
+      border-bottom: 1px dotted var(--line);
+      margin: 0 .8rem;
+      position: relative;
+      top: -.2rem;
+    }
+    .item-price { font-size: 1.15rem; }
+    .item-desc { font-size: .85rem; }
+  }
+
+  /* Filtros */
   .filters {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    gap: 1rem;
+    gap: .8rem;
     margin-bottom: 2rem;
   }
   .filters label {
-    font-size: .65rem; letter-spacing: .1em; text-transform: uppercase;
-    display: flex; align-items: center; gap: .4rem;
-    cursor: pointer; color: var(--ink-soft);
+    font-size: .75rem; 
+    letter-spacing: .05em; 
+    text-transform: uppercase;
+    display: flex; 
+    align-items: center; 
+    gap: .4rem;
+    cursor: pointer; 
+    color: var(--ink);
+    background: #fff;
+    padding: .4rem .8rem;
+    border: 1px solid var(--line);
+    border-radius: 20px;
   }
-  .filters input[type="checkbox"] { accent-color: var(--ink); }
+  .filters input[type="checkbox"] { accent-color: var(--ink); width: 16px; height: 16px; }
 
+  /* Rodapé */
   footer{
-    margin-top: 4rem; padding-top: 2rem;
-    border-top: 1px solid var(--ink); text-align: center;
+    margin-top: 3rem; 
+    padding-top: 2rem;
+    border-top: 1px solid var(--ink); 
+    text-align: center;
   }
   footer .allergen-title {
-    font-weight: 600; font-size: .7rem;
+    font-weight: 600; font-size: .8rem;
     letter-spacing: .1em; text-transform: uppercase; margin-bottom: .5rem;
   }
   footer .allergen-list {
-    font-size: .65rem; color: var(--ink-soft); line-height: 1.8;
-    max-width: 700px; margin: 0 auto 2rem;
+    font-size: .75rem; color: var(--ink-soft); line-height: 1.8;
+    max-width: 700px; margin: 0 auto 1.5rem;
   }
   footer .warn {
-    font-size: .65rem; font-style: italic;
+    font-size: .75rem; font-style: italic;
     color: var(--ink-soft); max-width: 600px; margin: 0 auto;
   }
 
@@ -385,29 +380,21 @@
     z-index: 100; padding: 1rem; opacity: 0; transition: opacity .3s;
   }
   .modal.open { display: flex; opacity: 1; }
-
   .modal-inner {
-    position: relative; width: 100%; max-width: 400px;
+    position: relative; width: 100%; max-width: 450px;
     aspect-ratio: 9 / 16; max-height: 90dvh;
-    background: #000; border-radius: 8px; overflow: hidden;
+    background: #000; border-radius: 12px; overflow: hidden;
     box-shadow: 0 20px 60px rgba(0,0,0,.8);
     transform: scale(.9); transition: transform .3s var(--ease-out);
   }
   .modal.open .modal-inner { transform: scale(1); }
   .modal video { width: 100%; height: 100%; object-fit: cover; }
   .modal .close {
-    position: absolute; top: .5rem; right: .5rem;
-    width: 36px; height: 36px; background: rgba(0,0,0,.6);
+    position: absolute; top: 1rem; right: 1rem;
+    width: 40px; height: 40px; background: rgba(0,0,0,.6);
     border: 1px solid rgba(255,255,255,.2); border-radius: 50%;
-    color: #fff; font-size: 1rem; cursor: pointer;
+    color: #fff; font-size: 1.2rem; cursor: pointer;
     display: flex; align-items: center; justify-content: center; z-index: 2;
-  }
-
-  @media (max-width: 600px){
-    .wrap{ padding: 1.5rem 1rem 3rem; }
-    .item-name { font-size: .8rem; white-space: normal; }
-    .item-dots { display: none; }
-    .item-header { justify-content: space-between; gap: 1rem; }
   }
 </style>
 </head>
@@ -415,28 +402,27 @@
 
 <div class="wrap">
 
-  <!-- LOGO -->
   <div class="logo-header">
     <img src="images/logo.png" alt="First Chapter Cafe Logo">
   </div>
 
-  <!-- HERO -->
   <header class="hero">
     <h1>First Chapter Cafe</h1>
     <div class="hours">Mon–Fri 9–17 · Sat 9–18 · Sun 10–18</div>
     <div class="address">16 Fade Street, Dublin 2 · <a href="https://instagram.com/firstchaptercafe" target="_blank">@firstchaptercafe</a></div>
   </header>
 
-  <!-- ILUSTRAÇÃO: Máquina de Café -->
-  <img src="images/maquina.png" alt="Ilustração Máquina de Café" class="pdf-illustration" style="max-width: 250px;">
-
   <!-- NAVEGAÇÃO -->
   <nav class="toc" aria-label="Categorias do menu">
     <ul>
-      <li><a href="#cafes">Cafés</a></li>
-      <li><a href="#cold">Geladas</a></li>
-      <li><a href="#brunch">Brunch</a></li>
-      <!-- Adicione as outras categorias aqui -->
+      <li><a href="#cafes" class="active tab-btn" data-target="cafes">Cafés</a></li>
+      <li><a href="#teas" class="tab-btn" data-target="teas">Chás</a></li>
+      <li><a href="#cold" class="tab-btn" data-target="cold">Geladas</a></li>
+      <li><a href="#smoothies" class="tab-btn" data-target="smoothies">Smoothies</a></li>
+      <li><a href="#drinks" class="tab-btn" data-target="drinks">Drinks</a></li>
+      <li><a href="#wine" class="tab-btn" data-target="wine">Wine</a></li>
+      <li><a href="#brunch" class="tab-btn" data-target="brunch">Brunch</a></li>
+      <li><a href="#bakery" class="tab-btn" data-target="bakery">Padaria</a></li>
     </ul>
   </nav>
 
@@ -448,115 +434,529 @@
   </div>
 
   <!-- ============================================================
-       SEÇÃO CAFÉS
+       SEÇÃO CAFÉS (Pág 2)
        ============================================================ -->
-  <section class="menu-block" id="cafes">
-    
-    <div class="illustration-wrapper">
-      <!-- ILUSTRAÇÃO LATERAL: Xícara (Com Parallax) -->
-      <img src="images/xicara.png" alt="Xícara" class="illustration-side left parallax" data-speed="0.1">
+  <section class="menu-block active" id="cafes">
+    <div class="section-header"><h2>Cafés</h2></div>
+
+    <div class="menu-grid">
       
-      <div class="section-header">
-        <h2>Cafés</h2>
-      </div>
-
-      <div class="menu-grid">
-        
-        <!-- Item com Foto e Vídeo (Vertical) -->
-        <div class="item-card" data-tags="">
-          <div class="item-media" data-video="videos/velvet-mocha.mp4">
-            <!-- Foto vertical do produto -->
-            <img src="images/velvet-mocha.png" alt="Velvet Mocha" loading="lazy">
-            <span class="video-badge"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> Vídeo</span>
-          </div>
-          <div class="item-info">
-            <div class="item-header"><span class="item-name">Velvet Mocha</span><div class="item-dots"></div><span class="item-price">€4.90</span></div>
-            <div class="item-desc">Smooth, rich chocolate coffee - pure comfort in a cup.</div>
+      <!-- ESPRESSO -->
+      <div class="item-card" data-tags="">
+        <div class="item-media">
+          <div class="placeholder">
+            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
+            <span>Foto em breve</span>
           </div>
         </div>
+        <div class="item-info">
+          <div class="item-header"><span class="item-name">Espresso</span><div class="item-dots"></div><span class="item-price">€3.00</span></div>
+        </div>
+      </div>
 
-        <!-- Item sem foto -->
-        <div class="item-card" data-tags="">
-          <div class="item-media" data-video="">
-            <div class="placeholder">
-              <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
-              <span>Foto em breve</span>
-            </div>
-          </div>
-          <div class="item-info">
-            <div class="item-header"><span class="item-name">Espresso</span><div class="item-dots"></div><span class="item-price">€3.00</span></div>
+      <!-- AMERICANO -->
+      <div class="item-card" data-tags="">
+        <div class="item-media">
+          <div class="placeholder">
+            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
+            <span>Foto em breve</span>
           </div>
         </div>
-        
+        <div class="item-info">
+          <div class="item-header"><span class="item-name">Americano</span><div class="item-dots"></div><span class="item-price">€3.50</span></div>
+        </div>
       </div>
+
+      <!-- CAPPUCCINO -->
+      <div class="item-card" data-tags="">
+        <div class="item-media">
+          <div class="placeholder">
+            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
+            <span>Foto em breve</span>
+          </div>
+        </div>
+        <div class="item-info">
+          <div class="item-header"><span class="item-name">Cappuccino</span><div class="item-dots"></div><span class="item-price">€4.00</span></div>
+        </div>
+      </div>
+
+      <!-- FLAT WHITE -->
+      <div class="item-card" data-tags="">
+        <div class="item-media">
+          <div class="placeholder">
+            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
+            <span>Foto em breve</span>
+          </div>
+        </div>
+        <div class="item-info">
+          <div class="item-header"><span class="item-name">Flat White</span><div class="item-dots"></div><span class="item-price">€3.80</span></div>
+        </div>
+      </div>
+
+      <!-- LATTE -->
+      <div class="item-card" data-tags="">
+        <div class="item-media">
+          <div class="placeholder">
+            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
+            <span>Foto em breve</span>
+          </div>
+        </div>
+        <div class="item-info">
+          <div class="item-header"><span class="item-name">Latte</span><div class="item-dots"></div><span class="item-price">€4.50</span></div>
+        </div>
+      </div>
+
+      <!-- VELVET MOCHA -->
+      <div class="item-card" data-tags="">
+        <div class="item-media">
+          <div class="placeholder">
+            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
+            <span>Foto em breve</span>
+          </div>
+        </div>
+        <div class="item-info">
+          <div class="item-header"><span class="item-name">Velvet Mocha</span><div class="item-dots"></div><span class="item-price">€4.90</span></div>
+          <div class="item-desc">Smooth, rich chocolate coffee - pure comfort in a cup.</div>
+        </div>
+      </div>
+
+      <!-- PURE MATCHA -->
+      <div class="item-card" data-tags="vegan">
+        <div class="item-media">
+          <div class="placeholder">
+            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
+            <span>Foto em breve</span>
+          </div>
+        </div>
+        <div class="item-info">
+          <div class="item-header"><span class="item-name">Pure Matcha</span><div class="item-dots"></div><span class="item-price">€4.50</span></div>
+          <div class="item-desc">Clean, earthy matcha with a smooth, balanced finish.</div>
+        </div>
+      </div>
+
+      <!-- SPICED CHAI LATTE -->
+      <div class="item-card" data-tags="">
+        <div class="item-media">
+          <div class="placeholder">
+            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
+            <span>Foto em breve</span>
+          </div>
+        </div>
+        <div class="item-info">
+          <div class="item-header"><span class="item-name">Spiced Chai Latte</span><div class="item-dots"></div><span class="item-price">€4.50</span></div>
+          <div class="item-desc">Warm, aromatic spices blended into a creamy, comforting latte.</div>
+        </div>
+      </div>
+
+      <!-- DIRTY CHAI BOOST -->
+      <div class="item-card" data-tags="">
+        <div class="item-media">
+          <div class="placeholder">
+            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
+            <span>Foto em breve</span>
+          </div>
+        </div>
+        <div class="item-info">
+          <div class="item-header"><span class="item-name">Dirty Chai Boost</span><div class="item-dots"></div><span class="item-price">€4.80</span></div>
+          <div class="item-desc">Chai latte with a shot of espresso - bold, warm, and energizing.</div>
+        </div>
+      </div>
+
+      <!-- SIGNATURE HOT CHOCOLATE -->
+      <div class="item-card" data-tags="">
+        <div class="item-media">
+          <div class="placeholder">
+            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
+            <span>Foto em breve</span>
+          </div>
+        </div>
+        <div class="item-info">
+          <div class="item-header"><span class="item-name">Signature Hot Chocolate</span><div class="item-dots"></div><span class="item-price">€5.00</span></div>
+          <div class="item-desc">Thick, rich, and deeply chocolatey - made to indulge.</div>
+          <div class="item-extras">Add cream or marshmallow €1 each (6/7)</div>
+        </div>
+      </div>
+
     </div>
   </section>
 
-  <!-- ILUSTRAÇÃO: Copos e Taça -->
-  <img src="images/copos.png" alt="Ilustração Copos" class="pdf-illustration" style="max-width: 350px;">
+  <!-- ============================================================
+       SEÇÃO CHÁS
+       ============================================================ -->
+  <section class="menu-block" id="teas">
+    <div class="section-header"><h2>Chás</h2></div>
+    <div class="menu-grid">
+      
+      <div class="item-card">
+        <div class="item-media"><div class="placeholder"><svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg><span>Foto em breve</span></div></div>
+        <div class="item-info"><div class="item-header"><span class="item-name">Black Tea</span><div class="item-dots"></div><span class="item-price">€3.00</span></div></div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-media"><div class="placeholder"><svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg><span>Foto em breve</span></div></div>
+        <div class="item-info"><div class="item-header"><span class="item-name">Earl Grey</span><div class="item-dots"></div><span class="item-price">€3.00</span></div></div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-media"><div class="placeholder"><svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg><span>Foto em breve</span></div></div>
+        <div class="item-info"><div class="item-header"><span class="item-name">Peppermint</span><div class="item-dots"></div><span class="item-price">€3.00</span></div></div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-media"><div class="placeholder"><svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg><span>Foto em breve</span></div></div>
+        <div class="item-info"><div class="item-header"><span class="item-name">Green Tea</span><div class="item-dots"></div><span class="item-price">€3.00</span></div></div>
+      </div>
+
+    </div>
+  </section>
 
   <!-- ============================================================
-       SEÇÃO GELADAS
+       SEÇÃO GELADAS E SMOOTHIES (Pág 3)
        ============================================================ -->
   <section class="menu-block" id="cold">
-    <div class="illustration-wrapper">
-      <!-- ILUSTRAÇÃO LATERAL: Copo com gelo (Com Parallax) -->
-      <img src="images/drink-gelo.png" alt="Drink" class="illustration-side right parallax" data-speed="0.15">
+    <div class="section-header"><h2>Geladas & Bebidas</h2></div>
+    <div class="menu-grid">
       
-      <div class="section-header">
-        <h2>Geladas</h2>
+      <div class="item-card">
+        <div class="item-media"><div class="placeholder"><span>Foto em breve</span></div></div>
+        <div class="item-info"><div class="item-header"><span class="item-name">Fresh Pineapple Juice</span><div class="item-dots"></div><span class="item-price">€6.50</span></div></div>
       </div>
-      <div class="menu-grid">
-        <!-- Exemplo -->
-        <div class="item-card">
-          <div class="item-media" data-video="">
-            <img src="images/iced-matcha.png" alt="Iced Matcha">
-          </div>
-          <div class="item-info">
-            <div class="item-header"><span class="item-name">Emerald Grey</span><div class="item-dots"></div><span class="item-price">€6.50</span></div>
-            <div class="item-desc">Matcha blended with Earl Grey tea and a hint of vanilla.</div>
-          </div>
+      <div class="item-card">
+        <div class="item-media"><div class="placeholder"><span>Foto em breve</span></div></div>
+        <div class="item-info"><div class="item-header"><span class="item-name">Strawberry Juice</span><div class="item-dots"></div><span class="item-price">€5.50</span></div></div>
+      </div>
+      <div class="item-card">
+        <div class="item-media"><div class="placeholder"><span>Foto em breve</span></div></div>
+        <div class="item-info"><div class="item-header"><span class="item-name">Orange Juice</span><div class="item-dots"></div><span class="item-price">€4.00</span></div></div>
+      </div>
+      <div class="item-card">
+        <div class="item-media"><div class="placeholder"><span>Foto em breve</span></div></div>
+        <div class="item-info"><div class="item-header"><span class="item-name">Coke / Coke 0</span><div class="item-dots"></div><span class="item-price">€3.50</span></div></div>
+      </div>
+      <div class="item-card">
+        <div class="item-media"><div class="placeholder"><span>Foto em breve</span></div></div>
+        <div class="item-info"><div class="item-header"><span class="item-name">Still Water</span><div class="item-dots"></div><span class="item-price">€3.00</span></div></div>
+      </div>
+      <div class="item-card">
+        <div class="item-media"><div class="placeholder"><span>Foto em breve</span></div></div>
+        <div class="item-info"><div class="item-header"><span class="item-name">Sparkling Water</span><div class="item-dots"></div><span class="item-price">€3.50</span></div></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SEÇÃO SMOOTHIES E DRINKS (Pág 3 e 4)
+       ============================================================ -->
+  <section class="menu-block" id="smoothies">
+    <div class="section-header"><h2>Protein & Smoothies</h2></div>
+    <div class="menu-grid">
+      
+      <div class="item-card" data-tags="protein">
+        <div class="item-media"><div class="placeholder"><span>Foto em breve</span></div></div>
+        <div class="item-info">
+          <div class="item-header"><span class="item-name">Mocha Boost</span><div class="item-dots"></div><span class="item-price">€7.90</span></div>
+          <div class="item-desc">Rich mocha coffee blended with protein for a smooth, chocolatey boost. (7,6)</div>
+        </div>
+      </div>
+      <div class="item-card" data-tags="protein">
+        <div class="item-media"><div class="placeholder"><span>Foto em breve</span></div></div>
+        <div class="item-info">
+          <div class="item-header"><span class="item-name">Vanilla Fuel Latte</span><div class="item-dots"></div><span class="item-price">€7.90</span></div>
+          <div class="item-desc">Cold, creamy latte with a hint of vanilla and added protein. (7,6)</div>
+        </div>
+      </div>
+      <div class="item-card" data-tags="protein">
+        <div class="item-media"><div class="placeholder"><span>Foto em breve</span></div></div>
+        <div class="item-info">
+          <div class="item-header"><span class="item-name">Strawberry Smoothie</span><div class="item-dots"></div><span class="item-price">€6.50</span></div>
+          <div class="item-desc">Fresh, creamy strawberry blend - naturally sweet and refreshing. (7)</div>
+        </div>
+      </div>
+      <div class="item-card" data-tags="protein">
+        <div class="item-media"><div class="placeholder"><span>Foto em breve</span></div></div>
+        <div class="item-info">
+          <div class="item-header"><span class="item-name">Blue AntioX</span><div class="item-dots"></div><span class="item-price">€8.50</span></div>
+          <div class="item-desc">Blueberry, milk, and protein - smooth, antioxidant-rich, and energizing. (7)</div>
+        </div>
+      </div>
+      <div class="item-card" data-tags="protein">
+        <div class="item-media"><div class="placeholder"><span>Foto em breve</span></div></div>
+        <div class="item-info">
+          <div class="item-header"><span class="item-name">Strawberry Boost</span><div class="item-dots"></div><span class="item-price">€8.50</span></div>
+          <div class="item-desc">Strawberry, beetroot, and vanilla protein. (7)</div>
+        </div>
+      </div>
+      <div class="item-card" data-tags="protein">
+        <div class="item-media"><div class="placeholder"><span>Foto em breve</span></div></div>
+        <div class="item-info">
+          <div class="item-header"><span class="item-name">Berry AntioX</span><div class="item-dots"></div><span class="item-price">€8.50</span></div>
+          <div class="item-desc">Blueberry and strawberry with protein and a touch of honey. (7)</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO DRINKS -->
+  <section class="menu-block" id="drinks">
+    <div class="section-header"><h2>Drinks Geladas</h2></div>
+    <div class="menu-grid">
+      <div class="item-card">
+        <div class="item-media"><div class="placeholder"><span>Foto em breve</span></div></div>
+        <div class="item-info">
+          <div class="item-header"><span class="item-name">Coffee Cloud Coconut</span><div class="item-dots"></div><span class="item-price">€6.90</span></div>
+          <div class="item-desc">Coconut water, espresso, and ice. (7)</div>
+        </div>
+      </div>
+      <div class="item-card">
+        <div class="item-media"><div class="placeholder"><span>Foto em breve</span></div></div>
+        <div class="item-info">
+          <div class="item-header"><span class="item-name">Emerald Grey</span><div class="item-dots"></div><span class="item-price">€6.50</span></div>
+          <div class="item-desc">Matcha blended with Earl Grey tea and a hint of vanilla.</div>
+        </div>
+      </div>
+      <div class="item-card" data-tags="vegan">
+        <div class="item-media"><div class="placeholder"><span>Foto em breve</span></div></div>
+        <div class="item-info">
+          <div class="item-header"><span class="item-name">Green Garden Detox</span><div class="item-dots"></div><span class="item-price">€5.50</span></div>
+          <div class="item-desc">Cucumber, lemon, and mint with soda water.</div>
+        </div>
+      </div>
+      <div class="item-card">
+        <div class="item-media"><div class="placeholder"><span>Foto em breve</span></div></div>
+        <div class="item-info">
+          <div class="item-header"><span class="item-name">Strawberry Matcha</span><div class="item-dots"></div><span class="item-price">€6.50</span></div>
+          <div class="item-desc">Iced matcha layered with coconut water and strawberry purée</div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ============================================================
-       SEÇÃO BRUNCH
+       SEÇÃO WINE (Pág 4)
        ============================================================ -->
-  <section class="menu-block" id="brunch">
-    <div class="illustration-wrapper">
-      <!-- ILUSTRAÇÃO LATERAL: Flores (Com Parallax) -->
-      <img src="images/flor.png" alt="Flor" class="illustration-side left parallax" data-speed="0.08" style="top: 50px;">
+  <section class="menu-block" id="wine">
+    <div class="section-header">
+      <h2>Wine & Bubble</h2>
+      <div class="sub">Made for slow mornings!</div>
+    </div>
+    <div class="menu-grid">
       
-      <div class="section-header">
-        <h2>Brunch</h2>
-        <div class="sub">Add a splash of joy</div>
-      </div>
-      <div class="menu-grid">
-        <div class="item-card">
-          <div class="item-media" data-video="videos/avocado-toast.mp4">
-            <img src="images/avocado-toast.png" alt="Avocado Toast">
-            <span class="video-badge"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> Vídeo</span>
-          </div>
-          <div class="item-info">
-            <div class="item-header"><span class="item-name">Avocado on Toast</span><div class="item-dots"></div><span class="item-price">€14.50</span></div>
-            <div class="item-desc">Creamy smashed avocado on warm focaccia, topped with perfectly poached eggs.</div>
-          </div>
+      <div class="item-card">
+        <div class="item-media"><div class="placeholder"><span>Foto em breve</span></div></div>
+        <div class="item-info">
+          <div class="item-header"><span class="item-name">Rosé & Berry Spritz</span><div class="item-dots"></div><span class="item-price">€12.50</span></div>
+          <div class="item-desc">Rosé, mixed berries, soda water, prosecco.</div>
         </div>
       </div>
+      <div class="item-card">
+        <div class="item-media"><div class="placeholder"><span>Foto em breve</span></div></div>
+        <div class="item-info">
+          <div class="item-header"><span class="item-name">Aperol Spritz</span><div class="item-dots"></div><span class="item-price">€12.50</span></div>
+          <div class="item-desc">Bitter-sweet, sparkling, and vibrant - a timeless classic.</div>
+        </div>
+      </div>
+      <div class="item-card">
+        <div class="item-media"><div class="placeholder"><span>Foto em breve</span></div></div>
+        <div class="item-info">
+          <div class="item-header"><span class="item-name">Lemon Spritz</span><div class="item-dots"></div><span class="item-price">€12.50</span></div>
+          <div class="item-desc">Crisp, citrusy, and refreshing with a sparkling finish.</div>
+        </div>
+      </div>
+      <div class="item-card">
+        <div class="item-media"><div class="placeholder"><span>Foto em breve</span></div></div>
+        <div class="item-info">
+          <div class="item-header"><span class="item-name">Mimosa</span><div class="item-dots"></div><span class="item-price">€9.50</span></div>
+          <div class="item-desc">Prosecco topped with fresh orange juice.</div>
+        </div>
+      </div>
+      <div class="item-card">
+        <div class="item-media"><div class="placeholder"><span>Foto em breve</span></div></div>
+        <div class="item-info">
+          <div class="item-header"><span class="item-name">Prosecco (Glass)</span><div class="item-dots"></div><span class="item-price">€9.50</span></div>
+          <div class="item-desc">Light, crisp, and perfectly sparkling.</div>
+        </div>
+      </div>
+      <div class="item-card">
+        <div class="item-media"><div class="placeholder"><span>Foto em breve</span></div></div>
+        <div class="item-info">
+          <div class="item-header"><span class="item-name">White Wine (Glass)</span><div class="item-dots"></div><span class="item-price">€8.50</span></div>
+          <div class="item-desc">Fresh, crisp, and easy to drink.</div>
+        </div>
+      </div>
+      <div class="item-card">
+        <div class="item-media"><div class="placeholder"><span>Foto em breve</span></div></div>
+        <div class="item-info">
+          <div class="item-header"><span class="item-name">Red Wine (Glass)</span><div class="item-dots"></div><span class="item-price">€8.50</span></div>
+          <div class="item-desc">Smooth, balanced, and rich.</div>
+        </div>
+      </div>
+
     </div>
   </section>
 
-  <!-- RODAPÉ -->
+  <!-- ============================================================
+       SEÇÃO BRUNCH (Pág 5)
+       ============================================================ -->
+  <section class="menu-block" id="brunch">
+    <div class="section-header">
+      <h2>Brunch</h2>
+      <div class="sub">Add a splash of joy</div>
+    </div>
+    <div class="menu-grid">
+      
+      <div class="item-card">
+        <div class="item-media"><div class="placeholder"><span>Foto em breve</span></div></div>
+        <div class="item-info">
+          <div class="item-header"><span class="item-name">Avocado on Toast</span><div class="item-dots"></div><span class="item-price">€14.50</span></div>
+          <div class="item-desc">Creamy smashed avocado on warm focaccia, topped with perfectly poached eggs, parmesan, and balsamic glaze.</div>
+          <div class="item-extras">Add bacon for +€3 / Smoked Salmon +€4. Spice it up with crispy chilli.</div>
+          <div class="item-allerg">(1 wheat, 3, 6, 7, 11, 12)</div>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-media"><div class="placeholder"><span>Foto em breve</span></div></div>
+        <div class="item-info">
+          <div class="item-header"><span class="item-name">Eggs Hemingway</span><div class="item-dots"></div><span class="item-price">€15.00</span></div>
+          <div class="item-desc">Smoked salmon, perfectly poached eggs, and rich hollandaise on a toasted English muffin.</div>
+          <div class="item-allerg">(1 wheat, 3, 4, 7, 12)</div>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-media"><div class="placeholder"><span>Foto em breve</span></div></div>
+        <div class="item-info">
+          <div class="item-header"><span class="item-name">Eggs Benedict</span><div class="item-dots"></div><span class="item-price">€14.50</span></div>
+          <div class="item-desc">Poached eggs on a toasted English muffin with crispy bacon and silky hollandaise. Served with mixed leaves.</div>
+          <div class="item-allerg">(1 wheat, 3, 7, 12)</div>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-media"><div class="placeholder"><span>Foto em breve</span></div></div>
+        <div class="item-info">
+          <div class="item-header"><span class="item-name">Cheese Bagel</span><div class="item-dots"></div><span class="item-price">€15.90</span></div>
+          <div class="item-desc">Freshly toasted bagel with mixed leaves on the side. Crispy Bacon, scrambled eggs & melted cheese / Seasoned Chicken with melted cheese.</div>
+          <div class="item-allerg">(1 wheat, 3, 7, 11)</div>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-media"><div class="placeholder"><span>Foto em breve</span></div></div>
+        <div class="item-info">
+          <div class="item-header"><span class="item-name">French Toast</span><div class="item-dots"></div><span class="item-price">€13.90</span></div>
+          <div class="item-desc">Golden brioche, perfectly toasted and soft inside.</div>
+          <div class="item-extras">Dulce de Leche with a creamy finish / Crispy Bacon with a touch of maple sweetness.</div>
+          <div class="item-allerg">(1 wheat, 3, 7)</div>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-media"><div class="placeholder"><span>Foto em breve</span></div></div>
+        <div class="item-info">
+          <div class="item-header"><span class="item-name">Toast & Scrambled Eggs</span><div class="item-dots"></div><span class="item-price">€11.50</span></div>
+          <div class="item-desc">Scrambled eggs and cheese served on toasted focaccia, topped with hollandaise sauce. Served with mixed leaves.</div>
+          <div class="item-extras">Add Bacon for +€3 / Smoked salmon for +€4.</div>
+          <div class="item-allerg">(1 wheat, 3, 4, 7)</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SEÇÃO PADARIA (Pág 6)
+       ============================================================ -->
+  <section class="menu-block" id="bakery">
+    <div class="section-header"><h2>Padaria & Doces</h2></div>
+    <div class="menu-grid">
+      
+      <div class="item-card">
+        <div class="item-media"><div class="placeholder"><span>Foto em breve</span></div></div>
+        <div class="item-info">
+          <div class="item-header"><span class="item-name">Brazilian Cheese Bites</span><div class="item-dots"></div><span class="item-price">€3.50</span></div>
+          <div class="item-desc">Traditional Brazilian cheese bread (Pão de Queijo), light and fluffy, served warm.</div>
+          <div class="item-allerg">(3, 7)</div>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-media"><div class="placeholder"><span>Foto em breve</span></div></div>
+        <div class="item-info">
+          <div class="item-header"><span class="item-name">Croissant (Plain)</span><div class="item-dots"></div><span class="item-price">€3.50</span></div>
+          <div class="item-desc">Buttery, flaky croissant baked fresh daily.</div>
+          <div class="item-extras">Add extras: Bacon €3.50 / Eggs €3 / Cheese €3 / Smoked salmon €4</div>
+          <div class="item-allerg">(1 wheat, 3, 7)</div>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-media"><div class="placeholder"><span>Foto em breve</span></div></div>
+        <div class="item-info">
+          <div class="item-header"><span class="item-name">Pistachio Croissant</span><div class="item-dots"></div><span class="item-price">€9.99</span></div>
+          <div class="item-desc">Flaky croissant filled with rich pistachio cream and finished with a smooth pistachio topping.</div>
+          <div class="item-allerg">(1 wheat, 3, 7, 8 pistachio)</div>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-media"><div class="placeholder"><span>Foto em breve</span></div></div>
+        <div class="item-info">
+          <div class="item-header"><span class="item-name">Açaí Bowl</span><div class="item-dots"></div><span class="item-price">€9.99</span></div>
+          <div class="item-desc">Refreshing, creamy açaí topped with crunchy granola, strawberries, milk powder & condensed milk.</div>
+          <div class="item-allerg">(1 wheat, 7)</div>
+        </div>
+      </div>
+
+      <div class="item-card" data-tags="gf">
+        <div class="item-media"><div class="placeholder"><span>Foto em breve</span></div></div>
+        <div class="item-info">
+          <div class="item-header"><span class="item-name">Brownie with Ice Cream</span><div class="item-dots"></div><span class="item-price">€8.50</span></div>
+          <div class="item-desc">A gluten-free brownie made with almond flour, served with a scoop of vanilla ice cream.</div>
+          <div class="item-allerg">(3, 7, 8 almond)</div>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-media"><div class="placeholder"><span>Foto em breve</span></div></div>
+        <div class="item-info">
+          <div class="item-header"><span class="item-name">Fluffy Pancake Stack</span><div class="item-dots"></div><span class="item-price">€9.50</span></div>
+          <div class="item-desc">Soft, fluffy pancakes served warm.</div>
+          <div class="item-extras">Dulce de Leche & Vanilla ice cream / Nutella & Fresh Strawberries.</div>
+          <div class="item-allerg">(1 wheat, 3, 7)</div>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-media"><div class="placeholder"><span>Foto em breve</span></div></div>
+        <div class="item-info">
+          <div class="item-header"><span class="item-name">Chocolate Melt Cake</span><div class="item-dots"></div><span class="item-price">€7.50</span></div>
+          <div class="item-desc">Warm molten cake with a soft, gooey center.</div>
+          <div class="item-extras">Carrot Cake & Chocolate / Ferrero Rocher / Nutella & Strawberry.</div>
+          <div class="item-allerg">(1 wheat, 3, 7)</div>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-media"><div class="placeholder"><span>Foto em breve</span></div></div>
+        <div class="item-info">
+          <div class="item-header"><span class="item-name">Mini Profiteroles</span><div class="item-dots"></div><span class="item-price">€3.50</span></div>
+          <div class="item-desc">Coconut, Nutella, or Pistachio.</div>
+          <div class="item-allerg">(1 wheat, 3, 7, 8 pistachio, hazelnut, coconut)</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <footer>
     <p class="allergen-title">Allergen Notice:</p>
     <p class="allergen-list">
       1. Gluten · 2. Crustaceans · 3. Eggs · 4. Fish · 5. Peanuts · 6. Soybeans · 7. Milk · 8. Tree Nuts · 9. Celery · 10. Mustard · 11. Sesame Seeds · 12. Sulphites · 13. Lupin · 14. Molluscs
     </p>
-    <p class="warn">
-      As there are nuts and sesame seeds used in our kitchen, despite our best efforts, cross-contamination is possible.
-    </p>
+    <p class="warn">As there are nuts and sesame seeds used in our kitchen, cross-contamination is possible.</p>
   </footer>
 
 </div>
@@ -578,7 +978,8 @@
   document.querySelectorAll('.item-media').forEach(media => {
     media.addEventListener('click', () => {
       const src = media.dataset.video;
-      if (!src) return; 
+      if (!src) return; // Se não tiver vídeo, não faz nada
+      
       modalVideo.src = src;
       modal.classList.add('open');
       modalVideo.play().catch(e => console.log("Erro:", e));
@@ -597,7 +998,7 @@
   modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-  // Lógica dos Filtros
+  // Lógica dos Filtros (Vegano, etc)
   const filterInputs = document.querySelectorAll('.filters input');
   const items = document.querySelectorAll('.item-card');
 
@@ -612,28 +1013,24 @@
     });
   });
 
-  // Destaque do menu ativo
-  const sections = document.querySelectorAll('section.menu-block');
-  const navLinks = document.querySelectorAll('nav.toc a');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        navLinks.forEach(a => {
-          a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id);
-        });
-      }
-    });
-  }, { rootMargin: '-40% 0px -55% 0px' });
-  sections.forEach(s => observer.observe(s));
+  // Lógica das Abas
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  const sections = document.querySelectorAll('.menu-block');
 
-  // Efeito Parallax nas Ilustrações Laterais
-  window.addEventListener('scroll', () => {
-    const scrolled = window.scrollY;
-    document.querySelectorAll('.parallax').forEach(el => {
-      const speed = parseFloat(el.getAttribute('data-speed')) || 0.1;
-      // Move a imagem para cima ou para baixo dependendo da rolagem
-      const yPos = -(scrolled * speed);
-      el.style.transform = `translateY(${yPos}px)`;
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault(); 
+
+      const targetId = this.getAttribute('data-target');
+
+      tabButtons.forEach(b => b.classList.remove('active'));
+      sections.forEach(s => s.classList.remove('active'));
+
+      this.classList.add('active');
+      document.getElementById(targetId).classList.add('active');
+
+      const navPosition = document.querySelector('nav.toc').offsetTop;
+      window.scrollTo({ top: navPosition - 10, behavior: 'smooth' });
     });
   });
 </script>
