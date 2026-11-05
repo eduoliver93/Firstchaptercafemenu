@@ -2,18 +2,18 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#f7f5ef">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>First Chapter Cafe — Menu</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   /* ============================================================
-     PALETA E TIPOGRAFIA
+     PALETA E TIPOGRAFIA — fiéis ao PDF
      ============================================================ */
   :root{
     --bg:        #f7f5ef;
+    --bg-warm:   #f1ede3;
     --ink:       #111111;
     --ink-soft:  #4a4a4a;
     --line:      #d9d5cb;
@@ -28,7 +28,7 @@
   }
 
   *{ margin:0; padding:0; box-sizing:border-box; }
-  html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+  html{ scroll-behavior:smooth; }
 
   body{
     background: var(--bg);
@@ -40,7 +40,9 @@
     overflow-x: hidden;
   }
 
-  /* Textura de papel sutil */
+  /* ============================================================
+     TEXTURA DE PAPEL ENVELHECIDO + GRAIN
+     ============================================================ */
   body::before{
     content:"";
     position:fixed; inset:0;
@@ -55,242 +57,255 @@
     opacity: .8;
   }
 
-  /* Cursor de caneta (estética do PDF) */
-  @media (hover:hover) and (pointer:fine){
-    body{ cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path d='M3 21l3-9 9-9 3 3-9 9-9 3z' fill='none' stroke='%23111' stroke-width='1.2' stroke-linejoin='round'/></svg>") 3 21, auto; }
-    a, button, .media, label{ cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path d='M3 21l3-9 9-9 3 3-9 9-9 3z' fill='%23111' stroke='%23111' stroke-width='1.2' stroke-linejoin='round'/></svg>") 3 21, pointer; }
+  /* Vinheta suave nas bordas — remete ao papel impresso */
+  body::after{
+    content:"";
+    position:fixed; inset:0;
+    pointer-events:none;
+    z-index: 0;
+    background: radial-gradient(ellipse at center, transparent 55%, rgba(120,110,90,.10) 100%);
   }
 
   .wrap{
     max-width: 1080px;
     margin: 0 auto;
-    padding: 0 1.5rem 4rem;
+    padding: 2rem 1.5rem 4rem;
     position: relative;
     z-index: 1;
   }
 
   /* ============================================================
-     HERO — FOTO DO LOCAL + LOGO DO GATINHO
+     CURSOR PERSONALIZADO (caneta) — opcional, discreto
+     ============================================================ */
+  @media (hover:hover) and (pointer:fine){
+    body{ cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path d='M3 21l3-9 9-9 3 3-9 9-9 3z' fill='none' stroke='%23111' stroke-width='1.2' stroke-linejoin='round'/></svg>") 3 21, auto; }
+
+    a, button, .media, label{ cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path d='M3 21l3-9 9-9 3 3-9 9-9 3z' fill='%23111' stroke='%23111' stroke-width='1.2' stroke-linejoin='round'/></svg>") 3 21, pointer; }
+  }
+
+  /* ============================================================
+     HERO COM LOGO
      ============================================================ */
   .hero{
+    text-align:center;
+    padding: 1rem 1rem 2.5rem;
     position: relative;
-    width: 100%;
-    min-height: 480px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 4rem 1.5rem 3rem;
-    margin: 0 -1.5rem 0;
-    overflow: hidden;
-    isolation: isolate;
-    border-bottom: 1px solid var(--line);
   }
 
-  /* Foto do Local no Fundo */
-  .hero .hero-bg{
-    position: absolute;
-    inset: 0;
-    z-index: -2;
-  }
-
-  .hero .hero-bg img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    filter: saturate(.85) contrast(1.05);
-    animation: kenBurns 20s ease-in-out infinite alternate;
-  }
-
-  @keyframes kenBurns{
-    from{ transform: scale(1); }
-    to{ transform: scale(1.05); }
-  }
-
-  /* Overlay para manter a foto sutil e legível */
-  .hero::before{
+  /* Divisória desenhada à mão abaixo do hero */
+  .hero::after{
     content:"";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background:
-      linear-gradient(180deg, rgba(247,245,239,.3) 0%, rgba(247,245,239,.85) 60%, rgba(247,245,239,.98) 100%),
-      radial-gradient(ellipse at center, rgba(0,0,0,.05) 0%, rgba(0,0,0,.2) 100%);
+    display:block;
+    width: 100%;
+    height: 1px;
+    margin-top: 2rem;
+    background: var(--line);
+    background-image: linear-gradient(90deg, var(--line) 0%, var(--line) 100%);
+    mask-image: repeating-linear-gradient(90deg, #000 0 6px, transparent 6px 7px);
+    -webkit-mask-image: repeating-linear-gradient(90deg, #000 0 6px, transparent 6px 7px);
+    opacity: .7;
   }
 
-  /* LOGO CIRCULAR */
-  .hero .logo{
+  /* ESTILO DA LOGO */
+  .hero .logo-container {
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: floatLogo 6s ease-in-out infinite, fadeUp 1s var(--ease-out) 0.1s forwards;
+  }
+
+  .hero .logo {
     width: 140px;
     height: 140px;
     border-radius: 50%;
-    background: #fff;
-    padding: 5px;
+    background-color: #fff;
+    padding: 4px; /* Cria uma borda branca sutil ao redor do círculo */
     object-fit: cover;
-    box-shadow: 0 10px 25px rgba(0,0,0,.12);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  }
+
+  .hero .kicker{
+    font-size: .7rem;
+    letter-spacing: .35em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
     margin-bottom: 1.5rem;
-    animation: floatLogo 6s ease-in-out infinite, fadeInDown 1s var(--ease-out) .2s backwards;
+    opacity: 0;
+    animation: fadeUp .9s var(--ease-out) .2s forwards;
   }
 
-  @keyframes floatLogo{
-    0%, 100%{ transform: translateY(0); }
-    50%{ transform: translateY(-8px); }
-  }
-  @keyframes fadeInDown{
-    from{ opacity: 0; transform: translateY(-20px); }
-    to{ opacity: 1; transform: translateY(0); }
-  }
-
-  /* Texto do Hero */
   .hero h1{
     font-weight: 500;
-    font-size: clamp(1.8rem, 6vw, 3.2rem);
-    letter-spacing: .15em;
+    font-size: clamp(2.2rem, 8vw, 4.4rem);
+    letter-spacing: .18em;
     text-transform: uppercase;
     line-height: 1;
     margin-bottom: .6rem;
-    color: var(--ink);
+    opacity: 0;
+    animation: fadeUp 1s var(--ease-out) .35s forwards;
   }
+
   .hero h1 span{
     display:block;
     font-weight: 300;
-    letter-spacing: .5em;
-    font-size: .35em;
+    letter-spacing: .55em;
+    font-size: .32em;
     margin-top: .8rem;
     color: var(--ink-soft);
   }
 
-  .hero .meta{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: .5rem 1.5rem;
-    margin-top: 1rem;
-    animation: fadeUp 1s var(--ease-out) .4s backwards;
-  }
-
-  .hero .meta .hours{
+  .hero .hours{
     display:inline-block;
-    padding: .5rem 1.2rem;
+    margin-top: 2rem;
+    padding: .55rem 1.4rem;
     border: 1px solid var(--ink);
     border-radius: 999px;
-    font-size: .65rem;
+    font-size: .7rem;
     letter-spacing: .12em;
     text-transform: uppercase;
-    background: rgba(247,245,239,.8);
-    backdrop-filter: blur(6px);
+    opacity: 0;
+    animation: fadeUp .9s var(--ease-out) .55s forwards;
   }
 
-  .hero .meta .address{
-    font-size: .68rem;
+  .hero .address{
+    margin-top: 1rem;
+    font-size: .75rem;
     letter-spacing: .18em;
     text-transform: uppercase;
     color: var(--ink-soft);
-    display: flex;
-    align-items: center;
-    gap: .5rem;
+    opacity: 0;
+    animation: fadeUp .9s var(--ease-out) .65s forwards;
   }
 
-  .hero .meta .address a{
+  .hero .address a{
     color: var(--ink);
     text-decoration: none;
     border-bottom: 1px solid var(--ink);
     padding-bottom: 1px;
+    transition: letter-spacing .3s var(--ease-out);
+  }
+  .hero .address a:hover{ letter-spacing: .22em; }
+
+  /* Ornamento principal — animação de "caneta desenhando" */
+  .hero-ornament{
+    width: 300px;
+    height: 120px;
+    margin: 2.5rem auto 0;
+    display: block;
+    opacity: 0;
+    animation: fadeIn 1.2s var(--ease-out) .8s forwards;
   }
 
-  @keyframes fadeUp{
-    from{ opacity: 0; transform: translateY(14px); }
-    to{ opacity: 1; transform: translateY(0); }
+  .hero-ornament path,
+  .hero-ornament circle{
+    stroke-dasharray: 400;
+    stroke-dashoffset: 400;
+    animation: draw 2.4s var(--ease-in-out) 1.1s forwards;
   }
+
+  .hero-ornament path:nth-child(2){ animation-delay: 1.25s; }
+  .hero-ornament path:nth-child(3){ animation-delay: 1.4s; }
+  .hero-ornament path:nth-child(4){ animation-delay: 1.55s; }
+  .hero-ornament path:nth-child(5){ animation-delay: 1.7s; }
+  .hero-ornament path:nth-child(6){ animation-delay: 1.85s; }
+  .hero-ornament path:nth-child(7){ animation-delay: 2s; }
+  .hero-ornament path:nth-child(8){ animation-delay: 2.15s; }
+  .hero-ornament path:nth-child(9){ animation-delay: 2.3s; }
+  .hero-ornament path:nth-child(10){ animation-delay: 2.45s; }
+  .hero-ornament path:nth-child(11){ animation-delay: 2.6s; }
 
   /* ============================================================
-     NAVEGAÇÃO POR ABAS (Sticky e Scroll Horizontal no Mobile)
+     NAVEGAÇÃO STICKY
      ============================================================ */
-  nav.tabs{
+  nav.toc{
     position: sticky;
     top: 0;
-    z-index: 30;
-    background: rgba(247,245,239,.96);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    z-index: 20;
+    background: rgba(247,245,239,.94);
+    backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--line);
-    margin: 0 -1.5rem 1.5rem;
-    padding: 0;
+    padding: .7rem 0;
+    margin-bottom: 2rem;
   }
 
-  nav.tabs ul{
+  nav.toc ul{
     display: flex;
-    gap: 0;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .35rem 1.4rem;
     list-style: none;
-    overflow-x: auto;
-    scrollbar-width: none;
-    padding: 0 .8rem;
     max-width: 1080px;
     margin: 0 auto;
-    scroll-behavior: smooth;
+    padding: 0 1rem;
   }
-  nav.tabs ul::-webkit-scrollbar{ display: none; }
 
-  nav.tabs button{
-    flex-shrink: 0;
-    font-family: var(--sans);
+  nav.toc a{
     font-size: .68rem;
-    font-weight: 400;
     letter-spacing: .15em;
     text-transform: uppercase;
-    background: transparent;
-    border: 0;
     color: var(--ink-soft);
-    padding: .95rem .85rem;
-    cursor: pointer;
+    text-decoration: none;
+    padding: .3rem 0;
     position: relative;
     transition: color .25s var(--ease-out);
-    white-space: nowrap;
   }
 
-  nav.tabs button::after{
+  nav.toc a::after{
     content:"";
     position: absolute;
-    left: .85rem; right: .85rem; bottom: 0;
+    left: 0; bottom: 0;
     height: 1px;
+    width: 100%;
     background: var(--ink);
     transform: scaleX(0);
-    transform-origin: center;
-    transition: transform .3s var(--ease-out);
+    transform-origin: right;
+    transition: transform .35s var(--ease-out);
   }
 
-  nav.tabs button:hover{ color: var(--ink); }
-  nav.tabs button.active{ color: var(--ink); font-weight: 500; }
-  nav.tabs button.active::after{ transform: scaleX(1); }
+  nav.toc a:hover,
+  nav.toc a.active{ color: var(--ink); }
+
+  nav.toc a:hover::after,
+  nav.toc a.active::after{
+    transform: scaleX(1);
+    transform-origin: left;
+  }
 
   /* ============================================================
      SEÇÕES
      ============================================================ */
   section.menu-block{
-    display: none;
-    animation: fadeInPage .5s var(--ease-out);
+    padding: 2.5rem 0 2rem;
+    scroll-margin-top: 70px;
+    position: relative;
   }
-  section.menu-block.active{ display: block; }
 
-  @keyframes fadeInPage{
-    from{ opacity: 0; transform: translateY(10px); }
-    to{ opacity: 1; transform: translateY(0); }
+  /* Divisória entre seções — traço irregular desenhado */
+  section.menu-block + section.menu-block::before{
+    content:"";
+    display:block;
+    width: 100%;
+    height: 1px;
+    background: var(--line);
+    mask-image: repeating-linear-gradient(90deg, #000 0 4px, transparent 4px 6px);
+    -webkit-mask-image: repeating-linear-gradient(90deg, #000 0 4px, transparent 4px 6px);
+    opacity: .8;
+    margin-bottom: 2.5rem;
   }
 
   .section-head{
     display: flex;
     align-items: center;
     gap: 1rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.8rem;
   }
 
   .section-head h2{
     font-weight: 500;
-    font-size: 1.25rem;
+    font-size: 1.35rem;
     letter-spacing: .22em;
     text-transform: uppercase;
     white-space: nowrap;
+    position: relative;
   }
 
   .section-head .rule{
@@ -307,13 +322,15 @@
     inset: 0;
     background: var(--ink);
     transform: translateX(-100%);
-    transition: transform 1s var(--ease-out);
+    transition: transform 1.2s var(--ease-out);
   }
 
-  .menu-block.active .section-head .rule::after{ transform: translateX(0); }
+  .menu-block.visible .section-head .rule::after{
+    transform: translateX(0);
+  }
 
   .section-head .sub{
-    font-size: .62rem;
+    font-size: .65rem;
     letter-spacing: .2em;
     text-transform: uppercase;
     color: var(--ink-soft);
@@ -321,19 +338,12 @@
   }
 
   /* ============================================================
-     GRID E CARDS
+     GRID + CARDS
      ============================================================ */
   .grid{
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.2rem;
-  }
-
-  @media (min-width: 640px){
-    .grid{ grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
-  }
-  @media (min-width: 900px){
-    .grid{ grid-template-columns: repeat(3, 1fr); gap: 1.8rem; }
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.8rem;
   }
 
   .item{
@@ -343,20 +353,24 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    transition: transform .3s var(--ease-out), box-shadow .3s var(--ease-out), border-color .3s var(--ease-out);
-    -webkit-tap-highlight-color: transparent;
+    transition: transform .35s var(--ease-out), box-shadow .35s var(--ease-out), border-color .35s var(--ease-out);
+    opacity: 0;
+    transform: translateY(24px);
   }
 
-  .item:active{ transform: scale(.99); }
-  @media (hover:hover){
-    .item:hover{
-      transform: translateY(-4px);
-      box-shadow: 0 14px 34px rgba(0,0,0,.07);
-      border-color: #cfcabe;
-    }
+  .item.visible{
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity .8s var(--ease-out), transform .8s var(--ease-out);
   }
 
-  /* Mídia */
+  .item:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 14px 34px rgba(0,0,0,.07);
+    border-color: #cfcabe;
+  }
+
+  /* ---------- MÍDIA ---------- */
   .item .media{
     position: relative;
     width: 100%;
@@ -376,8 +390,9 @@
     filter: saturate(.95) contrast(1.02);
   }
 
-  @media (hover:hover){
-    .item:hover .media img{ transform: scale(1.05); filter: saturate(1.05); }
+  .item:hover .media img{
+    transform: scale(1.05);
+    filter: saturate(1.05) contrast(1.03);
   }
 
   /* Placeholder */
@@ -393,41 +408,48 @@
     text-align: center;
     padding: 1rem;
   }
+
   .item .media .placeholder svg{
-    width: 46px; height: 46px;
+    width: 54px; height: 54px;
     stroke: #b8b3a5;
     fill: none;
     stroke-width: 1.2;
     stroke-dasharray: 200;
     stroke-dashoffset: 200;
-    animation: draw 2s var(--ease-in-out) .2s forwards;
   }
-  @keyframes draw{ to{ stroke-dashoffset: 0; } }
+
+  .item.visible .placeholder svg{
+    animation: draw 2s var(--ease-in-out) forwards;
+  }
+
   .item .media .placeholder span{
-    font-size: .58rem;
+    font-size: .6rem;
     letter-spacing: .2em;
     text-transform: uppercase;
   }
 
-  /* Selo de vídeo */
+  /* Badge vídeo */
   .item .media .video-badge{
     position: absolute;
-    top: .55rem; right: .55rem;
+    top: .6rem; right: .6rem;
     display: inline-flex;
     align-items: center;
     gap: .3rem;
-    padding: .25rem .5rem;
+    padding: .28rem .55rem;
     background: rgba(17,17,17,.82);
     color: #fff;
-    font-size: .52rem;
+    font-size: .55rem;
     letter-spacing: .15em;
     text-transform: uppercase;
     border-radius: 3px;
     backdrop-filter: blur(4px);
   }
-  .item .media .video-badge svg{ width: 9px; height: 9px; fill: #fff; }
 
-  /* Overlay de Play */
+  .item .media .video-badge svg{
+    width: 10px; height: 10px; fill: #fff;
+    animation: pulse 2s infinite;
+  }
+
   .item .media .play-overlay{
     position: absolute;
     inset: 0;
@@ -435,25 +457,33 @@
     display: flex; align-items: center; justify-content: center;
     opacity: 0;
     transition: opacity .3s var(--ease-out);
-    pointer-events: none;
   }
-  @media (hover:hover){ .item .media:hover .play-overlay{ opacity: 1; } }
+
+  .item .media:hover .play-overlay{ opacity: 1; }
+
   .item .media .play-overlay .play-circle{
-    width: 52px; height: 52px;
+    width: 56px; height: 56px;
     border-radius: 50%;
     border: 2px solid #fff;
     display: flex; align-items: center; justify-content: center;
     background: rgba(17,17,17,.45);
+    transform: scale(.85);
+    transition: transform .3s var(--ease-out);
   }
-  .item .media .play-overlay .play-circle svg{ width: 16px; height: 16px; fill: #fff; margin-left: 3px; }
 
-  /* Informações do Item */
+  .item .media:hover .play-overlay .play-circle{ transform: scale(1); }
+
+  .item .media .play-overlay .play-circle svg{
+    width: 18px; height: 18px; fill: #fff; margin-left: 3px;
+  }
+
+  /* ---------- BODY ---------- */
   .item .body{
-    padding: 1rem 1.1rem 1.2rem;
+    padding: 1.1rem 1.2rem 1.3rem;
     display: flex;
     flex-direction: column;
     flex: 1;
-    gap: .4rem;
+    gap: .45rem;
   }
 
   .item .row-top{
@@ -464,47 +494,44 @@
   }
 
   .item .name{
-    font-size: .8rem;
+    font-size: .82rem;
     font-weight: 500;
     letter-spacing: .08em;
     text-transform: uppercase;
     line-height: 1.35;
   }
 
+  /* Estrela com brilho pulsante */
   .item .name .star{
-    font-size: .72rem;
+    font-size: .75rem;
     display: inline-block;
     animation: twinkle 2.4s ease-in-out infinite;
     transform-origin: center;
   }
-  @keyframes twinkle{
-    0%, 100%{ transform: scale(1); opacity: .9; }
-    50%{ transform: scale(1.25); opacity: 1; }
-  }
 
   .item .price{
     font-family: var(--serif);
-    font-size: 1rem;
+    font-size: 1.05rem;
     font-weight: 500;
     white-space: nowrap;
   }
 
   .item .desc{
-    font-size: .72rem;
+    font-size: .74rem;
     color: var(--ink-soft);
     line-height: 1.5;
   }
 
   .item .extras{
-    font-size: .64rem;
+    font-size: .66rem;
     letter-spacing: .04em;
     color: var(--ink-soft);
     font-style: italic;
-    margin-top: .1rem;
+    margin-top: .15rem;
   }
 
   .item .allerg{
-    font-size: .58rem;
+    font-size: .6rem;
     letter-spacing: .05em;
     color: #8a857a;
     margin-top: auto;
@@ -512,8 +539,11 @@
     border-top: 1px dashed var(--line);
   }
 
+  /* ============================================================
+     NOTAS
+     ============================================================ */
   .note{
-    font-size: .66rem;
+    font-size: .68rem;
     letter-spacing: .08em;
     text-transform: uppercase;
     color: var(--ink-soft);
@@ -522,51 +552,56 @@
     border-top: 1px dashed var(--line);
   }
 
-  /* Filtros */
+  /* ============================================================
+     FILTROS
+     ============================================================ */
   .filters{
     display: flex;
     flex-wrap: wrap;
-    gap: .4rem;
-    margin-bottom: 1.2rem;
+    justify-content: center;
+    gap: .5rem;
+    padding: 1.2rem 0 0;
+    border-top: 1px solid var(--line);
+    margin-top: 1.5rem;
   }
 
   .filters label{
     display: inline-flex;
     align-items: center;
     gap: .35rem;
-    font-size: .58rem;
+    font-size: .62rem;
     letter-spacing: .15em;
     text-transform: uppercase;
     color: var(--ink-soft);
     border: 1px solid var(--line);
-    padding: .3rem .7rem;
+    padding: .35rem .8rem;
     border-radius: 999px;
     cursor: pointer;
     background: var(--card);
     transition: all .25s var(--ease-out);
-    -webkit-tap-highlight-color: transparent;
   }
 
-  .filters label:active{ transform: scale(.97); }
+  .filters label:hover{ border-color: var(--ink); color: var(--ink); }
   .filters input{ display:none; }
   .filters label:has(input:checked){ background: var(--ink); color: #fff; border-color: var(--ink); }
   .filters label:has(input:checked) span{ color:#fff; }
 
   /* ============================================================
-     MODAL DE VÍDEO
+     MODAL DE VÍDEO — com fade + scale
      ============================================================ */
   .modal{
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,.94);
+    background: rgba(0,0,0,.92);
     display: none;
     align-items: center;
     justify-content: center;
     z-index: 100;
-    padding: 1rem;
+    padding: 1.5rem;
     opacity: 0;
-    transition: opacity .3s var(--ease-out);
+    transition: opacity .35s var(--ease-out);
   }
+
   .modal.open{ display: flex; opacity: 1; }
 
   .modal .modal-inner{
@@ -574,17 +609,18 @@
     width: 100%;
     max-width: 900px;
     aspect-ratio: 16 / 9;
-    max-height: calc(100dvh - 2rem);
     background: #000;
     border-radius: 4px;
     overflow: hidden;
     box-shadow: 0 20px 60px rgba(0,0,0,.6);
-    transform: scale(.94);
-    transition: transform .3s var(--ease-out);
+    transform: scale(.92);
+    transition: transform .35s var(--ease-out);
   }
+
   .modal.open .modal-inner{ transform: scale(1); }
 
-  .modal video, .modal iframe{
+  .modal video,
+  .modal iframe{
     width: 100%; height: 100%;
     border: 0; display: block;
     object-fit: contain;
@@ -593,82 +629,113 @@
 
   .modal .close{
     position: absolute;
-    top: .5rem; right: .5rem;
-    width: 36px; height: 36px;
-    border-radius: 50%;
-    background: rgba(0,0,0,.6);
-    border: 1px solid rgba(255,255,255,.2);
+    top: -40px; right: 0;
+    background: none; border: 0;
     color: #fff;
-    font-size: 1rem;
+    font-size: 1.6rem;
     cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    z-index: 2;
-    -webkit-tap-highlight-color: transparent;
+    line-height: 1;
+    padding: .3rem .5rem;
   }
-  .modal .close:active{ transform: scale(.92); }
 
   .modal .caption{
     position: absolute;
-    bottom: .5rem; left: .5rem;
-    background: rgba(0,0,0,.6);
+    bottom: -2.2rem; left: 0;
     color: #fff;
-    font-size: .62rem;
-    letter-spacing: .12em;
+    font-size: .7rem;
+    letter-spacing: .15em;
     text-transform: uppercase;
-    padding: .3rem .6rem;
-    border-radius: 3px;
-    max-width: calc(100% - 1rem);
+    opacity: .7;
   }
 
-  /* Rodapé */
+  /* ============================================================
+     RODAPÉ
+     ============================================================ */
   footer{
-    margin-top: 2.5rem;
-    padding-top: 1.8rem;
+    margin-top: 3rem;
+    padding-top: 2rem;
     border-top: 1px solid var(--line);
-    font-size: .62rem;
+    font-size: .65rem;
     letter-spacing: .06em;
     color: var(--ink-soft);
     text-align: center;
     line-height: 1.7;
   }
-  footer .allergen-list{ max-width: 640px; margin: .8rem auto 0; }
-  footer .warn{ margin-top: 1rem; font-style: italic; font-size: .58rem; }
-  footer strong{ color: var(--ink); font-weight: 500; }
 
-  /* Responsividade Mobile */
-  @media (max-width: 768px){
-    .hero{ min-height: 380px; padding: 3rem 1rem 2rem; margin: 0 -1rem 0; }
-    .hero .logo{ width: 110px; height: 110px; margin-bottom: 1rem; }
-    .hero .meta{ flex-direction: column; gap: .5rem; }
-    .hero .meta .hours{ font-size: .58rem; padding: .42rem 1rem; }
-    .hero .meta .address{ font-size: .6rem; }
-    nav.tabs{ margin: 0 -1rem 1.2rem; }
-    nav.tabs ul{ padding: 0 .3rem; }
-    nav.tabs button{ font-size: .6rem; letter-spacing: .12em; padding: .8rem .65rem; }
-    nav.tabs button::after{ left: .65rem; right: .65rem; }
+  footer .allergen-list{
+    max-width: 640px;
+    margin: .8rem auto 0;
   }
 
-  @media (max-width: 480px){
-    .wrap{ padding: 0 1rem 3rem; }
-    .hero{ min-height: 340px; padding: 2.5rem .8rem 1.5rem; }
-    .section-head h2{ font-size: 1rem; letter-spacing: .18em; }
-    .section-head .sub{ font-size: .55rem; letter-spacing: .15em; }
-    .item .body{ padding: .9rem .95rem 1.1rem; }
-    .item .name{ font-size: .74rem; }
-    .item .price{ font-size: .92rem; }
-    .item .desc{ font-size: .68rem; }
-    .item .extras{ font-size: .6rem; }
-    .item .allerg{ font-size: .55rem; }
-    .modal{ padding: .5rem; }
-    .modal .modal-inner{ aspect-ratio: auto; height: auto; max-height: calc(100dvh - 1rem); }
-    .modal video, .modal iframe{ width: 100%; height: auto; max-height: calc(100dvh - 1rem); aspect-ratio: 16 / 9; }
-    .modal .close{ top: .4rem; right: .4rem; width: 32px; height: 32px; font-size: .9rem; }
+  footer .warn{
+    margin-top: 1.2rem;
+    font-style: italic;
+    font-size: .62rem;
+  }
+
+  footer strong{ color: var(--ink); font-weight: 500; }
+
+  /* ============================================================
+     ANIMAÇÕES
+     ============================================================ */
+  @keyframes fadeUp{
+    from{ opacity:0; transform: translateY(18px); }
+    to{ opacity:1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn{
+    from{ opacity:0; }
+    to{ opacity:.85; }
+  }
+
+  @keyframes draw{
+    to{ stroke-dashoffset: 0; }
+  }
+
+  @keyframes twinkle{
+    0%, 100%{ transform: scale(1); opacity: .9; }
+    50%{ transform: scale(1.25); opacity: 1; }
+  }
+
+  @keyframes pulse{
+    0%, 100%{ opacity: .8; }
+    50%{ opacity: 1; }
+  }
+
+  @keyframes floatLogo {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  /* ============================================================
+     RESPONSIVO
+     ============================================================ */
+  @media (max-width: 720px){
+    .grid{ grid-template-columns: 1fr; gap: 1.4rem; }
+  }
+
+  @media (max-width: 520px){
+    .wrap{ padding: 1rem 1rem 3rem; }
+    .hero{ padding: 1.5rem .5rem 1.5rem; }
+    .hero .logo { width: 110px; height: 110px; } /* Logo menor no celular */
+    .hero .hours{ font-size: .58rem; letter-spacing: .08em; padding: .45rem 1rem; }
+    .section-head h2{ font-size: 1.05rem; letter-spacing: .16em; }
+    .item .name{ font-size: .76rem; }
+    .item .price{ font-size: .95rem; }
+    .item .desc{ font-size: .7rem; }
+    nav.toc ul{ gap: .25rem .9rem; }
+    nav.toc a{ font-size: .58rem; }
+    .modal .close{ top: -36px; font-size: 1.3rem; }
   }
 
   @media (prefers-reduced-motion: reduce){
-    *{ transition: none !important; animation: none !important; scroll-behavior: auto !important; }
-    section.menu-block{ animation: none !important; }
-    .hero .hero-bg img{ animation: none !important; }
+    *{
+      transition: none !important;
+      animation: none !important;
+      scroll-behavior: auto !important;
+    }
+    .item, .item.visible{ opacity:1 !important; transform:none !important; }
+    .hero .logo-container { opacity: 1; }
   }
 </style>
 </head>
@@ -677,67 +744,83 @@
 <div class="wrap">
 
   <!-- ============================================================
-       HERO COM FOTO DO LOCAL + LOGO DO GATINHO
+       HERO COM A LOGO
        ============================================================ -->
   <header class="hero">
-    <!-- A foto do local no fundo -->
-    <div class="hero-bg">
-      <img src="https://i.imgur.com/vHq4wX5.jpeg" alt="Interior do First Chapter Cafe" loading="eager">
+    
+    <!-- Logo do Gatinho -->
+    <div class="logo-container">
+      <!-- Substitua o src abaixo pelo caminho da sua imagem real -->
+      <img src="images/logo.jpg" alt="First Chapter Cafe Logo" class="logo">
     </div>
 
-    <!-- A logo do gatinho (ajuste o src para a sua imagem) -->
-    <img class="logo" src="https://i.imgur.com/8K1XW7z.jpeg" alt="First Chapter Cafe Logo">
-
-    <!-- Nome do Café -->
+    <div class="kicker">First Chapter Cafe</div>
     <h1>First Chapter<span>Cafe</span></h1>
 
-    <!-- Informações -->
-    <div class="meta">
-      <span class="hours">Mon–Fri 9–17 · Sat 9–18 · Sun 10–18</span>
-      <span class="address">16 Fade Street, Dublin 2 · <a href="https://instagram.com/firstchaptercafe" target="_blank" rel="noopener">@firstchaptercafe</a></span>
-    </div>
+    <div class="hours">Mon–Fri 9–17 · Sat 9–18 · Sun 10–18</div>
+    <div class="address">16 Fade Street, Dublin 2 · <a href="https://instagram.com/firstchaptercafe" target="_blank" rel="noopener">@firstchaptercafe</a></div>
+
+    <!-- Ornamento com animação de caneta desenhando -->
+    <svg class="hero-ornament" viewBox="0 0 300 120" fill="none" stroke="#111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M10 20 L70 20 L64 78 L16 78 Z" />
+      <path d="M10 20 C18 12 62 12 70 20" />
+      <path d="M16 78 C24 84 56 84 64 78" />
+      <path d="M20 30 L60 30" stroke-dasharray="1 3" opacity=".6"/>
+      <path d="M24 84 L84 84 L78 118 L30 118 Z" />
+      <path d="M24 84 C32 78 76 78 84 84" />
+      <path d="M30 118 C38 122 70 122 78 118" />
+      <path d="M120 40 C118 60 130 78 140 78 C150 78 162 60 160 40 Z" />
+      <path d="M140 78 L140 100" />
+      <path d="M128 100 L152 100" />
+      <path d="M200 30 L240 30 L236 100 L204 100 Z" />
+      <path d="M200 30 C208 26 232 26 240 30" />
+      <path d="M204 100 C212 104 228 104 236 100" />
+      <path d="M218 20 L226 60" />
+      <path d="M218 20 L222 14" />
+    </svg>
   </header>
 
   <!-- ============================================================
-       NAVEGAÇÃO POR ABAS
+       NAVEGAÇÃO
        ============================================================ -->
-  <nav class="tabs" aria-label="Categorias do menu">
-    <ul role="tablist">
-      <li><button role="tab" class="active" data-target="cafes" aria-selected="true">Cafés</button></li>
-      <li><button role="tab" data-target="teas" aria-selected="false">Chás</button></li>
-      <li><button role="tab" data-target="cold" aria-selected="false">Geladas</button></li>
-      <li><button role="tab" data-target="smoothies" aria-selected="false">Smoothies</button></li>
-      <li><button role="tab" data-target="drinks" aria-selected="false">Drinks</button></li>
-      <li><button role="tab" data-target="wine" aria-selected="false">Wine</button></li>
-      <li><button role="tab" data-target="brunch" aria-selected="false">Brunch</button></li>
-      <li><button role="tab" data-target="bakery" aria-selected="false">Padaria</button></li>
+  <nav class="toc" aria-label="Categorias do menu">
+    <ul>
+      <li><a href="#cafes">Cafés</a></li>
+      <li><a href="#teas">Chás</a></li>
+      <li><a href="#cold">Geladas</a></li>
+      <li><a href="#smoothies">Smoothies</a></li>
+      <li><a href="#drinks">Drinks</a></li>
+      <li><a href="#wine">Wine &amp; Bubbles</a></li>
+      <li><a href="#brunch">Brunch</a></li>
+      <li><a href="#bakery">Padaria &amp; Doces</a></li>
     </ul>
   </nav>
 
-  <!-- ============================================================
-       SEÇÕES (Exemplo com Café e Brunch. Cole as demais no mesmo padrão)
-       ============================================================ -->
+  <!-- Filtros -->
+  <div class="filters" role="group" aria-label="Filtros alimentares">
+    <label><input type="checkbox" data-filter="vegan"><span>Vegano</span></label>
+    <label><input type="checkbox" data-filter="gf"><span>Sem Glúten</span></label>
+    <label><input type="checkbox" data-filter="protein"><span>Com Proteína</span></label>
+  </div>
 
-  <!-- SEÇÃO: CAFÉS -->
-  <section class="menu-block active" id="cafes" role="tabpanel">
+  <!-- ============================================================
+       CAFÉS
+       ============================================================ -->
+  <section class="menu-block" id="cafes">
     <div class="section-head">
       <h2>Cafés</h2>
       <span class="rule"></span>
       <span class="sub">Espresso Bar</span>
     </div>
 
-    <div class="filters" role="group" aria-label="Filtros alimentares">
-      <label><input type="checkbox" data-filter="vegan"><span>Vegano</span></label>
-      <label><input type="checkbox" data-filter="gf"><span>Sem Glúten</span></label>
-      <label><input type="checkbox" data-filter="protein"><span>Com Proteína</span></label>
-    </div>
-
     <div class="grid">
-      <!-- Item com foto e vídeo -->
+      <!-- Item com foto + vídeo -->
       <article class="item" data-tags="">
         <div class="media" data-video="videos/velvet-mocha.mp4" data-caption="Velvet Mocha — preparo">
-          <img src="images/velvet-mocha.jpg" alt="Velvet Mocha" loading="lazy">
-          <span class="video-badge"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> Vídeo</span>
+          <img src="images/velvet-mocha.jpg" alt="Velvet Mocha — café com chocolate cremoso" loading="lazy">
+          <span class="video-badge">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> Vídeo
+          </span>
           <div class="play-overlay"><div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
         </div>
         <div class="body">
@@ -750,7 +833,17 @@
         </div>
       </article>
 
-      <!-- Item com placeholder -->
+      <!-- Item com foto (sem vídeo) -->
+      <article class="item" data-tags="">
+        <div class="media" data-video="" data-caption="Espresso">
+          <img src="images/espresso.jpg" alt="Espresso duplo" loading="lazy">
+        </div>
+        <div class="body">
+          <div class="row-top"><div class="name">Espresso</div><div class="price">€3.00</div></div>
+        </div>
+      </article>
+
+      <!-- Item sem foto (placeholder) -->
       <article class="item" data-tags="">
         <div class="media" data-video="" data-caption="Americano">
           <div class="placeholder">
@@ -762,18 +855,112 @@
           <div class="row-top"><div class="name">Americano</div><div class="price">€3.50</div></div>
         </div>
       </article>
+
+      <article class="item" data-tags="">
+        <div class="media" data-video="" data-caption="Cappuccino">
+          <div class="placeholder">
+            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
+            <span>Foto em breve</span>
+          </div>
+        </div>
+        <div class="body">
+          <div class="row-top"><div class="name">Cappuccino</div><div class="price">€4.00</div></div>
+        </div>
+      </article>
+
+      <article class="item" data-tags="">
+        <div class="media" data-video="" data-caption="Flat White">
+          <div class="placeholder">
+            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
+            <span>Foto em breve</span>
+          </div>
+        </div>
+        <div class="body">
+          <div class="row-top"><div class="name">Flat White</div><div class="price">€3.80</div></div>
+        </div>
+      </article>
+
+      <article class="item" data-tags="">
+        <div class="media" data-video="" data-caption="Latte">
+          <div class="placeholder">
+            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
+            <span>Foto em breve</span>
+          </div>
+        </div>
+        <div class="body">
+          <div class="row-top"><div class="name">Latte</div><div class="price">€4.50</div></div>
+        </div>
+      </article>
+
+      <article class="item" data-tags="vegan">
+        <div class="media" data-video="" data-caption="Pure Matcha">
+          <div class="placeholder">
+            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
+            <span>Foto em breve</span>
+          </div>
+        </div>
+        <div class="body">
+          <div class="row-top"><div class="name">Pure Matcha</div><div class="price">€4.50</div></div>
+          <p class="desc">Clean, earthy matcha with a smooth, balanced finish.</p>
+        </div>
+      </article>
+
+      <article class="item" data-tags="">
+        <div class="media" data-video="" data-caption="Spiced Chai Latte">
+          <div class="placeholder">
+            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
+            <span>Foto em breve</span>
+          </div>
+        </div>
+        <div class="body">
+          <div class="row-top"><div class="name">Spiced Chai Latte</div><div class="price">€4.50</div></div>
+          <p class="desc">Warm, aromatic spices blended into a creamy, comforting latte.</p>
+        </div>
+      </article>
+
+      <article class="item" data-tags="">
+        <div class="media" data-video="" data-caption="Dirty Chai Boost">
+          <div class="placeholder">
+            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
+            <span>Foto em breve</span>
+          </div>
+        </div>
+        <div class="body">
+          <div class="row-top"><div class="name">Dirty Chai Boost <span class="star">★</span></div><div class="price">€4.80</div></div>
+          <p class="desc">Chai latte with a shot of espresso — bold, warm, and energizing.</p>
+        </div>
+      </article>
+
+      <article class="item" data-tags="">
+        <div class="media" data-video="" data-caption="Signature Hot Chocolate">
+          <div class="placeholder">
+            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
+            <span>Foto em breve</span>
+          </div>
+        </div>
+        <div class="body">
+          <div class="row-top"><div class="name">Signature Hot Chocolate <span class="star">★</span></div><div class="price">€5.00</div></div>
+          <p class="desc">Thick, rich, and deeply chocolatey — made to indulge.</p>
+          <div class="extras">Add cream or marshmallow €1 (6/7)</div>
+        </div>
+      </article>
+
     </div>
     <p class="note">Ice, syrups or alternative milk +€0.50 each</p>
   </section>
 
-  <!-- SEÇÃO: BRUNCH -->
-  <section class="menu-block" id="brunch" role="tabpanel">
+  <!-- ============================================================
+       BRUNCH (exemplo com mídia)
+       ============================================================ -->
+  <section class="menu-block" id="brunch">
     <div class="section-head">
       <h2>Brunch</h2>
       <span class="rule"></span>
       <span class="sub">Add a splash of joy</span>
     </div>
+
     <div class="grid">
+
       <article class="item" data-tags="">
         <div class="media" data-video="videos/avocado-toast.mp4" data-caption="Avocado on Toast — montagem">
           <img src="images/avocado-toast.jpg" alt="Avocado on Toast com ovos poché" loading="lazy">
@@ -783,25 +970,233 @@
         <div class="body">
           <div class="row-top"><div class="name">Avocado on Toast</div><div class="price">€14.50</div></div>
           <p class="desc">Creamy smashed avocado on warm focaccia, topped with perfectly poached eggs, parmesan, and balsamic glaze.</p>
-          <div class="extras">Add bacon +€3 · Smoked salmon +€4</div>
+          <div class="extras">Add bacon +€3 · Smoked salmon +€4 · Crispy chilli</div>
           <div class="allerg">(1 wheat, 3, 6, 7, 11, 12)</div>
         </div>
       </article>
+
+      <article class="item" data-tags="">
+        <div class="media" data-video="" data-caption="Eggs Hemingway">
+          <div class="placeholder">
+            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
+            <span>Foto em breve</span>
+          </div>
+        </div>
+        <div class="body">
+          <div class="row-top"><div class="name">Eggs Hemingway</div><div class="price">€15.00</div></div>
+          <p class="desc">Smoked salmon, perfectly poached eggs, and rich hollandaise on a toasted English muffin.</p>
+          <div class="allerg">(1 wheat, 3, 4, 7, 12)</div>
+        </div>
+      </article>
+
+      <article class="item" data-tags="">
+        <div class="media" data-video="" data-caption="Eggs Benedict">
+          <div class="placeholder">
+            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
+            <span>Foto em breve</span>
+          </div>
+        </div>
+        <div class="body">
+          <div class="row-top"><div class="name">Eggs Benedict</div><div class="price">€14.50</div></div>
+          <p class="desc">Poached eggs on a toasted English muffin with crispy bacon and silky hollandaise.</p>
+          <div class="allerg">(1 wheat, 3, 7, 12)</div>
+        </div>
+      </article>
+
+      <article class="item" data-tags="">
+        <div class="media" data-video="" data-caption="Cheese Bagel">
+          <div class="placeholder">
+            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
+            <span>Foto em breve</span>
+          </div>
+        </div>
+        <div class="body">
+          <div class="row-top"><div class="name">Cheese Bagel</div><div class="price">€15.90</div></div>
+          <p class="desc">Freshly toasted bagel with mixed leaves. Crispy bacon, scrambled eggs &amp; melted cheese / Seasoned chicken with melted cheese.</p>
+          <div class="allerg">(1 wheat, 3, 7, 11)</div>
+        </div>
+      </article>
+
+      <article class="item" data-tags="">
+        <div class="media" data-video="" data-caption="French Toast">
+          <div class="placeholder">
+            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
+            <span>Foto em breve</span>
+          </div>
+        </div>
+        <div class="body">
+          <div class="row-top"><div class="name">French Toast</div><div class="price">€13.90</div></div>
+          <p class="desc">Golden brioche, perfectly toasted and soft inside.</p>
+          <div class="extras">Dulce de Leche / Crispy Bacon with maple</div>
+          <div class="allerg">(1 wheat, 3, 7)</div>
+        </div>
+      </article>
+
+      <article class="item" data-tags="">
+        <div class="media" data-video="" data-caption="Toast & Scrambled Eggs">
+          <div class="placeholder">
+            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
+            <span>Foto em breve</span>
+          </div>
+        </div>
+        <div class="body">
+          <div class="row-top"><div class="name">Toast &amp; Scrambled Eggs</div><div class="price">€11.50</div></div>
+          <p class="desc">Scrambled eggs and cheese on toasted focaccia, topped with hollandaise.</p>
+          <div class="extras">Add bacon +€3 · Smoked salmon +€4</div>
+          <div class="allerg">(1 wheat, 3, 4, 7)</div>
+        </div>
+      </article>
+
     </div>
   </section>
 
-  <!-- (As outras seções - teas, cold, smoothies, drinks, wine, bakery - devem ser coladas aqui dentro com a mesma estrutura) -->
+  <!-- ============================================================
+       PADARIA & DOCES
+       ============================================================ -->
+  <section class="menu-block" id="bakery">
+    <div class="section-head">
+      <h2>Padaria &amp; Doces</h2>
+      <span class="rule"></span>
+      <span class="sub">Bakery &amp; Sweets</span>
+    </div>
 
+    <div class="grid">
+
+      <article class="item" data-tags="">
+        <div class="media" data-video="videos/pao-de-queijo.mp4" data-caption="Pão de Queijo — saindo do forno">
+          <img src="images/pao-de-queijo.jpg" alt="Pão de queijo quentinho" loading="lazy">
+          <span class="video-badge"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> Vídeo</span>
+          <div class="play-overlay"><div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        </div>
+        <div class="body">
+          <div class="row-top"><div class="name">Brazilian Cheese Bites</div><div class="price">€3.50</div></div>
+          <p class="desc">Traditional Brazilian cheese bread, light and fluffy, served warm.</p>
+          <div class="allerg">(3, 7)</div>
+        </div>
+      </article>
+
+      <article class="item" data-tags="">
+        <div class="media" data-video="" data-caption="Croissant">
+          <div class="placeholder">
+            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
+            <span>Foto em breve</span>
+          </div>
+        </div>
+        <div class="body">
+          <div class="row-top"><div class="name">Croissant (Plain)</div><div class="price">€3.50</div></div>
+          <p class="desc">Buttery, flaky croissant baked fresh daily.</p>
+          <div class="extras">Bacon +€3.50 · Eggs +€3 · Cheese +€3 · Smoked salmon +€4</div>
+          <div class="allerg">(1 wheat, 3, 7)</div>
+        </div>
+      </article>
+
+      <article class="item" data-tags="">
+        <div class="media" data-video="" data-caption="Pistachio Croissant">
+          <div class="placeholder">
+            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
+            <span>Foto em breve</span>
+          </div>
+        </div>
+        <div class="body">
+          <div class="row-top"><div class="name">Pistachio Croissant</div><div class="price">€9.99</div></div>
+          <p class="desc">Flaky croissant filled with rich pistachio cream and finished with a smooth pistachio topping.</p>
+          <div class="allerg">(1 wheat, 3, 7, 8)</div>
+        </div>
+      </article>
+
+      <article class="item" data-tags="">
+        <div class="media" data-video="" data-caption="Açaí Bowl">
+          <div class="placeholder">
+            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
+            <span>Foto em breve</span>
+          </div>
+        </div>
+        <div class="body">
+          <div class="row-top"><div class="name">Açaí Bowl</div><div class="price">€9.99</div></div>
+          <p class="desc">Refreshing, creamy açaí topped with crunchy granola, strawberries, milk powder &amp; condensed milk.</p>
+          <div class="allerg">(1 wheat, 7)</div>
+        </div>
+      </article>
+
+      <article class="item" data-tags="gf">
+        <div class="media" data-video="" data-caption="Brownie with Ice Cream">
+          <div class="placeholder">
+            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
+            <span>Foto em breve</span>
+          </div>
+        </div>
+        <div class="body">
+          <div class="row-top"><div class="name">Brownie with Ice Cream</div><div class="price">€8.50</div></div>
+          <p class="desc">A gluten-free brownie made with almond flour, served with a scoop of vanilla ice cream.</p>
+          <div class="allerg">(3, 7, 8)</div>
+        </div>
+      </article>
+
+      <article class="item" data-tags="">
+        <div class="media" data-video="" data-caption="Fluffy Pancake Stack">
+          <div class="placeholder">
+            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
+            <span>Foto em breve</span>
+          </div>
+        </div>
+        <div class="body">
+          <div class="row-top"><div class="name">Fluffy Pancake Stack</div><div class="price">€9.50</div></div>
+          <p class="desc">Soft, fluffy pancakes served warm.</p>
+          <div class="extras">Dulce de Leche &amp; Vanilla / Nutella &amp; Strawberries</div>
+          <div class="allerg">(1 wheat, 3, 7)</div>
+        </div>
+      </article>
+
+      <article class="item" data-tags="">
+        <div class="media" data-video="" data-caption="Chocolate Melt Cake">
+          <div class="placeholder">
+            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
+            <span>Foto em breve</span>
+          </div>
+        </div>
+        <div class="body">
+          <div class="row-top"><div class="name">Chocolate Melt Cake</div><div class="price">€7.50</div></div>
+          <p class="desc">Warm molten cake with a soft, gooey center.</p>
+          <div class="extras">Carrot Cake &amp; Chocolate / Ferrero Rocher / Nutella &amp; Strawberry</div>
+          <div class="allerg">(1 wheat, 3, 7)</div>
+        </div>
+      </article>
+
+      <article class="item" data-tags="">
+        <div class="media" data-video="" data-caption="Mini Profiteroles">
+          <div class="placeholder">
+            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
+            <span>Foto em breve</span>
+          </div>
+        </div>
+        <div class="body">
+          <div class="row-top"><div class="name">Mini Profiteroles</div><div class="price">€3.50</div></div>
+          <p class="desc">Coconut, Nutella, or Pistachio.</p>
+          <div class="allerg">(1 wheat, 3, 7, 8)</div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       RODAPÉ
+       ============================================================ -->
   <footer>
     <p><strong>FIRST CHAPTER CAFE</strong> · 16 Fade Street, Dublin 2</p>
     <p class="allergen-list">
       <strong>Allergens:</strong> 1. Gluten · 2. Crustaceans · 3. Eggs · 4. Fish · 5. Peanuts · 6. Soybeans · 7. Milk · 8. Tree Nuts · 9. Celery · 10. Mustard · 11. Sesame Seeds · 12. Sulphites · 13. Lupin · 14. Molluscs
     </p>
-    <p class="warn">As there are nuts and sesame seeds used in our kitchen, cross-contamination is possible.</p>
+    <p class="warn">
+      As there are nuts and sesame seeds used in our kitchen, cross-contamination is possible. Please advise a staff member.
+    </p>
   </footer>
+
 </div>
 
-<!-- MODAL DE VÍDEO -->
+<!-- ============================================================
+     MODAL DE VÍDEO
+     ============================================================ -->
 <div class="modal" id="videoModal" role="dialog" aria-modal="true" aria-label="Vídeo do item">
   <div class="modal-inner">
     <button class="close" id="closeModal" aria-label="Fechar vídeo">✕</button>
@@ -810,53 +1205,57 @@
   </div>
 </div>
 
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
 <script>
-  /* ABAS */
-  const tabButtons = document.querySelectorAll('nav.tabs button');
-  const sections = document.querySelectorAll('section.menu-block');
-
-  function activateTab(targetId){
-    sections.forEach(s => s.classList.remove('active'));
-    const target = document.getElementById(targetId);
-    if (target) target.classList.add('active');
-
-    tabButtons.forEach(btn => {
-      const isActive = btn.dataset.target === targetId;
-      btn.classList.toggle('active', isActive);
-      btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
-    });
-
-    const navHeight = document.querySelector('nav.tabs').offsetHeight;
-    const top = target.getBoundingClientRect().top + window.scrollY - navHeight - 8;
-    window.scrollTo({ top, behavior: 'smooth' });
-
-    const activeBtn = [...tabButtons].find(b => b.dataset.target === targetId);
-    if (activeBtn) activeBtn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-  }
-
-  tabButtons.forEach(btn => {
-    btn.addEventListener('click', () => activateTab(btn.dataset.target));
-  });
-
-  /* FILTROS */
-  document.querySelectorAll('.filters').forEach(group => {
-    const inputs = group.querySelectorAll('input');
-    const section = group.closest('section');
-    const items = section.querySelectorAll('.item');
-
-    inputs.forEach(input => {
-      input.addEventListener('change', () => {
-        const active = [...inputs].filter(i => i.checked).map(i => i.dataset.filter);
-        items.forEach(item => {
-          const tags = (item.dataset.tags || '').split(/\s+/);
-          const matches = active.every(f => tags.includes(f));
-          item.style.display = (matches || active.length === 0) ? '' : 'none';
+  /* ---------- REVEAL ON SCROLL ---------- */
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        // anima filhos em cascata
+        const items = entry.target.querySelectorAll('.item');
+        items.forEach((item, i) => {
+          setTimeout(() => item.classList.add('visible'), i * 80);
         });
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('section.menu-block').forEach(s => revealObserver.observe(s));
+
+  /* ---------- FILTROS ---------- */
+  const filterInputs = document.querySelectorAll('.filters input');
+  const items = document.querySelectorAll('.item');
+
+  filterInputs.forEach(input => {
+    input.addEventListener('change', () => {
+      const active = [...filterInputs].filter(i => i.checked).map(i => i.dataset.filter);
+      items.forEach(item => {
+        const tags = (item.dataset.tags || '').split(/\s+/);
+        const matches = active.every(f => tags.includes(f));
+        item.style.display = (matches || active.length === 0) ? '' : 'none';
       });
     });
   });
 
-  /* MODAL DE VÍDEO */
+  /* ---------- NAV ATIVA ---------- */
+  const navLinks = document.querySelectorAll('nav.toc a');
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(a => {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id);
+        });
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+
+  document.querySelectorAll('section.menu-block').forEach(s => sectionObserver.observe(s));
+
+  /* ---------- MODAL DE VÍDEO ---------- */
   const modal = document.getElementById('videoModal');
   const modalVideo = document.getElementById('modalVideo');
   const modalCaption = document.getElementById('modalCaption');
@@ -868,7 +1267,7 @@
       const caption = media.dataset.caption || '';
       if (!src) return;
 
-      if (/\.(mp4|webm|ogg)$/i.test(src)) {
+      if (src.endsWith('.mp4') || src.endsWith('.webm') || src.endsWith('.ogg')) {
         modalVideo.src = src;
         modalVideo.style.display = 'block';
       } else {
