@@ -121,21 +121,26 @@
     z-index: 50;
     background-color: rgba(247, 245, 239, 0.95);
     backdrop-filter: blur(8px);
-    padding: 3.5rem 0 1rem 0;
+    padding: 3.5rem 0 1rem 0;   /* espaço em cima para o gato */
     margin: 0 -1rem 2rem -1rem;
     border-bottom: 1px solid var(--line);
   }
+
+  /* Wrapper com overflow horizontal — o gato NÃO fica aqui dentro */
+  .nav-scroll-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .nav-scroll-wrap::-webkit-scrollbar { display: none; }
+
   .nav-scroll {
     display: flex;
     flex-wrap: nowrap;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
     gap: 0.6rem;
     list-style: none;
     padding: 0 1rem;
-    scrollbar-width: none;
   }
-  .nav-scroll::-webkit-scrollbar { display: none; }
 
   .nav-btn {
     flex: 0 0 auto;
@@ -404,16 +409,18 @@
 
   <!-- NAVEGAÇÃO FIXA -->
   <div class="nav-container">
-    <ul class="nav-scroll">
-      <li><button class="nav-btn tab-btn active" data-target="coffee-tea"><img src="images/gato.gif" alt="Cat" class="nav-cat-gif">Coffee & Tea</button></li>
-      <li><button class="nav-btn tab-btn" data-target="protein-coffee"><img src="images/gato.gif" alt="Cat" class="nav-cat-gif">Protein Coffee</button></li>
-      <li><button class="nav-btn tab-btn" data-target="beverages"><img src="images/gato.gif" alt="Cat" class="nav-cat-gif">Beverages & Juices</button></li>
-      <li><button class="nav-btn tab-btn" data-target="smoothies"><img src="images/gato.gif" alt="Cat" class="nav-cat-gif">Smoothies</button></li>
-      <li><button class="nav-btn tab-btn" data-target="signature"><img src="images/gato.gif" alt="Cat" class="nav-cat-gif">Signature Drinks</button></li>
-      <li><button class="nav-btn tab-btn" data-target="drinks-alcohol"><img src="images/gato.gif" alt="Cat" class="nav-cat-gif">Wine & Bubbles</button></li>
-      <li><button class="nav-btn tab-btn" data-target="brunch"><img src="images/gato.gif" alt="Cat" class="nav-cat-gif">Brunch</button></li>
-      <li><button class="nav-btn tab-btn" data-target="bites-sweets"><img src="images/gato.gif" alt="Cat" class="nav-cat-gif">Bites & Sweets</button></li>
-    </ul>
+    <div class="nav-scroll-wrap">
+      <ul class="nav-scroll">
+        <li><button class="nav-btn tab-btn active" data-target="coffee-tea"><img src="images/gato.gif" alt="Cat" class="nav-cat-gif">Coffee & Tea</button></li>
+        <li><button class="nav-btn tab-btn" data-target="protein-coffee"><img src="images/gato.gif" alt="Cat" class="nav-cat-gif">Protein Coffee</button></li>
+        <li><button class="nav-btn tab-btn" data-target="beverages"><img src="images/gato.gif" alt="Cat" class="nav-cat-gif">Beverages & Juices</button></li>
+        <li><button class="nav-btn tab-btn" data-target="smoothies"><img src="images/gato.gif" alt="Cat" class="nav-cat-gif">Smoothies</button></li>
+        <li><button class="nav-btn tab-btn" data-target="signature"><img src="images/gato.gif" alt="Cat" class="nav-cat-gif">Signature Drinks</button></li>
+        <li><button class="nav-btn tab-btn" data-target="drinks-alcohol"><img src="images/gato.gif" alt="Cat" class="nav-cat-gif">Wine & Bubbles</button></li>
+        <li><button class="nav-btn tab-btn" data-target="brunch"><img src="images/gato.gif" alt="Cat" class="nav-cat-gif">Brunch</button></li>
+        <li><button class="nav-btn tab-btn" data-target="bites-sweets"><img src="images/gato.gif" alt="Cat" class="nav-cat-gif">Bites & Sweets</button></li>
+      </ul>
+    </div>
   </div>
 
   <!-- ============ COFFEE & TEA ============ -->
