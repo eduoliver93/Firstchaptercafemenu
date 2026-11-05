@@ -128,7 +128,7 @@
   }
 
   /* ============================================================
-     NAVEGAÇÃO COM O GATINHO (MÉTODO INFALÍVEL)
+     NAVEGAÇÃO COM O GATINHO
      ============================================================ */
   .nav-container {
     margin-bottom: 2.5rem;
@@ -141,7 +141,7 @@
     -webkit-overflow-scrolling: touch;
     gap: 0.6rem;
     list-style: none;
-    padding: 3rem 0 0.5rem 0; /* AUMENTADO PARA O GATO GRANDE CABER */
+    padding: 3.5rem 0 0.5rem 0; /* Espaço para o gato grande não cortar */
     scrollbar-width: none;
   }
   .nav-scroll::-webkit-scrollbar { display: none; }
@@ -173,14 +173,15 @@
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   }
 
-  /* O GATINHO AUMENTADO */
+  /* O GATINHO */
   .nav-cat-gif {
     position: absolute;
-    height: 60px; /* AUMENTADO (era 35px) */
+    height: 60px; 
     width: auto;
-    top: -56px; /* Posiciona acima do botão */
+    top: 100%; /* Cola a base do gato na base do botão */
     left: 50%;
-    transform: translateX(-50%) translateY(10px); 
+    transform: translateX(-50%) translateY(10px);
+    margin-top: -10px; /* Sobe um pouquinho para parecer deitado na borda */
     opacity: 0;
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     pointer-events: none;
