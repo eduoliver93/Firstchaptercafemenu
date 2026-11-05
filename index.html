@@ -128,10 +128,17 @@
   }
 
   /* ============================================================
-     NAVEGAÇÃO COM O GATINHO
+     NAVEGAÇÃO FIXA (STICKY) COM O GATINHO
      ============================================================ */
   .nav-container {
-    margin-bottom: 2.5rem;
+    position: sticky; /* Faz a barra ficar fixa no topo */
+    top: 0; /* Cola no topo da tela */
+    z-index: 50; /* Garante que fique acima dos itens do menu */
+    background-color: rgba(247, 245, 239, 0.95); /* Fundo semi-transparente igual ao do site */
+    backdrop-filter: blur(8px); /* Efeito de vidro embaçado atrás dos botões */
+    padding: 3.5rem 0 1rem 0; /* Espaço em cima para o gato não cortar na tela */
+    margin: 0 -1rem 2rem -1rem; /* Estica a barra para as bordas da tela */
+    border-bottom: 1px solid var(--line); /* Linha sutil embaixo */
   }
 
   .nav-scroll {
@@ -141,7 +148,7 @@
     -webkit-overflow-scrolling: touch;
     gap: 0.6rem;
     list-style: none;
-    padding: 3.5rem 0 0.5rem 0; /* Espaço em cima para o gato grande */
+    padding: 0 1rem; /* Respiro nas laterais */
     scrollbar-width: none;
   }
   .nav-scroll::-webkit-scrollbar { display: none; }
@@ -159,7 +166,7 @@
     padding: 0.5rem 1rem;
     border: 1px solid var(--line);
     border-radius: 50px; 
-    background: transparent;
+    background: var(--bg); /* Fundo bege para o botão não ficar transparente */
     transition: all 0.3s var(--ease-out);
     cursor: pointer;
     -webkit-appearance: none;
@@ -176,22 +183,26 @@
   /* O GATINHO */
   .nav-cat-gif {
     position: absolute;
-    height: 55px; /* Tamanho do gato */
+    height: 55px; 
     width: auto;
-    top: -48px; /* Puxa ele para cima do botão */
+    top: -48px; 
     left: 50%;
     transform: translateX(-50%) translateY(10px); 
     opacity: 0;
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     pointer-events: none;
-    z-index: 100; /* Garante que ele fique na frente do fundo preto do botão */
+    z-index: 100; 
     color: transparent; 
   }
 
-  /* Quando o botão está ativo, o gato aparece */
   .nav-btn.active .nav-cat-gif {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
+  }
+
+  /* Compensa o espaço da barra fixa ao clicar nas abas */
+  section.menu-block {
+    scroll-margin-top: 130px; 
   }
 
   /* ============================================================
@@ -387,7 +398,7 @@
 
   <img src="images/maquina.png" alt="Coffee Machine" class="img-center">
 
-  <!-- NAVEGAÇÃO -->
+  <!-- NAVEGAÇÃO FIXA -->
   <div class="nav-container">
     <ul class="nav-scroll">
       <li>
@@ -928,8 +939,14 @@
       this.classList.add('active');
       document.getElementById(targetId).classList.add('active');
 
-      const navPosition = document.querySelector('.nav-container').offsetTop;
-      window.scrollTo({ top: navPosition - 10, behavior: 'smooth' });
+      // Rola suavemente para o topo do conteúdo (abaixo da barra fixa)
+      const navHeight = document.querySelector('.nav-container').offsetHeight;
+      const sectionPosition = document.getElementById(targetId).offsetTop;
+      
+      window.scrollTo({ 
+        top: sectionPosition - navHeight, 
+        behavior: 'smooth' 
+      });
     });
   });
 
