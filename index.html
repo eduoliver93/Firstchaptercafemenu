@@ -119,26 +119,22 @@
     position: sticky;
     top: 0;
     z-index: 50;
-    /* CORREÇÃO: Fundo bege sólido, sem blur para não bugar a renderização do gato */
-    background-color: var(--bg); 
-    padding: 4.5rem 0 1rem 0; /* Aumentei o top para o gato caber folgado */
+    /* FUNDO TOTALMENTE TRANSPARENTE AQUI */
+    background-color: transparent;
+    padding: 5rem 0 1rem 0; /* Espaço superior para o gato */
     margin: 0 -1rem 2rem -1rem;
-    border-bottom: 1px solid var(--line);
   }
 
   .nav-scroll {
     display: flex;
     flex-wrap: nowrap;
-    overflow-x: auto;
-    /* CORREÇÃO: Isso permite que o gato suba sem ser cortado */
-    overflow-y: visible; 
-    -webkit-overflow-scrolling: touch;
+    /* Removido o overflow-x:auto para o gato não ser cortado */
+    overflow: visible; 
     gap: 0.6rem;
     list-style: none;
     padding: 0 1rem;
     scrollbar-width: none;
   }
-  .nav-scroll::-webkit-scrollbar { display: none; }
 
   .nav-btn {
     flex: 0 0 auto;
@@ -153,12 +149,14 @@
     padding: 0.5rem 1rem;
     border: 1px solid var(--line);
     border-radius: 50px;
-    background: var(--bg);
+    /* FUNDO APENAS NO BOTÃO */
+    background: var(--bg); 
     transition: all 0.3s var(--ease-out);
     cursor: pointer;
     -webkit-appearance: none;
     position: relative;
   }
+
   .nav-btn.active {
     color: var(--active-txt);
     background-color: var(--active-bg);
@@ -173,7 +171,6 @@
     width: auto;
     max-width: none;
     flex-shrink: 0;
-    /* CORREÇÃO: Usar translateY em vez de top evita bugs de renderização */
     bottom: 100%; 
     left: 50%;
     transform: translate(-50%, 10px); 
