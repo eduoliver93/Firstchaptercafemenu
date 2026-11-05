@@ -106,7 +106,7 @@
   .img-center {
     display: block;
     margin: 1.5rem auto;
-    max-width: 110px; /* Metade do tamanho */
+    max-width: 110px;
     opacity: 0.9;
   }
 
@@ -244,9 +244,11 @@
     overflow: hidden;
     cursor: pointer;
     border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    /* Fundo elegante que aparece se a imagem não carregar */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="%23a8a396" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/><text x="12" y="22" font-family="sans-serif" font-size="4" text-anchor="middle" fill="%23a8a396">Photo coming soon</text></svg>');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 60%;
   }
 
   .item-media img {
@@ -255,22 +257,8 @@
     object-fit: cover;
     transition: transform .5s var(--ease-out);
     border-radius: 6px;
-  }
-
-  .placeholder {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: .5rem;
-    color: #a8a396;
-  }
-  .placeholder svg {
-    width: 32px; height: 32px;
-    stroke: currentColor; fill: none; stroke-width: 1.5;
-  }
-  .placeholder span {
-    font-size: .75rem; letter-spacing: .1em; text-transform: uppercase;
+    position: relative;
+    z-index: 1; /* Fica acima do placeholder de erro */
   }
 
   /* Botão de Play do Vídeo */
@@ -454,7 +442,6 @@
     <div class="section-header"><h2>Coffee & Tea</h2></div>
     <div class="menu-grid">
       
-      <!-- ESPRESSO -->
       <div class="item-card">
         <div class="item-media" data-video="videos/espresso.mp4">
           <img src="images/espresso.png" alt="Espresso" loading="lazy">
@@ -463,7 +450,6 @@
         <div class="item-info"><div class="item-header"><span class="item-name">Espresso</span><div class="item-dots"></div><span class="item-price">€3.00</span></div></div>
       </div>
 
-      <!-- AMERICANO -->
       <div class="item-card">
         <div class="item-media" data-video="videos/americano.mp4">
           <img src="images/americano.png" alt="Americano" loading="lazy">
@@ -472,7 +458,6 @@
         <div class="item-info"><div class="item-header"><span class="item-name">Americano</span><div class="item-dots"></div><span class="item-price">€3.50</span></div></div>
       </div>
 
-      <!-- CAPPUCCINO -->
       <div class="item-card">
         <div class="item-media" data-video="videos/cappuccino.mp4">
           <img src="images/cappuccino.png" alt="Cappuccino" loading="lazy">
@@ -481,7 +466,6 @@
         <div class="item-info"><div class="item-header"><span class="item-name">Cappuccino</span><div class="item-dots"></div><span class="item-price">€4.00</span></div></div>
       </div>
 
-      <!-- FLAT WHITE -->
       <div class="item-card">
         <div class="item-media" data-video="videos/flat-white.mp4">
           <img src="images/flat-white.png" alt="Flat White" loading="lazy">
@@ -490,7 +474,6 @@
         <div class="item-info"><div class="item-header"><span class="item-name">Flat White</span><div class="item-dots"></div><span class="item-price">€3.80</span></div></div>
       </div>
 
-      <!-- LATTE -->
       <div class="item-card">
         <div class="item-media" data-video="videos/latte.mp4">
           <img src="images/latte.png" alt="Latte" loading="lazy">
@@ -499,7 +482,6 @@
         <div class="item-info"><div class="item-header"><span class="item-name">Latte</span><div class="item-dots"></div><span class="item-price">€4.50</span></div></div>
       </div>
 
-      <!-- VELVET MOCHA -->
       <div class="item-card">
         <div class="item-media" data-video="videos/velvet-mocha.mp4">
           <img src="images/velvet-mocha.png" alt="Velvet Mocha" loading="lazy">
@@ -508,7 +490,6 @@
         <div class="item-info"><div class="item-header"><span class="item-name">Velvet Mocha</span><div class="item-dots"></div><span class="item-price">€4.90</span></div><div class="item-desc">Smooth, rich chocolate coffee.</div></div>
       </div>
 
-      <!-- PURE MATCHA -->
       <div class="item-card">
         <div class="item-media" data-video="videos/pure-matcha.mp4">
           <img src="images/pure-matcha.png" alt="Pure Matcha" loading="lazy">
@@ -517,7 +498,6 @@
         <div class="item-info"><div class="item-header"><span class="item-name">Pure Matcha</span><div class="item-dots"></div><span class="item-price">€4.50</span></div></div>
       </div>
 
-      <!-- SPICED CHAI LATTE -->
       <div class="item-card">
         <div class="item-media" data-video="videos/spiced-chai-latte.mp4">
           <img src="images/spiced-chai-latte.png" alt="Spiced Chai Latte" loading="lazy">
@@ -526,7 +506,6 @@
         <div class="item-info"><div class="item-header"><span class="item-name">Spiced Chai Latte</span><div class="item-dots"></div><span class="item-price">€4.50</span></div></div>
       </div>
 
-      <!-- DIRTY CHAI BOOST -->
       <div class="item-card">
         <div class="item-media" data-video="videos/dirty-chai-boost.mp4">
           <img src="images/dirty-chai-boost.png" alt="Dirty Chai Boost" loading="lazy">
@@ -535,7 +514,6 @@
         <div class="item-info"><div class="item-header"><span class="item-name">Dirty Chai Boost</span><div class="item-dots"></div><span class="item-price">€4.80</span></div><div class="item-desc">Chai latte with a shot of espresso.</div></div>
       </div>
 
-      <!-- SIGNATURE HOT CHOCOLATE -->
       <div class="item-card">
         <div class="item-media" data-video="videos/signature-hot-chocolate.mp4">
           <img src="images/signature-hot-chocolate.png" alt="Signature Hot Chocolate" loading="lazy">
@@ -544,7 +522,6 @@
         <div class="item-info"><div class="item-header"><span class="item-name">Signature Hot Chocolate</span><div class="item-dots"></div><span class="item-price">€5.00</span></div><div class="item-desc">Add cream or marshmallow for €1 each.</div></div>
       </div>
 
-      <!-- TEAS -->
       <div class="item-card">
         <div class="item-media" data-video="videos/teas.mp4">
           <img src="images/teas.png" alt="Teas" loading="lazy">
