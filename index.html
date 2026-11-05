@@ -75,9 +75,9 @@
 
   .hero{
     text-align: center;
-    padding: 0 0 1.5rem;
+    padding: 0 0 1rem;
     border-bottom: 1px solid var(--ink);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
   }
 
   .hero h1{
@@ -99,6 +99,44 @@
   }
   .hero .address{ color: var(--ink-soft); font-size: .75rem; }
   .hero .address a{ color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--ink); }
+
+  /* ============================================================
+     ILUSTRAÇÕES DO PDF (Classes para você brincar)
+     ============================================================ */
+  
+  /* Imagem centralizada no topo (Máquina) */
+  .img-center {
+    display: block;
+    margin: 2rem auto;
+    max-width: 220px;
+    opacity: 0.9;
+  }
+
+  /* Imagem que fica entre as seções (Copos, Drink) */
+  .img-divider {
+    display: block;
+    margin: 2rem auto;
+    max-width: 200px;
+    opacity: 0.9;
+  }
+
+  /* Imagens laterais no Desktop (Xícara, Flor) */
+  .img-side {
+    display: none; /* Esconde no celular */
+  }
+
+  @media (min-width: 1050px) {
+    .img-side {
+      display: block;
+      position: absolute;
+      width: 150px;
+      opacity: 0.9;
+      z-index: -1; /* Fica atrás do texto */
+      pointer-events: none;
+    }
+    .img-side.left { left: -170px; top: 50px; }
+    .img-side.right { right: -170px; top: 50px; }
+  }
 
   /* ============================================================
      NAVEGAÇÃO
@@ -249,7 +287,7 @@
     background: rgba(17,17,17,0.8);
     border: 2px solid #fff;
     border-radius: 50%;
-    display: none; /* Escondido por padrão */
+    display: none; 
     align-items: center;
     justify-content: center;
     backdrop-filter: blur(4px);
@@ -403,6 +441,9 @@
     <div class="address">16 Fade Street, Dublin 2 · <a href="https://instagram.com/firstchaptercafe" target="_blank">@firstchaptercafe</a></div>
   </header>
 
+  <!-- MÁQUINA DE CAFÉ (Pág 1) -->
+  <img src="images/maquina.png" alt="Coffee Machine" class="img-center">
+
   <!-- NAVEGAÇÃO -->
   <div class="nav-container">
     <ul class="nav-scroll">
@@ -417,9 +458,12 @@
   </div>
 
   <!-- ============================================================
-       COFFEE & TEA
+       COFFEE & TEA (Com Xícara Flutuante)
        ============================================================ -->
   <section class="menu-block active" id="coffee-tea">
+    <!-- XÍCARA (Pág 2) -->
+    <img src="images/xicara.png" alt="Cup" class="img-side left">
+    
     <div class="section-header"><h2>Coffee & Tea</h2></div>
     <div class="menu-grid">
       
@@ -503,6 +547,9 @@
     </div>
     <div class="section-note">Note: Ice, syrups, or alternative milk are an extra €0.50 each.</div>
   </section>
+
+  <!-- COPOS (Pág 1 e 3) -->
+  <img src="images/copos.png" alt="Glasses" class="img-divider">
 
   <!-- ============================================================
        PROTEIN COFFEE
@@ -599,10 +646,16 @@
     </div>
   </section>
 
+  <!-- DRINK COM GELO (Pág 4) -->
+  <img src="images/drink-gelo.png" alt="Drink" class="img-divider">
+
   <!-- ============================================================
-       DRINKS & ALCOHOL
+       DRINKS & ALCOHOL (Com Flor Flutuante)
        ============================================================ -->
   <section class="menu-block" id="drinks-alcohol">
+    <!-- FLOR (Pág 5) -->
+    <img src="images/flor.png" alt="Flower" class="img-side right">
+
     <div class="section-header"><h2>Drinks & Alcohol</h2></div>
     <div class="menu-grid">
       
@@ -800,15 +853,11 @@
   document.querySelectorAll('.item-media').forEach(media => {
     const videoSrc = media.dataset.video;
     
-    // Se o item tiver vídeo, mostra o botão de play
     if (videoSrc && videoSrc.trim() !== "") {
       const playBtn = media.querySelector('.video-btn');
-      if (playBtn) {
-        playBtn.style.display = 'flex';
-      }
+      if (playBtn) playBtn.style.display = 'flex';
     }
 
-    // Abre o modal ao clicar na área de mídia
     media.addEventListener('click', () => {
       if (!videoSrc || videoSrc.trim() === "") return; 
       
