@@ -2,216 +2,101 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#f7f5ef">
 <title>First Chapter Cafe — Menu</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   /* ============================================================
-     PALETA E TIPOGRAFIA — fiéis ao PDF
+     PALETA E TIPOGRAFIA (Idênticas ao PDF)
      ============================================================ */
   :root{
-    --bg:        #f7f5ef;
-    --bg-warm:   #f1ede3;
-    --ink:       #111111;
-    --ink-soft:  #4a4a4a;
-    --line:      #d9d5cb;
-    --card:      #fbfaf6;
-    --media-bg:  #ece8df;
+    --bg:        #f7f5ef; /* Papel */
+    --ink:       #111111; /* Traço preto */
+    --ink-soft:  #555555; /* Cinza para descrições */
+    --line:      #c4c0b6; /* Linha pontilhada */
+    --media-bg:  #ebe7de; 
 
     --serif: 'Cormorant Garamond', Georgia, serif;
     --sans:  'Jost', 'Helvetica Neue', Arial, sans-serif;
-
     --ease-out: cubic-bezier(.22,.61,.36,1);
-    --ease-in-out: cubic-bezier(.65,.05,.36,1);
   }
 
   *{ margin:0; padding:0; box-sizing:border-box; }
   html{ scroll-behavior:smooth; }
 
   body{
-    background: var(--bg);
+    background-color: var(--bg);
     color: var(--ink);
     font-family: var(--sans);
-    font-weight: 300;
-    line-height: 1.55;
+    font-weight: 400;
+    line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+    /* Textura sutil de papel */
+    background-image: radial-gradient(rgba(120,110,90,.06) 1px, transparent 1px);
+    background-size: 4px 4px;
   }
 
-  /* ============================================================
-     TEXTURA DE PAPEL ENVELHECIDO + GRAIN
-     ============================================================ */
-  body::before{
-    content:"";
-    position:fixed; inset:0;
-    pointer-events:none;
-    z-index: 0;
-    background-image:
-      radial-gradient(rgba(120,110,90,.06) 1px, transparent 1px),
-      radial-gradient(rgba(0,0,0,.04) 1px, transparent 1px);
-    background-size: 3px 3px, 7px 7px;
-    background-position: 0 0, 2px 3px;
-    mix-blend-mode: multiply;
-    opacity: .8;
-  }
-
-  /* Vinheta suave nas bordas — remete ao papel impresso */
-  body::after{
-    content:"";
-    position:fixed; inset:0;
-    pointer-events:none;
-    z-index: 0;
-    background: radial-gradient(ellipse at center, transparent 55%, rgba(120,110,90,.10) 100%);
+  @keyframes floatLogo {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
   }
 
   .wrap{
-    max-width: 1080px;
+    max-width: 900px;
     margin: 0 auto;
-    padding: 2rem 1.5rem 4rem;
+    padding: 2rem 1.5rem 5rem;
     position: relative;
     z-index: 1;
   }
 
   /* ============================================================
-     CURSOR PERSONALIZADO (caneta) — opcional, discreto
+     LOGO E HERO
      ============================================================ */
-  @media (hover:hover) and (pointer:fine){
-    body{ cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path d='M3 21l3-9 9-9 3 3-9 9-9 3z' fill='none' stroke='%23111' stroke-width='1.2' stroke-linejoin='round'/></svg>") 3 21, auto; }
-
-    a, button, .media, label{ cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path d='M3 21l3-9 9-9 3 3-9 9-9 3z' fill='%23111' stroke='%23111' stroke-width='1.2' stroke-linejoin='round'/></svg>") 3 21, pointer; }
+  .logo-header {
+    text-align: center;
+    margin-bottom: 1rem;
+    animation: floatLogo 6s ease-in-out infinite;
   }
-
-  /* ============================================================
-     HERO COM LOGO
-     ============================================================ */
-  .hero{
-    text-align:center;
-    padding: 1rem 1rem 2.5rem;
-    position: relative;
-  }
-
-  /* Divisória desenhada à mão abaixo do hero */
-  .hero::after{
-    content:"";
-    display:block;
-    width: 100%;
-    height: 1px;
-    margin-top: 2rem;
-    background: var(--line);
-    background-image: linear-gradient(90deg, var(--line) 0%, var(--line) 100%);
-    mask-image: repeating-linear-gradient(90deg, #000 0 6px, transparent 6px 7px);
-    -webkit-mask-image: repeating-linear-gradient(90deg, #000 0 6px, transparent 6px 7px);
-    opacity: .7;
-  }
-
-  /* ESTILO DA LOGO */
-  .hero .logo-container {
-    margin-bottom: 1.5rem;
-    opacity: 0;
-    animation: floatLogo 6s ease-in-out infinite, fadeUp 1s var(--ease-out) 0.1s forwards;
-  }
-
-  .hero .logo {
-    width: 140px;
-    height: 140px;
+  
+  .logo-header img {
+    width: 130px;
+    height: 130px;
     border-radius: 50%;
-    background-color: #fff;
-    padding: 4px; /* Cria uma borda branca sutil ao redor do círculo */
     object-fit: cover;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    border: 2px solid var(--ink);
+    background-color: #fff;
+    padding: 2px;
   }
 
-  .hero .kicker{
-    font-size: .7rem;
-    letter-spacing: .35em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    margin-bottom: 1.5rem;
-    opacity: 0;
-    animation: fadeUp .9s var(--ease-out) .2s forwards;
+  .hero{
+    text-align: center;
+    padding: 1rem 0 2rem;
+    border-bottom: 1px solid var(--ink);
+    margin-bottom: 2rem;
   }
 
   .hero h1{
+    font-family: var(--sans);
     font-weight: 500;
-    font-size: clamp(2.2rem, 8vw, 4.4rem);
-    letter-spacing: .18em;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    letter-spacing: .2em;
     text-transform: uppercase;
     line-height: 1;
-    margin-bottom: .6rem;
-    opacity: 0;
-    animation: fadeUp 1s var(--ease-out) .35s forwards;
+    margin-bottom: 1.5rem;
   }
 
-  .hero h1 span{
-    display:block;
-    font-weight: 300;
-    letter-spacing: .55em;
-    font-size: .32em;
-    margin-top: .8rem;
-    color: var(--ink-soft);
-  }
-
-  .hero .hours{
-    display:inline-block;
-    margin-top: 2rem;
-    padding: .55rem 1.4rem;
-    border: 1px solid var(--ink);
-    border-radius: 999px;
-    font-size: .7rem;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    opacity: 0;
-    animation: fadeUp .9s var(--ease-out) .55s forwards;
-  }
-
-  .hero .address{
-    margin-top: 1rem;
+  .hero .hours, .hero .address{
     font-size: .75rem;
-    letter-spacing: .18em;
+    letter-spacing: .15em;
     text-transform: uppercase;
-    color: var(--ink-soft);
-    opacity: 0;
-    animation: fadeUp .9s var(--ease-out) .65s forwards;
+    margin-bottom: .5rem;
   }
-
-  .hero .address a{
-    color: var(--ink);
-    text-decoration: none;
-    border-bottom: 1px solid var(--ink);
-    padding-bottom: 1px;
-    transition: letter-spacing .3s var(--ease-out);
-  }
-  .hero .address a:hover{ letter-spacing: .22em; }
-
-  /* Ornamento principal — animação de "caneta desenhando" */
-  .hero-ornament{
-    width: 300px;
-    height: 120px;
-    margin: 2.5rem auto 0;
-    display: block;
-    opacity: 0;
-    animation: fadeIn 1.2s var(--ease-out) .8s forwards;
-  }
-
-  .hero-ornament path,
-  .hero-ornament circle{
-    stroke-dasharray: 400;
-    stroke-dashoffset: 400;
-    animation: draw 2.4s var(--ease-in-out) 1.1s forwards;
-  }
-
-  .hero-ornament path:nth-child(2){ animation-delay: 1.25s; }
-  .hero-ornament path:nth-child(3){ animation-delay: 1.4s; }
-  .hero-ornament path:nth-child(4){ animation-delay: 1.55s; }
-  .hero-ornament path:nth-child(5){ animation-delay: 1.7s; }
-  .hero-ornament path:nth-child(6){ animation-delay: 1.85s; }
-  .hero-ornament path:nth-child(7){ animation-delay: 2s; }
-  .hero-ornament path:nth-child(8){ animation-delay: 2.15s; }
-  .hero-ornament path:nth-child(9){ animation-delay: 2.3s; }
-  .hero-ornament path:nth-child(10){ animation-delay: 2.45s; }
-  .hero-ornament path:nth-child(11){ animation-delay: 2.6s; }
+  .hero .address{ color: var(--ink-soft); }
+  .hero .address a{ color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--ink); }
 
   /* ============================================================
      NAVEGAÇÃO STICKY
@@ -220,522 +105,290 @@
     position: sticky;
     top: 0;
     z-index: 20;
-    background: rgba(247,245,239,.94);
+    background: rgba(247,245,239,.96);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--line);
-    padding: .7rem 0;
-    margin-bottom: 2rem;
+    padding: .8rem 0;
+    margin-bottom: 3rem;
   }
 
   nav.toc ul{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: .35rem 1.4rem;
+    gap: .4rem 1.5rem;
     list-style: none;
-    max-width: 1080px;
-    margin: 0 auto;
     padding: 0 1rem;
   }
 
   nav.toc a{
-    font-size: .68rem;
+    font-size: .65rem;
+    font-weight: 500;
     letter-spacing: .15em;
     text-transform: uppercase;
     color: var(--ink-soft);
     text-decoration: none;
-    padding: .3rem 0;
-    position: relative;
-    transition: color .25s var(--ease-out);
+    transition: color .2s, border-bottom .2s;
+    padding-bottom: 2px;
   }
 
-  nav.toc a::after{
-    content:"";
-    position: absolute;
-    left: 0; bottom: 0;
-    height: 1px;
-    width: 100%;
-    background: var(--ink);
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform .35s var(--ease-out);
-  }
-
-  nav.toc a:hover,
-  nav.toc a.active{ color: var(--ink); }
-
-  nav.toc a:hover::after,
-  nav.toc a.active::after{
-    transform: scaleX(1);
-    transform-origin: left;
+  nav.toc a:hover, nav.toc a.active {
+    color: var(--ink);
+    border-bottom: 1px solid var(--ink);
   }
 
   /* ============================================================
-     SEÇÕES
+     ILUSTRAÇÕES DO PDF (Posicionamento)
+     ============================================================ */
+  .pdf-illustration {
+    display: block;
+    margin: 2rem auto;
+    max-width: 100%;
+    height: auto;
+    opacity: 0.9;
+    /* Filtro para garantir que fiquem em preto e branco puros */
+    filter: grayscale(100%) contrast(1.2); 
+  }
+
+  /* Ilustrações laterais no Desktop */
+  .illustration-wrapper {
+    position: relative;
+  }
+  .illustration-side {
+    display: none;
+  }
+  @media (min-width: 950px) {
+    .illustration-side {
+      display: block;
+      position: absolute;
+      width: 180px;
+      top: 0;
+      filter: grayscale(100%) contrast(1.2);
+    }
+    .illustration-side.left { left: -200px; }
+    .illustration-side.right { right: -200px; }
+  }
+
+  /* ============================================================
+     ESTRUTURA DO MENU
      ============================================================ */
   section.menu-block{
-    padding: 2.5rem 0 2rem;
+    padding: 1rem 0 4rem;
     scroll-margin-top: 70px;
-    position: relative;
   }
 
-  /* Divisória entre seções — traço irregular desenhado */
-  section.menu-block + section.menu-block::before{
-    content:"";
-    display:block;
-    width: 100%;
-    height: 1px;
-    background: var(--line);
-    mask-image: repeating-linear-gradient(90deg, #000 0 4px, transparent 4px 6px);
-    -webkit-mask-image: repeating-linear-gradient(90deg, #000 0 4px, transparent 4px 6px);
-    opacity: .8;
-    margin-bottom: 2.5rem;
+  .section-header {
+    text-align: center;
+    margin-bottom: 2rem;
   }
 
-  .section-head{
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.8rem;
-  }
-
-  .section-head h2{
+  .section-header h2{
     font-weight: 500;
-    font-size: 1.35rem;
-    letter-spacing: .22em;
+    font-size: 1.2rem;
+    letter-spacing: .25em;
     text-transform: uppercase;
-    white-space: nowrap;
-    position: relative;
+    margin-bottom: .5rem;
   }
-
-  .section-head .rule{
-    flex: 1;
-    height: 1px;
-    background: var(--line);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .section-head .rule::after{
-    content:"";
-    position: absolute;
-    inset: 0;
-    background: var(--ink);
-    transform: translateX(-100%);
-    transition: transform 1.2s var(--ease-out);
-  }
-
-  .menu-block.visible .section-head .rule::after{
-    transform: translateX(0);
-  }
-
-  .section-head .sub{
+  
+  .section-header .sub{
     font-size: .65rem;
-    letter-spacing: .2em;
+    letter-spacing: .15em;
     text-transform: uppercase;
     color: var(--ink-soft);
-    white-space: nowrap;
   }
 
-  /* ============================================================
-     GRID + CARDS
-     ============================================================ */
-  .grid{
+  /* Grid dos itens (Vertical) */
+  .menu-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 1.8rem;
+    grid-template-columns: 1fr; 
+    gap: 2rem;
   }
 
-  .item{
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    overflow: hidden;
+  @media (min-width: 700px) {
+    .menu-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+  }
+
+  /* Card do Item */
+  .item-card {
     display: flex;
     flex-direction: column;
-    transition: transform .35s var(--ease-out), box-shadow .35s var(--ease-out), border-color .35s var(--ease-out);
-    opacity: 0;
-    transform: translateY(24px);
+    gap: .5rem;
   }
 
-  .item.visible{
-    opacity: 1;
-    transform: translateY(0);
-    transition: opacity .8s var(--ease-out), transform .8s var(--ease-out);
-  }
-
-  .item:hover{
-    transform: translateY(-4px);
-    box-shadow: 0 14px 34px rgba(0,0,0,.07);
-    border-color: #cfcabe;
-  }
-
-  /* ---------- MÍDIA ---------- */
-  .item .media{
+  /* Área de Mídia (Foto/Vídeo Vertical) */
+  .item-media {
     position: relative;
     width: 100%;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 3 / 4; /* Formato Vertical */
     background: var(--media-bg);
+    border: 1px solid var(--line);
     overflow: hidden;
     cursor: pointer;
-    border-bottom: 1px solid var(--line);
   }
 
-  .item .media img{
+  .item-media img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
-    transition: transform .8s var(--ease-out), filter .8s var(--ease-out);
-    filter: saturate(.95) contrast(1.02);
+    transition: transform .5s var(--ease-out);
   }
 
-  .item:hover .media img{
-    transform: scale(1.05);
-    filter: saturate(1.05) contrast(1.03);
+  .item-media:hover img {
+    transform: scale(1.03);
   }
 
   /* Placeholder */
-  .item .media .placeholder{
+  .item-media .placeholder {
     position: absolute;
     inset: 0;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     gap: .5rem;
-    color: #b8b3a5;
-    text-align: center;
-    padding: 1rem;
+    color: #a8a396;
+  }
+  .item-media .placeholder svg {
+    width: 32px; height: 32px;
+    stroke: currentColor; fill: none; stroke-width: 1.5;
+  }
+  .item-media .placeholder span {
+    font-size: .65rem; letter-spacing: .1em; text-transform: uppercase;
   }
 
-  .item .media .placeholder svg{
-    width: 54px; height: 54px;
-    stroke: #b8b3a5;
-    fill: none;
-    stroke-width: 1.2;
-    stroke-dasharray: 200;
-    stroke-dashoffset: 200;
-  }
-
-  .item.visible .placeholder svg{
-    animation: draw 2s var(--ease-in-out) forwards;
-  }
-
-  .item .media .placeholder span{
-    font-size: .6rem;
-    letter-spacing: .2em;
-    text-transform: uppercase;
-  }
-
-  /* Badge vídeo */
-  .item .media .video-badge{
+  /* Badge de Vídeo */
+  .video-badge {
     position: absolute;
-    top: .6rem; right: .6rem;
-    display: inline-flex;
-    align-items: center;
-    gap: .3rem;
-    padding: .28rem .55rem;
-    background: rgba(17,17,17,.82);
+    top: .5rem; right: .5rem;
+    background: rgba(17,17,17,.8);
     color: #fff;
     font-size: .55rem;
-    letter-spacing: .15em;
+    letter-spacing: .1em;
     text-transform: uppercase;
+    padding: .2rem .5rem;
     border-radius: 3px;
+    display: flex;
+    align-items: center;
+    gap: .3rem;
     backdrop-filter: blur(4px);
   }
+  .video-badge svg { width: 10px; height: 10px; fill: #fff; }
 
-  .item .media .video-badge svg{
-    width: 10px; height: 10px; fill: #fff;
-    animation: pulse 2s infinite;
-  }
-
-  .item .media .play-overlay{
-    position: absolute;
-    inset: 0;
-    background: rgba(17,17,17,.35);
-    display: flex; align-items: center; justify-content: center;
-    opacity: 0;
-    transition: opacity .3s var(--ease-out);
-  }
-
-  .item .media:hover .play-overlay{ opacity: 1; }
-
-  .item .media .play-overlay .play-circle{
-    width: 56px; height: 56px;
-    border-radius: 50%;
-    border: 2px solid #fff;
-    display: flex; align-items: center; justify-content: center;
-    background: rgba(17,17,17,.45);
-    transform: scale(.85);
-    transition: transform .3s var(--ease-out);
-  }
-
-  .item .media:hover .play-overlay .play-circle{ transform: scale(1); }
-
-  .item .media .play-overlay .play-circle svg{
-    width: 18px; height: 18px; fill: #fff; margin-left: 3px;
-  }
-
-  /* ---------- BODY ---------- */
-  .item .body{
-    padding: 1.1rem 1.2rem 1.3rem;
+  /* Informações do Item (Nome, Linha, Preço) */
+  .item-info {
     display: flex;
     flex-direction: column;
-    flex: 1;
-    gap: .45rem;
   }
 
-  .item .row-top{
+  .item-header {
     display: flex;
-    justify-content: space-between;
     align-items: baseline;
-    gap: .8rem;
+    width: 100%;
+    margin-bottom: .2rem;
   }
 
-  .item .name{
-    font-size: .82rem;
+  .item-name {
+    font-size: .85rem;
     font-weight: 500;
-    letter-spacing: .08em;
+    letter-spacing: .1em;
     text-transform: uppercase;
-    line-height: 1.35;
-  }
-
-  /* Estrela com brilho pulsante */
-  .item .name .star{
-    font-size: .75rem;
-    display: inline-block;
-    animation: twinkle 2.4s ease-in-out infinite;
-    transform-origin: center;
-  }
-
-  .item .price{
-    font-family: var(--serif);
-    font-size: 1.05rem;
-    font-weight: 500;
     white-space: nowrap;
   }
 
-  .item .desc{
-    font-size: .74rem;
-    color: var(--ink-soft);
-    line-height: 1.5;
-  }
-
-  .item .extras{
-    font-size: .66rem;
-    letter-spacing: .04em;
-    color: var(--ink-soft);
-    font-style: italic;
-    margin-top: .15rem;
-  }
-
-  .item .allerg{
-    font-size: .6rem;
-    letter-spacing: .05em;
-    color: #8a857a;
-    margin-top: auto;
-    padding-top: .5rem;
-    border-top: 1px dashed var(--line);
-  }
-
-  /* ============================================================
-     NOTAS
-     ============================================================ */
-  .note{
-    font-size: .68rem;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    margin-top: 1.2rem;
-    padding-top: .8rem;
-    border-top: 1px dashed var(--line);
-  }
-
-  /* ============================================================
-     FILTROS
-     ============================================================ */
-  .filters{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: .5rem;
-    padding: 1.2rem 0 0;
-    border-top: 1px solid var(--line);
-    margin-top: 1.5rem;
-  }
-
-  .filters label{
-    display: inline-flex;
-    align-items: center;
-    gap: .35rem;
-    font-size: .62rem;
-    letter-spacing: .15em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    border: 1px solid var(--line);
-    padding: .35rem .8rem;
-    border-radius: 999px;
-    cursor: pointer;
-    background: var(--card);
-    transition: all .25s var(--ease-out);
-  }
-
-  .filters label:hover{ border-color: var(--ink); color: var(--ink); }
-  .filters input{ display:none; }
-  .filters label:has(input:checked){ background: var(--ink); color: #fff; border-color: var(--ink); }
-  .filters label:has(input:checked) span{ color:#fff; }
-
-  /* ============================================================
-     MODAL DE VÍDEO — com fade + scale
-     ============================================================ */
-  .modal{
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,.92);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 100;
-    padding: 1.5rem;
-    opacity: 0;
-    transition: opacity .35s var(--ease-out);
-  }
-
-  .modal.open{ display: flex; opacity: 1; }
-
-  .modal .modal-inner{
+  .item-dots {
+    flex-grow: 1;
+    border-bottom: 1px dotted var(--line);
+    margin: 0 .6rem;
     position: relative;
-    width: 100%;
-    max-width: 900px;
-    aspect-ratio: 16 / 9;
-    background: #000;
-    border-radius: 4px;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0,0,0,.6);
-    transform: scale(.92);
-    transition: transform .35s var(--ease-out);
+    top: -.2rem;
   }
 
-  .modal.open .modal-inner{ transform: scale(1); }
-
-  .modal video,
-  .modal iframe{
-    width: 100%; height: 100%;
-    border: 0; display: block;
-    object-fit: contain;
-    background: #000;
+  .item-price {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 600;
   }
 
-  .modal .close{
-    position: absolute;
-    top: -40px; right: 0;
-    background: none; border: 0;
-    color: #fff;
-    font-size: 1.6rem;
-    cursor: pointer;
-    line-height: 1;
-    padding: .3rem .5rem;
-  }
-
-  .modal .caption{
-    position: absolute;
-    bottom: -2.2rem; left: 0;
-    color: #fff;
-    font-size: .7rem;
-    letter-spacing: .15em;
-    text-transform: uppercase;
-    opacity: .7;
-  }
-
-  /* ============================================================
-     RODAPÉ
-     ============================================================ */
-  footer{
-    margin-top: 3rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--line);
-    font-size: .65rem;
-    letter-spacing: .06em;
+  .item-desc {
+    font-size: .75rem;
     color: var(--ink-soft);
-    text-align: center;
-    line-height: 1.7;
+    line-height: 1.6;
   }
 
-  footer .allergen-list{
-    max-width: 640px;
-    margin: .8rem auto 0;
-  }
-
-  footer .warn{
-    margin-top: 1.2rem;
+  .item-extras {
+    font-size: .7rem;
     font-style: italic;
-    font-size: .62rem;
+    color: var(--ink-soft);
+    margin-top: .2rem;
+  }
+  
+  .item-allerg {
+    font-size: .65rem;
+    color: #888;
+    margin-top: .2rem;
   }
 
-  footer strong{ color: var(--ink); font-weight: 500; }
+  /* Filtros e Rodapé */
+  .filters {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .filters label {
+    font-size: .65rem; letter-spacing: .1em; text-transform: uppercase;
+    display: flex; align-items: center; gap: .4rem;
+    cursor: pointer; color: var(--ink-soft);
+  }
+  .filters input[type="checkbox"] { accent-color: var(--ink); }
 
-  /* ============================================================
-     ANIMAÇÕES
-     ============================================================ */
-  @keyframes fadeUp{
-    from{ opacity:0; transform: translateY(18px); }
-    to{ opacity:1; transform: translateY(0); }
+  footer{
+    margin-top: 4rem; padding-top: 2rem;
+    border-top: 1px solid var(--ink); text-align: center;
+  }
+  footer .allergen-title {
+    font-weight: 600; font-size: .7rem;
+    letter-spacing: .1em; text-transform: uppercase; margin-bottom: .5rem;
+  }
+  footer .allergen-list {
+    font-size: .65rem; color: var(--ink-soft); line-height: 1.8;
+    max-width: 700px; margin: 0 auto 2rem;
+  }
+  footer .warn {
+    font-size: .65rem; font-style: italic;
+    color: var(--ink-soft); max-width: 600px; margin: 0 auto;
   }
 
-  @keyframes fadeIn{
-    from{ opacity:0; }
-    to{ opacity:.85; }
+  /* MODAL DE VÍDEO */
+  .modal {
+    position: fixed; inset: 0; background: rgba(0,0,0,.95);
+    display: none; align-items: center; justify-content: center;
+    z-index: 100; padding: 1rem; opacity: 0; transition: opacity .3s;
+  }
+  .modal.open { display: flex; opacity: 1; }
+
+  .modal-inner {
+    position: relative; width: 100%; max-width: 400px;
+    aspect-ratio: 9 / 16; max-height: 90dvh;
+    background: #000; border-radius: 8px; overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,.8);
+    transform: scale(.9); transition: transform .3s var(--ease-out);
+  }
+  .modal.open .modal-inner { transform: scale(1); }
+  .modal video { width: 100%; height: 100%; object-fit: cover; }
+  .modal .close {
+    position: absolute; top: .5rem; right: .5rem;
+    width: 36px; height: 36px; background: rgba(0,0,0,.6);
+    border: 1px solid rgba(255,255,255,.2); border-radius: 50%;
+    color: #fff; font-size: 1rem; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; z-index: 2;
   }
 
-  @keyframes draw{
-    to{ stroke-dashoffset: 0; }
-  }
-
-  @keyframes twinkle{
-    0%, 100%{ transform: scale(1); opacity: .9; }
-    50%{ transform: scale(1.25); opacity: 1; }
-  }
-
-  @keyframes pulse{
-    0%, 100%{ opacity: .8; }
-    50%{ opacity: 1; }
-  }
-
-  @keyframes floatLogo {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
-  }
-
-  /* ============================================================
-     RESPONSIVO
-     ============================================================ */
-  @media (max-width: 720px){
-    .grid{ grid-template-columns: 1fr; gap: 1.4rem; }
-  }
-
-  @media (max-width: 520px){
-    .wrap{ padding: 1rem 1rem 3rem; }
-    .hero{ padding: 1.5rem .5rem 1.5rem; }
-    .hero .logo { width: 110px; height: 110px; } /* Logo menor no celular */
-    .hero .hours{ font-size: .58rem; letter-spacing: .08em; padding: .45rem 1rem; }
-    .section-head h2{ font-size: 1.05rem; letter-spacing: .16em; }
-    .item .name{ font-size: .76rem; }
-    .item .price{ font-size: .95rem; }
-    .item .desc{ font-size: .7rem; }
-    nav.toc ul{ gap: .25rem .9rem; }
-    nav.toc a{ font-size: .58rem; }
-    .modal .close{ top: -36px; font-size: 1.3rem; }
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    *{
-      transition: none !important;
-      animation: none !important;
-      scroll-behavior: auto !important;
-    }
-    .item, .item.visible{ opacity:1 !important; transform:none !important; }
-    .hero .logo-container { opacity: 1; }
+  @media (max-width: 600px){
+    .wrap{ padding: 1.5rem 1rem 3rem; }
+    .item-name { font-size: .8rem; white-space: normal; }
+    .item-dots { display: none; }
+    .item-header { justify-content: space-between; gap: 1rem; }
   }
 </style>
 </head>
@@ -743,492 +396,205 @@
 
 <div class="wrap">
 
-  <!-- ============================================================
-       HERO COM A LOGO
-       ============================================================ -->
+  <!-- LOGO -->
+  <div class="logo-header">
+    <img src="images/logo.png" alt="First Chapter Cafe Logo">
+  </div>
+
+  <!-- HERO -->
   <header class="hero">
-    
-    <!-- Logo do Gatinho -->
-    <div class="logo-container">
-      <!-- Substitua o src abaixo pelo caminho da sua imagem real -->
-      <img src="images/logo.png" alt="First Chapter Cafe Logo" class="logo">
-    </div>
-
-    <div class="kicker">First Chapter Cafe</div>
-    <h1>First Chapter<span>Cafe</span></h1>
-
+    <h1>First Chapter Cafe</h1>
     <div class="hours">Mon–Fri 9–17 · Sat 9–18 · Sun 10–18</div>
-    <div class="address">16 Fade Street, Dublin 2 · <a href="https://instagram.com/firstchaptercafe" target="_blank" rel="noopener">@firstchaptercafe</a></div>
-
-    <!-- Ornamento com animação de caneta desenhando -->
-    <svg class="hero-ornament" viewBox="0 0 300 120" fill="none" stroke="#111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M10 20 L70 20 L64 78 L16 78 Z" />
-      <path d="M10 20 C18 12 62 12 70 20" />
-      <path d="M16 78 C24 84 56 84 64 78" />
-      <path d="M20 30 L60 30" stroke-dasharray="1 3" opacity=".6"/>
-      <path d="M24 84 L84 84 L78 118 L30 118 Z" />
-      <path d="M24 84 C32 78 76 78 84 84" />
-      <path d="M30 118 C38 122 70 122 78 118" />
-      <path d="M120 40 C118 60 130 78 140 78 C150 78 162 60 160 40 Z" />
-      <path d="M140 78 L140 100" />
-      <path d="M128 100 L152 100" />
-      <path d="M200 30 L240 30 L236 100 L204 100 Z" />
-      <path d="M200 30 C208 26 232 26 240 30" />
-      <path d="M204 100 C212 104 228 104 236 100" />
-      <path d="M218 20 L226 60" />
-      <path d="M218 20 L222 14" />
-    </svg>
+    <div class="address">16 Fade Street, Dublin 2 · <a href="https://instagram.com/firstchaptercafe" target="_blank">@firstchaptercafe</a></div>
   </header>
 
-  <!-- ============================================================
-       NAVEGAÇÃO
-       ============================================================ -->
+  <!-- ILUSTRAÇÃO: Máquina de Café (Pág 1) -->
+  <img src="images/maquina.jpg" alt="Ilustração Máquina de Café" class="pdf-illustration" style="max-width: 250px; margin-bottom: 0;">
+
+  <!-- NAVEGAÇÃO -->
   <nav class="toc" aria-label="Categorias do menu">
     <ul>
       <li><a href="#cafes">Cafés</a></li>
       <li><a href="#teas">Chás</a></li>
       <li><a href="#cold">Geladas</a></li>
       <li><a href="#smoothies">Smoothies</a></li>
-      <li><a href="#drinks">Drinks</a></li>
-      <li><a href="#wine">Wine &amp; Bubbles</a></li>
+      <li><a href="#wine">Wine</a></li>
       <li><a href="#brunch">Brunch</a></li>
-      <li><a href="#bakery">Padaria &amp; Doces</a></li>
+      <li><a href="#bakery">Padaria</a></li>
     </ul>
   </nav>
 
-  <!-- Filtros -->
-  <div class="filters" role="group" aria-label="Filtros alimentares">
-    <label><input type="checkbox" data-filter="vegan"><span>Vegano</span></label>
-    <label><input type="checkbox" data-filter="gf"><span>Sem Glúten</span></label>
-    <label><input type="checkbox" data-filter="protein"><span>Com Proteína</span></label>
+  <!-- FILTROS -->
+  <div class="filters">
+    <label><input type="checkbox" data-filter="vegan"> Vegano</label>
+    <label><input type="checkbox" data-filter="gf"> Sem Glúten</label>
+    <label><input type="checkbox" data-filter="protein"> Com Proteína</label>
   </div>
 
   <!-- ============================================================
-       CAFÉS
+       SEÇÃO CAFÉS
        ============================================================ -->
   <section class="menu-block" id="cafes">
-    <div class="section-head">
-      <h2>Cafés</h2>
-      <span class="rule"></span>
-      <span class="sub">Espresso Bar</span>
+    
+    <div class="illustration-wrapper">
+      <!-- ILUSTRAÇÃO: Xícara Fumegante (Pág 2) -->
+      <img src="images/xicara.jpg" alt="Ilustração Xícara" class="illustration-side left">
+      
+      <div class="section-header">
+        <h2>Cafés</h2>
+      </div>
+
+      <div class="menu-grid">
+        <!-- Item com Foto/Vídeo -->
+        <div class="item-card" data-tags="">
+          <div class="item-media" data-video="videos/velvet-mocha.mp4">
+            <img src="images/velvet-mocha.jpg" alt="Velvet Mocha" loading="lazy">
+            <span class="video-badge"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> Vídeo</span>
+          </div>
+          <div class="item-info">
+            <div class="item-header"><span class="item-name">Velvet Mocha</span><div class="item-dots"></div><span class="item-price">€4.90</span></div>
+            <div class="item-desc">Smooth, rich chocolate coffee - pure comfort in a cup.</div>
+          </div>
+        </div>
+
+        <!-- Item sem foto (Placeholder) -->
+        <div class="item-card" data-tags="">
+          <div class="item-media" data-video="">
+            <div class="placeholder">
+              <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
+              <span>Foto em breve</span>
+            </div>
+          </div>
+          <div class="item-info">
+            <div class="item-header"><span class="item-name">Espresso</span><div class="item-dots"></div><span class="item-price">€3.00</span></div>
+          </div>
+        </div>
+        
+        <!-- Adicione os outros cafés aqui seguindo o mesmo padrão -->
+        <div class="item-card" data-tags="">
+          <div class="item-media" data-video="">
+            <div class="placeholder">
+              <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
+              <span>Foto em breve</span>
+            </div>
+          </div>
+          <div class="item-info">
+            <div class="item-header"><span class="item-name">Cappuccino</span><div class="item-dots"></div><span class="item-price">€4.00</span></div>
+          </div>
+        </div>
+
+      </div>
     </div>
+  </section>
 
-    <div class="grid">
-      <!-- Item com foto + vídeo -->
-      <article class="item" data-tags="">
-        <div class="media" data-video="videos/velvet-mocha.mp4" data-caption="Velvet Mocha — preparo">
-          <img src="images/velvet-mocha.jpg" alt="Velvet Mocha — café com chocolate cremoso" loading="lazy">
-          <span class="video-badge">
-            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> Vídeo
-          </span>
-          <div class="play-overlay"><div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
-        </div>
-        <div class="body">
-          <div class="row-top">
-            <div class="name">Velvet Mocha <span class="star">★</span></div>
-            <div class="price">€4.90</div>
+  <!-- ILUSTRAÇÃO: Copos Empilhados, Taça e Canudo (Pág 1 e 3) -->
+  <img src="images/copos.jpg" alt="Ilustração Copos" class="pdf-illustration" style="max-width: 350px;">
+
+  <!-- ============================================================
+       SEÇÃO GELADAS
+       ============================================================ -->
+  <section class="menu-block" id="cold">
+    <div class="illustration-wrapper">
+      <!-- ILUSTRAÇÃO: Copo com canudo listrado (Pág 3) -->
+      <img src="images/drink-gelo.jpg" alt="Ilustração Drink" class="illustration-side right">
+      
+      <div class="section-header">
+        <h2>Geladas</h2>
+      </div>
+      <div class="menu-grid">
+        <!-- Exemplo de item -->
+        <div class="item-card">
+          <div class="item-media" data-video="">
+            <img src="images/iced-matcha.jpg" alt="Iced Matcha">
           </div>
-          <p class="desc">Smooth, rich chocolate coffee — pure comfort in a cup.</p>
-          <div class="allerg">Alérgenos: 7</div>
-        </div>
-      </article>
-
-      <!-- Item com foto (sem vídeo) -->
-      <article class="item" data-tags="">
-        <div class="media" data-video="" data-caption="Espresso">
-          <img src="images/espresso.jpg" alt="Espresso duplo" loading="lazy">
-        </div>
-        <div class="body">
-          <div class="row-top"><div class="name">Espresso</div><div class="price">€3.00</div></div>
-        </div>
-      </article>
-
-      <!-- Item sem foto (placeholder) -->
-      <article class="item" data-tags="">
-        <div class="media" data-video="" data-caption="Americano">
-          <div class="placeholder">
-            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
-            <span>Foto em breve</span>
+          <div class="item-info">
+            <div class="item-header"><span class="item-name">Emerald Grey</span><div class="item-dots"></div><span class="item-price">€6.50</span></div>
+            <div class="item-desc">Matcha blended with Earl Grey tea and a hint of vanilla.</div>
           </div>
         </div>
-        <div class="body">
-          <div class="row-top"><div class="name">Americano</div><div class="price">€3.50</div></div>
-        </div>
-      </article>
-
-      <article class="item" data-tags="">
-        <div class="media" data-video="" data-caption="Cappuccino">
-          <div class="placeholder">
-            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
-            <span>Foto em breve</span>
-          </div>
-        </div>
-        <div class="body">
-          <div class="row-top"><div class="name">Cappuccino</div><div class="price">€4.00</div></div>
-        </div>
-      </article>
-
-      <article class="item" data-tags="">
-        <div class="media" data-video="" data-caption="Flat White">
-          <div class="placeholder">
-            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
-            <span>Foto em breve</span>
-          </div>
-        </div>
-        <div class="body">
-          <div class="row-top"><div class="name">Flat White</div><div class="price">€3.80</div></div>
-        </div>
-      </article>
-
-      <article class="item" data-tags="">
-        <div class="media" data-video="" data-caption="Latte">
-          <div class="placeholder">
-            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
-            <span>Foto em breve</span>
-          </div>
-        </div>
-        <div class="body">
-          <div class="row-top"><div class="name">Latte</div><div class="price">€4.50</div></div>
-        </div>
-      </article>
-
-      <article class="item" data-tags="vegan">
-        <div class="media" data-video="" data-caption="Pure Matcha">
-          <div class="placeholder">
-            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
-            <span>Foto em breve</span>
-          </div>
-        </div>
-        <div class="body">
-          <div class="row-top"><div class="name">Pure Matcha</div><div class="price">€4.50</div></div>
-          <p class="desc">Clean, earthy matcha with a smooth, balanced finish.</p>
-        </div>
-      </article>
-
-      <article class="item" data-tags="">
-        <div class="media" data-video="" data-caption="Spiced Chai Latte">
-          <div class="placeholder">
-            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
-            <span>Foto em breve</span>
-          </div>
-        </div>
-        <div class="body">
-          <div class="row-top"><div class="name">Spiced Chai Latte</div><div class="price">€4.50</div></div>
-          <p class="desc">Warm, aromatic spices blended into a creamy, comforting latte.</p>
-        </div>
-      </article>
-
-      <article class="item" data-tags="">
-        <div class="media" data-video="" data-caption="Dirty Chai Boost">
-          <div class="placeholder">
-            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
-            <span>Foto em breve</span>
-          </div>
-        </div>
-        <div class="body">
-          <div class="row-top"><div class="name">Dirty Chai Boost <span class="star">★</span></div><div class="price">€4.80</div></div>
-          <p class="desc">Chai latte with a shot of espresso — bold, warm, and energizing.</p>
-        </div>
-      </article>
-
-      <article class="item" data-tags="">
-        <div class="media" data-video="" data-caption="Signature Hot Chocolate">
-          <div class="placeholder">
-            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
-            <span>Foto em breve</span>
-          </div>
-        </div>
-        <div class="body">
-          <div class="row-top"><div class="name">Signature Hot Chocolate <span class="star">★</span></div><div class="price">€5.00</div></div>
-          <p class="desc">Thick, rich, and deeply chocolatey — made to indulge.</p>
-          <div class="extras">Add cream or marshmallow €1 (6/7)</div>
-        </div>
-      </article>
-
+      </div>
     </div>
-    <p class="note">Ice, syrups or alternative milk +€0.50 each</p>
   </section>
 
   <!-- ============================================================
-       BRUNCH (exemplo com mídia)
+       SEÇÃO BRUNCH
        ============================================================ -->
   <section class="menu-block" id="brunch">
-    <div class="section-head">
-      <h2>Brunch</h2>
-      <span class="rule"></span>
-      <span class="sub">Add a splash of joy</span>
-    </div>
-
-    <div class="grid">
-
-      <article class="item" data-tags="">
-        <div class="media" data-video="videos/avocado-toast.mp4" data-caption="Avocado on Toast — montagem">
-          <img src="images/avocado-toast.jpg" alt="Avocado on Toast com ovos poché" loading="lazy">
-          <span class="video-badge"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> Vídeo</span>
-          <div class="play-overlay"><div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
-        </div>
-        <div class="body">
-          <div class="row-top"><div class="name">Avocado on Toast</div><div class="price">€14.50</div></div>
-          <p class="desc">Creamy smashed avocado on warm focaccia, topped with perfectly poached eggs, parmesan, and balsamic glaze.</p>
-          <div class="extras">Add bacon +€3 · Smoked salmon +€4 · Crispy chilli</div>
-          <div class="allerg">(1 wheat, 3, 6, 7, 11, 12)</div>
-        </div>
-      </article>
-
-      <article class="item" data-tags="">
-        <div class="media" data-video="" data-caption="Eggs Hemingway">
-          <div class="placeholder">
-            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
-            <span>Foto em breve</span>
+    <div class="illustration-wrapper">
+      <!-- ILUSTRAÇÃO: Flores (Pág 5) -->
+      <img src="images/flor.jpg" alt="Ilustração Flor" class="illustration-side left" style="top: 50px;">
+      
+      <div class="section-header">
+        <h2>Brunch</h2>
+        <div class="sub">Add a splash of joy</div>
+      </div>
+      <div class="menu-grid">
+        <div class="item-card">
+          <div class="item-media" data-video="videos/avocado-toast.mp4">
+            <img src="images/avocado-toast.jpg" alt="Avocado Toast">
+            <span class="video-badge"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> Vídeo</span>
+          </div>
+          <div class="item-info">
+            <div class="item-header"><span class="item-name">Avocado on Toast</span><div class="item-dots"></div><span class="item-price">€14.50</span></div>
+            <div class="item-desc">Creamy smashed avocado on warm focaccia, topped with perfectly poached eggs.</div>
           </div>
         </div>
-        <div class="body">
-          <div class="row-top"><div class="name">Eggs Hemingway</div><div class="price">€15.00</div></div>
-          <p class="desc">Smoked salmon, perfectly poached eggs, and rich hollandaise on a toasted English muffin.</p>
-          <div class="allerg">(1 wheat, 3, 4, 7, 12)</div>
-        </div>
-      </article>
-
-      <article class="item" data-tags="">
-        <div class="media" data-video="" data-caption="Eggs Benedict">
-          <div class="placeholder">
-            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
-            <span>Foto em breve</span>
-          </div>
-        </div>
-        <div class="body">
-          <div class="row-top"><div class="name">Eggs Benedict</div><div class="price">€14.50</div></div>
-          <p class="desc">Poached eggs on a toasted English muffin with crispy bacon and silky hollandaise.</p>
-          <div class="allerg">(1 wheat, 3, 7, 12)</div>
-        </div>
-      </article>
-
-      <article class="item" data-tags="">
-        <div class="media" data-video="" data-caption="Cheese Bagel">
-          <div class="placeholder">
-            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
-            <span>Foto em breve</span>
-          </div>
-        </div>
-        <div class="body">
-          <div class="row-top"><div class="name">Cheese Bagel</div><div class="price">€15.90</div></div>
-          <p class="desc">Freshly toasted bagel with mixed leaves. Crispy bacon, scrambled eggs &amp; melted cheese / Seasoned chicken with melted cheese.</p>
-          <div class="allerg">(1 wheat, 3, 7, 11)</div>
-        </div>
-      </article>
-
-      <article class="item" data-tags="">
-        <div class="media" data-video="" data-caption="French Toast">
-          <div class="placeholder">
-            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
-            <span>Foto em breve</span>
-          </div>
-        </div>
-        <div class="body">
-          <div class="row-top"><div class="name">French Toast</div><div class="price">€13.90</div></div>
-          <p class="desc">Golden brioche, perfectly toasted and soft inside.</p>
-          <div class="extras">Dulce de Leche / Crispy Bacon with maple</div>
-          <div class="allerg">(1 wheat, 3, 7)</div>
-        </div>
-      </article>
-
-      <article class="item" data-tags="">
-        <div class="media" data-video="" data-caption="Toast & Scrambled Eggs">
-          <div class="placeholder">
-            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
-            <span>Foto em breve</span>
-          </div>
-        </div>
-        <div class="body">
-          <div class="row-top"><div class="name">Toast &amp; Scrambled Eggs</div><div class="price">€11.50</div></div>
-          <p class="desc">Scrambled eggs and cheese on toasted focaccia, topped with hollandaise.</p>
-          <div class="extras">Add bacon +€3 · Smoked salmon +€4</div>
-          <div class="allerg">(1 wheat, 3, 4, 7)</div>
-        </div>
-      </article>
-
+      </div>
     </div>
   </section>
 
-  <!-- ============================================================
-       PADARIA & DOCES
-       ============================================================ -->
-  <section class="menu-block" id="bakery">
-    <div class="section-head">
-      <h2>Padaria &amp; Doces</h2>
-      <span class="rule"></span>
-      <span class="sub">Bakery &amp; Sweets</span>
-    </div>
-
-    <div class="grid">
-
-      <article class="item" data-tags="">
-        <div class="media" data-video="videos/pao-de-queijo.mp4" data-caption="Pão de Queijo — saindo do forno">
-          <img src="images/pao-de-queijo.jpg" alt="Pão de queijo quentinho" loading="lazy">
-          <span class="video-badge"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> Vídeo</span>
-          <div class="play-overlay"><div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
-        </div>
-        <div class="body">
-          <div class="row-top"><div class="name">Brazilian Cheese Bites</div><div class="price">€3.50</div></div>
-          <p class="desc">Traditional Brazilian cheese bread, light and fluffy, served warm.</p>
-          <div class="allerg">(3, 7)</div>
-        </div>
-      </article>
-
-      <article class="item" data-tags="">
-        <div class="media" data-video="" data-caption="Croissant">
-          <div class="placeholder">
-            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
-            <span>Foto em breve</span>
-          </div>
-        </div>
-        <div class="body">
-          <div class="row-top"><div class="name">Croissant (Plain)</div><div class="price">€3.50</div></div>
-          <p class="desc">Buttery, flaky croissant baked fresh daily.</p>
-          <div class="extras">Bacon +€3.50 · Eggs +€3 · Cheese +€3 · Smoked salmon +€4</div>
-          <div class="allerg">(1 wheat, 3, 7)</div>
-        </div>
-      </article>
-
-      <article class="item" data-tags="">
-        <div class="media" data-video="" data-caption="Pistachio Croissant">
-          <div class="placeholder">
-            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
-            <span>Foto em breve</span>
-          </div>
-        </div>
-        <div class="body">
-          <div class="row-top"><div class="name">Pistachio Croissant</div><div class="price">€9.99</div></div>
-          <p class="desc">Flaky croissant filled with rich pistachio cream and finished with a smooth pistachio topping.</p>
-          <div class="allerg">(1 wheat, 3, 7, 8)</div>
-        </div>
-      </article>
-
-      <article class="item" data-tags="">
-        <div class="media" data-video="" data-caption="Açaí Bowl">
-          <div class="placeholder">
-            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
-            <span>Foto em breve</span>
-          </div>
-        </div>
-        <div class="body">
-          <div class="row-top"><div class="name">Açaí Bowl</div><div class="price">€9.99</div></div>
-          <p class="desc">Refreshing, creamy açaí topped with crunchy granola, strawberries, milk powder &amp; condensed milk.</p>
-          <div class="allerg">(1 wheat, 7)</div>
-        </div>
-      </article>
-
-      <article class="item" data-tags="gf">
-        <div class="media" data-video="" data-caption="Brownie with Ice Cream">
-          <div class="placeholder">
-            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
-            <span>Foto em breve</span>
-          </div>
-        </div>
-        <div class="body">
-          <div class="row-top"><div class="name">Brownie with Ice Cream</div><div class="price">€8.50</div></div>
-          <p class="desc">A gluten-free brownie made with almond flour, served with a scoop of vanilla ice cream.</p>
-          <div class="allerg">(3, 7, 8)</div>
-        </div>
-      </article>
-
-      <article class="item" data-tags="">
-        <div class="media" data-video="" data-caption="Fluffy Pancake Stack">
-          <div class="placeholder">
-            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
-            <span>Foto em breve</span>
-          </div>
-        </div>
-        <div class="body">
-          <div class="row-top"><div class="name">Fluffy Pancake Stack</div><div class="price">€9.50</div></div>
-          <p class="desc">Soft, fluffy pancakes served warm.</p>
-          <div class="extras">Dulce de Leche &amp; Vanilla / Nutella &amp; Strawberries</div>
-          <div class="allerg">(1 wheat, 3, 7)</div>
-        </div>
-      </article>
-
-      <article class="item" data-tags="">
-        <div class="media" data-video="" data-caption="Chocolate Melt Cake">
-          <div class="placeholder">
-            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
-            <span>Foto em breve</span>
-          </div>
-        </div>
-        <div class="body">
-          <div class="row-top"><div class="name">Chocolate Melt Cake</div><div class="price">€7.50</div></div>
-          <p class="desc">Warm molten cake with a soft, gooey center.</p>
-          <div class="extras">Carrot Cake &amp; Chocolate / Ferrero Rocher / Nutella &amp; Strawberry</div>
-          <div class="allerg">(1 wheat, 3, 7)</div>
-        </div>
-      </article>
-
-      <article class="item" data-tags="">
-        <div class="media" data-video="" data-caption="Mini Profiteroles">
-          <div class="placeholder">
-            <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
-            <span>Foto em breve</span>
-          </div>
-        </div>
-        <div class="body">
-          <div class="row-top"><div class="name">Mini Profiteroles</div><div class="price">€3.50</div></div>
-          <p class="desc">Coconut, Nutella, or Pistachio.</p>
-          <div class="allerg">(1 wheat, 3, 7, 8)</div>
-        </div>
-      </article>
-
-    </div>
-  </section>
-
-  <!-- ============================================================
-       RODAPÉ
-       ============================================================ -->
+  <!-- RODAPÉ -->
   <footer>
-    <p><strong>FIRST CHAPTER CAFE</strong> · 16 Fade Street, Dublin 2</p>
+    <p class="allergen-title">Allergen Notice:</p>
     <p class="allergen-list">
-      <strong>Allergens:</strong> 1. Gluten · 2. Crustaceans · 3. Eggs · 4. Fish · 5. Peanuts · 6. Soybeans · 7. Milk · 8. Tree Nuts · 9. Celery · 10. Mustard · 11. Sesame Seeds · 12. Sulphites · 13. Lupin · 14. Molluscs
+      1. Gluten · 2. Crustaceans · 3. Eggs · 4. Fish · 5. Peanuts · 6. Soybeans · 7. Milk · 8. Tree Nuts · 9. Celery · 10. Mustard · 11. Sesame Seeds · 12. Sulphites · 13. Lupin · 14. Molluscs
     </p>
     <p class="warn">
-      As there are nuts and sesame seeds used in our kitchen, cross-contamination is possible. Please advise a staff member.
+      As there are nuts and sesame seeds used in our kitchen, despite our best efforts, cross-contamination is possible.
     </p>
   </footer>
 
 </div>
 
-<!-- ============================================================
-     MODAL DE VÍDEO
-     ============================================================ -->
-<div class="modal" id="videoModal" role="dialog" aria-modal="true" aria-label="Vídeo do item">
+<!-- MODAL DE VÍDEO -->
+<div class="modal" id="videoModal">
   <div class="modal-inner">
-    <button class="close" id="closeModal" aria-label="Fechar vídeo">✕</button>
+    <button class="close" id="closeModal">✕</button>
     <video id="modalVideo" controls playsinline></video>
-    <div class="caption" id="modalCaption"></div>
   </div>
 </div>
 
-<!-- ============================================================
-     JAVASCRIPT
-     ============================================================ -->
 <script>
-  /* ---------- REVEAL ON SCROLL ---------- */
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        // anima filhos em cascata
-        const items = entry.target.querySelectorAll('.item');
-        items.forEach((item, i) => {
-          setTimeout(() => item.classList.add('visible'), i * 80);
-        });
-        revealObserver.unobserve(entry.target);
-      }
+  // Modal de Vídeo
+  const modal = document.getElementById('videoModal');
+  const modalVideo = document.getElementById('modalVideo');
+  const closeBtn = document.getElementById('closeModal');
+
+  document.querySelectorAll('.item-media').forEach(media => {
+    media.addEventListener('click', () => {
+      const src = media.dataset.video;
+      if (!src) return; 
+      modalVideo.src = src;
+      modal.classList.add('open');
+      modalVideo.play().catch(e => console.log("Erro:", e));
+      document.body.style.overflow = 'hidden';
     });
-  }, { threshold: 0.12 });
+  });
 
-  document.querySelectorAll('section.menu-block').forEach(s => revealObserver.observe(s));
+  function closeModal() {
+    modal.classList.remove('open');
+    modalVideo.pause();
+    modalVideo.src = '';
+    document.body.style.overflow = '';
+  }
 
-  /* ---------- FILTROS ---------- */
+  closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // Filtros
   const filterInputs = document.querySelectorAll('.filters input');
-  const items = document.querySelectorAll('.item');
+  const items = document.querySelectorAll('.item-card');
 
   filterInputs.forEach(input => {
     input.addEventListener('change', () => {
@@ -1241,9 +607,10 @@
     });
   });
 
-  /* ---------- NAV ATIVA ---------- */
+  // Destaque do menu
+  const sections = document.querySelectorAll('section.menu-block');
   const navLinks = document.querySelectorAll('nav.toc a');
-  const sectionObserver = new IntersectionObserver((entries) => {
+  const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         navLinks.forEach(a => {
@@ -1252,55 +619,7 @@
       }
     });
   }, { rootMargin: '-40% 0px -55% 0px' });
-
-  document.querySelectorAll('section.menu-block').forEach(s => sectionObserver.observe(s));
-
-  /* ---------- MODAL DE VÍDEO ---------- */
-  const modal = document.getElementById('videoModal');
-  const modalVideo = document.getElementById('modalVideo');
-  const modalCaption = document.getElementById('modalCaption');
-  const closeBtn = document.getElementById('closeModal');
-
-  document.querySelectorAll('.item .media').forEach(media => {
-    media.addEventListener('click', () => {
-      const src = media.dataset.video;
-      const caption = media.dataset.caption || '';
-      if (!src) return;
-
-      if (src.endsWith('.mp4') || src.endsWith('.webm') || src.endsWith('.ogg')) {
-        modalVideo.src = src;
-        modalVideo.style.display = 'block';
-      } else {
-        modalVideo.style.display = 'none';
-        const iframe = document.createElement('iframe');
-        iframe.src = src;
-        iframe.allow = 'autoplay; encrypted-media; picture-in-picture';
-        iframe.allowFullscreen = true;
-        const old = modal.querySelector('iframe');
-        if (old) old.remove();
-        modal.querySelector('.modal-inner').appendChild(iframe);
-      }
-
-      modalCaption.textContent = caption;
-      modal.classList.add('open');
-      modalVideo.play().catch(() => {});
-      document.body.style.overflow = 'hidden';
-    });
-  });
-
-  function closeModal(){
-    modal.classList.remove('open');
-    modalVideo.pause();
-    modalVideo.src = '';
-    modalVideo.style.display = 'block';
-    const iframe = modal.querySelector('iframe');
-    if (iframe) iframe.remove();
-    document.body.style.overflow = '';
-  }
-
-  closeBtn.addEventListener('click', closeModal);
-  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  sections.forEach(s => observer.observe(s));
 </script>
 
 </body>
