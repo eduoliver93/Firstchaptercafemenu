@@ -141,7 +141,7 @@
     -webkit-overflow-scrolling: touch;
     gap: 0.6rem;
     list-style: none;
-    padding: 1.5rem 0 0.5rem 0; /* Espaço extra no topo para o gato não cortar */
+    padding: 3rem 0 0.5rem 0; /* AUMENTADO PARA O GATO GRANDE CABER */
     scrollbar-width: none;
   }
   .nav-scroll::-webkit-scrollbar { display: none; }
@@ -163,7 +163,7 @@
     transition: all 0.3s var(--ease-out);
     cursor: pointer;
     -webkit-appearance: none;
-    position: relative; /* Necessário para posicionar o gato */
+    position: relative;
   }
 
   .nav-btn.active {
@@ -173,19 +173,18 @@
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   }
 
-  /* O GATINHO FICA DENTRO DO BOTÃO */
+  /* O GATINHO AUMENTADO */
   .nav-cat-gif {
     position: absolute;
-    height: 35px; /* Tamanho do gato */
+    height: 60px; /* AUMENTADO (era 35px) */
     width: auto;
-    top: -32px; /* Fica em cima do botão */
+    top: -56px; /* Posiciona acima do botão */
     left: 50%;
-    transform: translateX(-50%) translateY(10px); /* Centralizado e escondido um pouco para baixo */
+    transform: translateX(-50%) translateY(10px); 
     opacity: 0;
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     pointer-events: none;
     z-index: 10;
-    /* Remove a imagem de erro se o arquivo não existir */
     color: transparent; 
   }
 
@@ -391,7 +390,6 @@
   <!-- NAVEGAÇÃO -->
   <div class="nav-container">
     <ul class="nav-scroll">
-      <!-- O Gato agora fica DENTRO do botão -->
       <li>
         <button class="nav-btn tab-btn active" data-target="coffee-tea">
           <img src="images/gato.gif" alt="Cat" class="nav-cat-gif">
