@@ -101,18 +101,17 @@
   .hero .address a{ color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--ink); }
 
   /* ============================================================
-     ILUSTRAÇÕES DO PDF (Classes para você brincar)
+     ILUSTRAÇÕES DO PDF
      ============================================================ */
   
-  /* Imagem centralizada no topo (Máquina) */
+  /* Máquina de café reduzida à metade (110px) */
   .img-center {
     display: block;
-    margin: 2rem auto;
-    max-width: 220px;
+    margin: 1.5rem auto;
+    max-width: 110px; 
     opacity: 0.9;
   }
 
-  /* Imagem que fica entre as seções (Copos, Drink) */
   .img-divider {
     display: block;
     margin: 2rem auto;
@@ -120,9 +119,8 @@
     opacity: 0.9;
   }
 
-  /* Imagens laterais no Desktop (Xícara, Flor) */
   .img-side {
-    display: none; /* Esconde no celular */
+    display: none; 
   }
 
   @media (min-width: 1050px) {
@@ -131,7 +129,7 @@
       position: absolute;
       width: 150px;
       opacity: 0.9;
-      z-index: -1; /* Fica atrás do texto */
+      z-index: -1; 
       pointer-events: none;
     }
     .img-side.left { left: -170px; top: 50px; }
@@ -441,7 +439,7 @@
     <div class="address">16 Fade Street, Dublin 2 · <a href="https://instagram.com/firstchaptercafe" target="_blank">@firstchaptercafe</a></div>
   </header>
 
-  <!-- MÁQUINA DE CAFÉ (Pág 1) -->
+  <!-- MÁQUINA DE CAFÉ (Agora com 110px) -->
   <img src="images/maquina.png" alt="Coffee Machine" class="img-center">
 
   <!-- NAVEGAÇÃO -->
@@ -458,10 +456,9 @@
   </div>
 
   <!-- ============================================================
-       COFFEE & TEA (Com Xícara Flutuante)
+       COFFEE & TEA
        ============================================================ -->
   <section class="menu-block active" id="coffee-tea">
-    <!-- XÍCARA (Pág 2) -->
     <img src="images/xicara.png" alt="Cup" class="img-side left">
     
     <div class="section-header"><h2>Coffee & Tea</h2></div>
@@ -548,7 +545,7 @@
     <div class="section-note">Note: Ice, syrups, or alternative milk are an extra €0.50 each.</div>
   </section>
 
-  <!-- COPOS (Pág 1 e 3) -->
+  <!-- COPOS -->
   <img src="images/copos.png" alt="Glasses" class="img-divider">
 
   <!-- ============================================================
@@ -646,14 +643,13 @@
     </div>
   </section>
 
-  <!-- DRINK COM GELO (Pág 4) -->
+  <!-- DRINK COM GELO -->
   <img src="images/drink-gelo.png" alt="Drink" class="img-divider">
 
   <!-- ============================================================
-       DRINKS & ALCOHOL (Com Flor Flutuante)
+       DRINKS & ALCOHOL
        ============================================================ -->
   <section class="menu-block" id="drinks-alcohol">
-    <!-- FLOR (Pág 5) -->
     <img src="images/flor.png" alt="Flower" class="img-side right">
 
     <div class="section-header"><h2>Drinks & Alcohol</h2></div>
