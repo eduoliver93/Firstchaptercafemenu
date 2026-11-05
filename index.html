@@ -40,9 +40,21 @@
     background-size: 4px 4px;
   }
 
+  /* Cursor de caneta (Desktop) */
+  @media (hover:hover) and (pointer:fine){
+    body{ cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path d='M3 21l3-9 9-9 3 3-9 9-9 3z' fill='none' stroke='%23111' stroke-width='1.2' stroke-linejoin='round'/></svg>") 3 21, auto; }
+    a, .item-media, label, button{ cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path d='M3 21l3-9 9-9 3 3-9 9-9 3z' fill='%23111' stroke='%23111' stroke-width='1.2' stroke-linejoin='round'/></svg>") 3 21, pointer; }
+  }
+
   @keyframes floatLogo {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-5px); }
+  }
+
+  /* Animação de entrada das ilustrações do PDF */
+  @keyframes drawIllustration {
+    from { opacity: 0; filter: drop-shadow(0 0 10px rgba(255,255,255,1)) grayscale(100%) contrast(1.2); transform: translateY(20px); }
+    to { opacity: 1; filter: drop-shadow(0 0 0 rgba(255,255,255,0)) grayscale(100%) contrast(1.2); transform: translateY(0); }
   }
 
   .wrap{
@@ -138,35 +150,42 @@
   }
 
   /* ============================================================
-     ILUSTRAÇÕES DO PDF (Posicionamento)
+     ILUSTRAÇÕES DO PDF
      ============================================================ */
   .pdf-illustration {
     display: block;
-    margin: 2rem auto;
+    margin: 3rem auto;
     max-width: 100%;
     height: auto;
-    opacity: 0.9;
-    /* Filtro para garantir que fiquem em preto e branco puros */
-    filter: grayscale(100%) contrast(1.2); 
+    /* Deixa a imagem em preto e branco puro para combinar com o papel */
+    filter: grayscale(100%) contrast(1.2);
+    animation: drawIllustration 1.5s var(--ease-out) forwards;
+    opacity: 0;
   }
 
-  /* Ilustrações laterais no Desktop */
   .illustration-wrapper {
     position: relative;
   }
+  
   .illustration-side {
     display: none;
   }
-  @media (min-width: 950px) {
+
+  /* No Desktop, as ilustrações flutuam nas laterais com efeito Parallax */
+  @media (min-width: 1050px) {
     .illustration-side {
       display: block;
       position: absolute;
-      width: 180px;
-      top: 0;
+      width: 160px;
+      top: 50px;
       filter: grayscale(100%) contrast(1.2);
+      animation: drawIllustration 1.5s var(--ease-out) forwards;
+      opacity: 0;
+      /* O JS vai controlar o movimento de parallax */
+      will-change: transform;
     }
-    .illustration-side.left { left: -200px; }
-    .illustration-side.right { right: -200px; }
+    .illustration-side.left { left: -190px; }
+    .illustration-side.right { right: -190px; }
   }
 
   /* ============================================================
@@ -201,11 +220,11 @@
   .menu-grid {
     display: grid;
     grid-template-columns: 1fr; 
-    gap: 2rem;
+    gap: 2.5rem;
   }
 
   @media (min-width: 700px) {
-    .menu-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+    .menu-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem 3rem; }
   }
 
   /* Card do Item */
@@ -237,7 +256,7 @@
     transform: scale(1.03);
   }
 
-  /* Placeholder */
+  /* Placeholder (Caso falte alguma foto) */
   .item-media .placeholder {
     position: absolute;
     inset: 0;
@@ -274,7 +293,7 @@
   }
   .video-badge svg { width: 10px; height: 10px; fill: #fff; }
 
-  /* Informações do Item (Nome, Linha, Preço) */
+  /* Informações do Item */
   .item-info {
     display: flex;
     flex-direction: column;
@@ -408,19 +427,16 @@
     <div class="address">16 Fade Street, Dublin 2 · <a href="https://instagram.com/firstchaptercafe" target="_blank">@firstchaptercafe</a></div>
   </header>
 
-  <!-- ILUSTRAÇÃO: Máquina de Café (Pág 1) -->
-  <img src="images/maquina.jpg" alt="Ilustração Máquina de Café" class="pdf-illustration" style="max-width: 250px; margin-bottom: 0;">
+  <!-- ILUSTRAÇÃO: Máquina de Café -->
+  <img src="images/maquina.png" alt="Ilustração Máquina de Café" class="pdf-illustration" style="max-width: 250px;">
 
   <!-- NAVEGAÇÃO -->
   <nav class="toc" aria-label="Categorias do menu">
     <ul>
       <li><a href="#cafes">Cafés</a></li>
-      <li><a href="#teas">Chás</a></li>
       <li><a href="#cold">Geladas</a></li>
-      <li><a href="#smoothies">Smoothies</a></li>
-      <li><a href="#wine">Wine</a></li>
       <li><a href="#brunch">Brunch</a></li>
-      <li><a href="#bakery">Padaria</a></li>
+      <!-- Adicione as outras categorias aqui -->
     </ul>
   </nav>
 
@@ -437,18 +453,20 @@
   <section class="menu-block" id="cafes">
     
     <div class="illustration-wrapper">
-      <!-- ILUSTRAÇÃO: Xícara Fumegante (Pág 2) -->
-      <img src="images/xicara.jpg" alt="Ilustração Xícara" class="illustration-side left">
+      <!-- ILUSTRAÇÃO LATERAL: Xícara (Com Parallax) -->
+      <img src="images/xicara.png" alt="Xícara" class="illustration-side left parallax" data-speed="0.1">
       
       <div class="section-header">
         <h2>Cafés</h2>
       </div>
 
       <div class="menu-grid">
-        <!-- Item com Foto/Vídeo -->
+        
+        <!-- Item com Foto e Vídeo (Vertical) -->
         <div class="item-card" data-tags="">
           <div class="item-media" data-video="videos/velvet-mocha.mp4">
-            <img src="images/velvet-mocha.jpg" alt="Velvet Mocha" loading="lazy">
+            <!-- Foto vertical do produto -->
+            <img src="images/velvet-mocha.png" alt="Velvet Mocha" loading="lazy">
             <span class="video-badge"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> Vídeo</span>
           </div>
           <div class="item-info">
@@ -457,7 +475,7 @@
           </div>
         </div>
 
-        <!-- Item sem foto (Placeholder) -->
+        <!-- Item sem foto -->
         <div class="item-card" data-tags="">
           <div class="item-media" data-video="">
             <div class="placeholder">
@@ -470,42 +488,29 @@
           </div>
         </div>
         
-        <!-- Adicione os outros cafés aqui seguindo o mesmo padrão -->
-        <div class="item-card" data-tags="">
-          <div class="item-media" data-video="">
-            <div class="placeholder">
-              <svg viewBox="0 0 24 24"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/></svg>
-              <span>Foto em breve</span>
-            </div>
-          </div>
-          <div class="item-info">
-            <div class="item-header"><span class="item-name">Cappuccino</span><div class="item-dots"></div><span class="item-price">€4.00</span></div>
-          </div>
-        </div>
-
       </div>
     </div>
   </section>
 
-  <!-- ILUSTRAÇÃO: Copos Empilhados, Taça e Canudo (Pág 1 e 3) -->
-  <img src="images/copos.jpg" alt="Ilustração Copos" class="pdf-illustration" style="max-width: 350px;">
+  <!-- ILUSTRAÇÃO: Copos e Taça -->
+  <img src="images/copos.png" alt="Ilustração Copos" class="pdf-illustration" style="max-width: 350px;">
 
   <!-- ============================================================
        SEÇÃO GELADAS
        ============================================================ -->
   <section class="menu-block" id="cold">
     <div class="illustration-wrapper">
-      <!-- ILUSTRAÇÃO: Copo com canudo listrado (Pág 3) -->
-      <img src="images/drink-gelo.jpg" alt="Ilustração Drink" class="illustration-side right">
+      <!-- ILUSTRAÇÃO LATERAL: Copo com gelo (Com Parallax) -->
+      <img src="images/drink-gelo.png" alt="Drink" class="illustration-side right parallax" data-speed="0.15">
       
       <div class="section-header">
         <h2>Geladas</h2>
       </div>
       <div class="menu-grid">
-        <!-- Exemplo de item -->
+        <!-- Exemplo -->
         <div class="item-card">
           <div class="item-media" data-video="">
-            <img src="images/iced-matcha.jpg" alt="Iced Matcha">
+            <img src="images/iced-matcha.png" alt="Iced Matcha">
           </div>
           <div class="item-info">
             <div class="item-header"><span class="item-name">Emerald Grey</span><div class="item-dots"></div><span class="item-price">€6.50</span></div>
@@ -521,8 +526,8 @@
        ============================================================ -->
   <section class="menu-block" id="brunch">
     <div class="illustration-wrapper">
-      <!-- ILUSTRAÇÃO: Flores (Pág 5) -->
-      <img src="images/flor.jpg" alt="Ilustração Flor" class="illustration-side left" style="top: 50px;">
+      <!-- ILUSTRAÇÃO LATERAL: Flores (Com Parallax) -->
+      <img src="images/flor.png" alt="Flor" class="illustration-side left parallax" data-speed="0.08" style="top: 50px;">
       
       <div class="section-header">
         <h2>Brunch</h2>
@@ -531,7 +536,7 @@
       <div class="menu-grid">
         <div class="item-card">
           <div class="item-media" data-video="videos/avocado-toast.mp4">
-            <img src="images/avocado-toast.jpg" alt="Avocado Toast">
+            <img src="images/avocado-toast.png" alt="Avocado Toast">
             <span class="video-badge"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> Vídeo</span>
           </div>
           <div class="item-info">
@@ -565,7 +570,7 @@
 </div>
 
 <script>
-  // Modal de Vídeo
+  // Lógica do Modal de Vídeo
   const modal = document.getElementById('videoModal');
   const modalVideo = document.getElementById('modalVideo');
   const closeBtn = document.getElementById('closeModal');
@@ -592,7 +597,7 @@
   modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-  // Filtros
+  // Lógica dos Filtros
   const filterInputs = document.querySelectorAll('.filters input');
   const items = document.querySelectorAll('.item-card');
 
@@ -607,7 +612,7 @@
     });
   });
 
-  // Destaque do menu
+  // Destaque do menu ativo
   const sections = document.querySelectorAll('section.menu-block');
   const navLinks = document.querySelectorAll('nav.toc a');
   const observer = new IntersectionObserver((entries) => {
@@ -620,6 +625,17 @@
     });
   }, { rootMargin: '-40% 0px -55% 0px' });
   sections.forEach(s => observer.observe(s));
+
+  // Efeito Parallax nas Ilustrações Laterais
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    document.querySelectorAll('.parallax').forEach(el => {
+      const speed = parseFloat(el.getAttribute('data-speed')) || 0.1;
+      // Move a imagem para cima ou para baixo dependendo da rolagem
+      const yPos = -(scrolled * speed);
+      el.style.transform = `translateY(${yPos}px)`;
+    });
+  });
 </script>
 
 </body>
