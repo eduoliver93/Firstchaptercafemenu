@@ -110,13 +110,6 @@
     opacity: 0.9;
   }
 
-  .img-divider {
-    display: block;
-    margin: 2rem auto;
-    max-width: 180px;
-    opacity: 0.9;
-  }
-
   .img-side {
     display: none; 
   }
@@ -135,11 +128,10 @@
   }
 
   /* ============================================================
-     NAVEGAÇÃO COM O GATINHO (GIF)
+     NAVEGAÇÃO COM O GATINHO (MÉTODO INFALÍVEL)
      ============================================================ */
   .nav-container {
-    margin-bottom: 2rem;
-    position: relative; /* Necessário para posicionar o gato */
+    margin-bottom: 2.5rem;
   }
 
   .nav-scroll {
@@ -149,9 +141,8 @@
     -webkit-overflow-scrolling: touch;
     gap: 0.6rem;
     list-style: none;
-    padding: 0 0 0.5rem 0;
+    padding: 1.5rem 0 0.5rem 0; /* Espaço extra no topo para o gato não cortar */
     scrollbar-width: none;
-    position: relative;
   }
   .nav-scroll::-webkit-scrollbar { display: none; }
 
@@ -172,7 +163,7 @@
     transition: all 0.3s var(--ease-out);
     cursor: pointer;
     -webkit-appearance: none;
-    position: relative;
+    position: relative; /* Necessário para posicionar o gato */
   }
 
   .nav-btn.active {
@@ -182,21 +173,26 @@
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   }
 
-  /* O GATINHO ANIMADO */
+  /* O GATINHO FICA DENTRO DO BOTÃO */
   .nav-cat-gif {
     position: absolute;
-    height: 40px; /* Tamanho do gato */
+    height: 35px; /* Tamanho do gato */
     width: auto;
-    bottom: 100%; /* Fica acima dos botões */
-    margin-bottom: -5px; /* Ajuste fino para o gato parecer deitado no botão */
-    left: 0;
+    top: -32px; /* Fica em cima do botão */
+    left: 50%;
+    transform: translateX(-50%) translateY(10px); /* Centralizado e escondido um pouco para baixo */
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     pointer-events: none;
     z-index: 10;
-    /* Transição suave para acompanhar o botão */
-    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); 
-    transform: translateX(0);
-    /* Oculta a imagem quebrada se o gif não carregar */
-    color: transparent;
+    /* Remove a imagem de erro se o arquivo não existir */
+    color: transparent; 
+  }
+
+  /* Quando o botão está ativo, o gato aparece e sobe */
+  .nav-btn.active .nav-cat-gif {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
   }
 
   /* ============================================================
@@ -208,9 +204,7 @@
     animation: fadeIn 0.4s ease;
   }
 
-  section.menu-block.active {
-    display: block;
-  }
+  section.menu-block.active { display: block; }
 
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
@@ -229,13 +223,6 @@
     text-transform: uppercase;
     margin-bottom: .3rem;
   }
-  
-  .section-header .sub{
-    font-size: .75rem;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-  }
 
   .menu-grid {
     display: grid;
@@ -247,14 +234,12 @@
     .menu-grid { grid-template-columns: 1fr 1fr; gap: 2rem 3rem; }
   }
 
-  /* Card do Item */
   .item-card {
     display: flex;
     flex-direction: column;
     gap: .8rem;
   }
 
-  /* Área de Mídia (Foto/Vídeo Vertical) */
   .item-media {
     position: relative;
     width: 100%;
@@ -264,7 +249,6 @@
     overflow: hidden;
     cursor: pointer;
     border-radius: 6px;
-    /* Fundo elegante que aparece se a imagem não carregar */
     background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="%23a8a396" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/><text x="12" y="22" font-family="sans-serif" font-size="4" text-anchor="middle" fill="%23a8a396">Photo coming soon</text></svg>');
     background-position: center;
     background-repeat: no-repeat;
@@ -278,10 +262,9 @@
     transition: transform .5s var(--ease-out);
     border-radius: 6px;
     position: relative;
-    z-index: 1;
+    z-index: 1; 
   }
 
-  /* Botão de Play do Vídeo */
   .video-btn {
     position: absolute;
     bottom: 1rem;
@@ -300,23 +283,10 @@
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
   }
   
-  .item-media:hover .video-btn {
-    transform: scale(1.1);
-    background: rgba(17,17,17,1);
-  }
+  .item-media:hover .video-btn { transform: scale(1.1); background: rgba(17,17,17,1); }
+  .video-btn svg { width: 20px; height: 20px; fill: #fff; margin-left: 3px; }
 
-  .video-btn svg {
-    width: 20px;
-    height: 20px;
-    fill: #fff;
-    margin-left: 3px;
-  }
-
-  /* Textos dos Itens */
-  .item-info {
-    display: flex;
-    flex-direction: column;
-  }
+  .item-info { display: flex; flex-direction: column; }
 
   .item-header {
     display: flex;
@@ -344,22 +314,14 @@
     white-space: nowrap;
   }
 
-  .item-desc {
-    font-size: .9rem; 
-    color: var(--ink-soft);
-    line-height: 1.6;
-  }
-
   .section-note {
     text-align: center;
     font-size: .75rem;
-    letter-spacing: .05em;
     color: var(--ink-soft);
     margin-top: 2.5rem;
     padding-top: 1rem;
     border-top: 1px dashed var(--line);
     text-transform: uppercase;
-    font-weight: 500;
   }
 
   @media (min-width: 700px) {
@@ -374,29 +336,15 @@
       top: -.2rem;
     }
     .item-price { font-size: 1.15rem; }
-    .item-desc { font-size: .85rem; }
   }
 
   footer{
-    margin-top: 3rem; 
-    padding-top: 2rem;
-    border-top: 1px solid var(--ink); 
-    text-align: center;
+    margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--ink); text-align: center;
   }
-  footer .allergen-title {
-    font-weight: 600; font-size: .8rem;
-    letter-spacing: .1em; text-transform: uppercase; margin-bottom: .5rem;
-  }
-  footer .allergen-list {
-    font-size: .75rem; color: var(--ink-soft); line-height: 1.8;
-    max-width: 700px; margin: 0 auto 1.5rem;
-  }
-  footer .warn {
-    font-size: .75rem; font-style: italic;
-    color: var(--ink-soft); max-width: 600px; margin: 0 auto;
-  }
+  footer .allergen-title { font-weight: 600; font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; margin-bottom: .5rem; }
+  footer .allergen-list { font-size: .75rem; color: var(--ink-soft); line-height: 1.8; max-width: 700px; margin: 0 auto 1.5rem; }
+  footer .warn { font-size: .75rem; font-style: italic; color: var(--ink-soft); max-width: 600px; margin: 0 auto; }
 
-  /* MODAL DE VÍDEO */
   .modal {
     position: fixed; inset: 0; background: rgba(0,0,0,.95);
     display: none; align-items: center; justify-content: center;
@@ -440,19 +388,52 @@
 
   <img src="images/maquina.png" alt="Coffee Machine" class="img-center">
 
-  <!-- NAVEGAÇÃO COM O GATINHO -->
+  <!-- NAVEGAÇÃO -->
   <div class="nav-container">
-    <ul class="nav-scroll" id="navScroll">
-      <!-- O Gato fica aqui, invisível no início (o JS vai posicionar) -->
-      <img src="images/gato.gif" alt="Cat" class="nav-cat-gif" id="navCat">
-      
-      <li><button class="nav-btn tab-btn active" data-target="coffee-tea">Coffee & Tea</button></li>
-      <li><button class="nav-btn tab-btn" data-target="protein-coffee">Protein Coffee</button></li>
-      <li><button class="nav-btn tab-btn" data-target="beverages">Beverages & Juices</button></li>
-      <li><button class="nav-btn tab-btn" data-target="smoothies">Smoothies</button></li>
-      <li><button class="nav-btn tab-btn" data-target="drinks-alcohol">Drinks & Alcohol</button></li>
-      <li><button class="nav-btn tab-btn" data-target="brunch">Brunch</button></li>
-      <li><button class="nav-btn tab-btn" data-target="bites-sweets">Bites & Sweets</button></li>
+    <ul class="nav-scroll">
+      <!-- O Gato agora fica DENTRO do botão -->
+      <li>
+        <button class="nav-btn tab-btn active" data-target="coffee-tea">
+          <img src="images/gato.gif" alt="Cat" class="nav-cat-gif">
+          Coffee & Tea
+        </button>
+      </li>
+      <li>
+        <button class="nav-btn tab-btn" data-target="protein-coffee">
+          <img src="images/gato.gif" alt="Cat" class="nav-cat-gif">
+          Protein Coffee
+        </button>
+      </li>
+      <li>
+        <button class="nav-btn tab-btn" data-target="beverages">
+          <img src="images/gato.gif" alt="Cat" class="nav-cat-gif">
+          Beverages & Juices
+        </button>
+      </li>
+      <li>
+        <button class="nav-btn tab-btn" data-target="smoothies">
+          <img src="images/gato.gif" alt="Cat" class="nav-cat-gif">
+          Smoothies
+        </button>
+      </li>
+      <li>
+        <button class="nav-btn tab-btn" data-target="drinks-alcohol">
+          <img src="images/gato.gif" alt="Cat" class="nav-cat-gif">
+          Drinks & Alcohol
+        </button>
+      </li>
+      <li>
+        <button class="nav-btn tab-btn" data-target="brunch">
+          <img src="images/gato.gif" alt="Cat" class="nav-cat-gif">
+          Brunch
+        </button>
+      </li>
+      <li>
+        <button class="nav-btn tab-btn" data-target="bites-sweets">
+          <img src="images/gato.gif" alt="Cat" class="nav-cat-gif">
+          Bites & Sweets
+        </button>
+      </li>
     </ul>
   </div>
 
@@ -935,58 +916,23 @@
 </div>
 
 <script>
-  // Lógica das Abas e do Gatinho
+  // Lógica das Abas
   const tabButtons = document.querySelectorAll('.tab-btn');
   const sections = document.querySelectorAll('.menu-block');
-  const catGif = document.getElementById('navCat');
-  const navScroll = document.getElementById('navScroll');
-
-  // Função para mover o gatinho para cima do botão ativo
-  function moveCat(btn) {
-    if(!catGif || !btn) return;
-    
-    // Pega a posição do botão em relação à barra de rolagem
-    const btnLeft = btn.offsetLeft;
-    const btnWidth = btn.offsetWidth;
-    
-    // Calcula o centro do botão (ajustando o tamanho do gatinho)
-    const catWidth = 40; // Largura do gato
-    const moveTo = btnLeft + (btnWidth / 2) - (catWidth / 2);
-    
-    // Aplica o movimento
-    catGif.style.transform = `translateX(${moveTo}px)`;
-  }
-
-  // Roda ao carregar a página (para o primeiro gato ficar no lugar certo)
-  window.addEventListener('load', () => {
-    const activeBtn = document.querySelector('.tab-btn.active');
-    moveCat(activeBtn);
-  });
 
   tabButtons.forEach(btn => {
     btn.addEventListener('click', function() {
       const targetId = this.getAttribute('data-target');
 
-      // Troca as classes dos botões e seções
       tabButtons.forEach(b => b.classList.remove('active'));
       sections.forEach(s => s.classList.remove('active'));
 
       this.classList.add('active');
       document.getElementById(targetId).classList.add('active');
 
-      // Move o gato para o botão clicado
-      moveCat(this);
-
-      // Rola a tela
       const navPosition = document.querySelector('.nav-container').offsetTop;
       window.scrollTo({ top: navPosition - 10, behavior: 'smooth' });
     });
-  });
-
-  // Se o usuário rolar a barra de abas no celular, o gato acompanha
-  navScroll.addEventListener('scroll', () => {
-    const activeBtn = document.querySelector('.tab-btn.active');
-    if(activeBtn) moveCat(activeBtn);
   });
 
   // Lógica do Modal de Vídeo
