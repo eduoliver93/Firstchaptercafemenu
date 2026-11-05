@@ -141,7 +141,7 @@
     -webkit-overflow-scrolling: touch;
     gap: 0.6rem;
     list-style: none;
-    padding: 3.5rem 0 0.5rem 0; /* Espaço para o gato grande não cortar */
+    padding: 3.5rem 0 0.5rem 0; /* Espaço em cima para o gato grande */
     scrollbar-width: none;
   }
   .nav-scroll::-webkit-scrollbar { display: none; }
@@ -176,20 +176,19 @@
   /* O GATINHO */
   .nav-cat-gif {
     position: absolute;
-    height: 60px; 
+    height: 55px; /* Tamanho do gato */
     width: auto;
-    top: 100%; /* Cola a base do gato na base do botão */
+    top: -48px; /* Puxa ele para cima do botão */
     left: 50%;
-    transform: translateX(-50%) translateY(10px);
-    margin-top: -10px; /* Sobe um pouquinho para parecer deitado na borda */
+    transform: translateX(-50%) translateY(10px); 
     opacity: 0;
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     pointer-events: none;
-    z-index: 10;
+    z-index: 100; /* Garante que ele fique na frente do fundo preto do botão */
     color: transparent; 
   }
 
-  /* Quando o botão está ativo, o gato aparece e sobe */
+  /* Quando o botão está ativo, o gato aparece */
   .nav-btn.active .nav-cat-gif {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
