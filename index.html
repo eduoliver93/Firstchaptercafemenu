@@ -129,34 +129,31 @@
     opacity: 0.9;
   }
 
-  /* Ilustração lateral - Visível no Mobile também */
+  /* 
+    CORREÇÃO DA CHICARA NO MOBILE:
+    - mix-blend-mode: multiply remove fundos brancos de imagens PNG.
+    - background: transparent força transparência.
+  */
   .img-side {
     display: block;
     position: absolute;
-    width: 70px; /* Tamanho ajustado para mobile */
-    opacity: 0.8;
-    z-index: 0; /* Fica atrás do conteúdo, mas visível */
+    width: 75px; 
+    opacity: 0.85;
+    z-index: 0; 
     pointer-events: none;
+    background: transparent !important;
+    mix-blend-mode: multiply; /* Remove o fundo branco magicamente */
   }
   
-  /* Posicionamento da Chicara no Mobile */
-  .img-side.left { 
-    left: 5px; 
-    top: 10px; 
-  }
-  
-  /* Posicionamento da Flor no Mobile */
-  .img-side.right { 
-    right: 5px; 
-    top: 10px; 
-  }
+  .img-side.left { left: 5px; top: 10px; }
+  .img-side.right { right: 5px; top: 10px; }
 
   /* Ajuste para Desktop */
   @media (min-width: 1050px) {
     .img-side {
       width: 100px;
       opacity: 0.9;
-      z-index: -1; /* No desktop fica mais para trás */
+      z-index: -1; 
     }
     .img-side.left { left: -120px; top: 50px; }
     .img-side.right { right: -120px; top: 50px; }
@@ -243,7 +240,7 @@
     display: none;
     padding: 1rem 0 3rem;
     animation: fadeIn 0.4s ease;
-    position: relative; /* Para manter a ilustração contida */
+    position: relative; 
   }
   section.menu-block.active { display: block; }
 
@@ -280,29 +277,25 @@
     .menu-grid { grid-template-columns: 1fr 1fr; gap: 2rem 2.5rem; }
   }
 
+  /* ==========================================
+     ITEM CARD (Imagem em cima, info embaixo)
+     ========================================== */
   .item-card {
     display: flex;
     flex-direction: column;
     gap: .8rem;
   }
 
-  /* ==========================================
-     MOLDURA QUADRADA (1:1) LIMPA
-     ========================================== */
   .item-media {
     position: relative;
     width: 100%;
-    aspect-ratio: 1 / 1; /* Força o quadrado */
+    aspect-ratio: 1 / 1; 
     max-width: 260px; 
     margin: 0 auto;   
-    
     background: var(--media-bg);
     cursor: pointer;
-    
-    /* Moldura simples e elegante */
     border: 1px solid var(--ink);
     border-radius: 4px; 
-    
     background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="%23a8a396" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13a4 4 0 0 1 0 8h-1M4 8v9a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V8M4 8V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2"/><text x="12" y="22" font-family="sans-serif" font-size="4" text-anchor="middle" fill="%23a8a396">Photo coming soon</text></svg>');
     background-position: center;
     background-repeat: no-repeat;
@@ -316,7 +309,7 @@
     transition: transform .5s var(--ease-out);
     position: relative;
     z-index: 1;
-    border-radius: 3px; /* Ligeiramente menor que a borda externa */
+    border-radius: 3px; 
   }
 
   .item-media:hover img {
@@ -342,9 +335,13 @@
   .item-media:hover .video-btn { transform: scale(1.1); background: rgba(17,17,17,1); }
   .video-btn svg { width: 18px; height: 18px; fill: #fff; margin-left: 3px; }
 
-  .item-info { display: flex; flex-direction: column; }
+  /* Informações empilhadas abaixo da imagem */
+  .item-info { 
+    display: block; 
+    width: 100%;
+  }
 
-  /* ===== HEADER DO ITEM (nome + preço) ===== */
+  /* Header do item (Nome e Preço na mesma linha) */
   .item-header {
     display: flex;
     align-items: baseline;
@@ -381,6 +378,7 @@
     line-height: 1.5;
     margin-top: .2rem;
     font-weight: 300;
+    display: block;
   }
 
   .item-allergens {
@@ -408,9 +406,13 @@
     line-height: 1.8;
   }
 
+  /* Ajustes finos para Desktop */
   @media (min-width: 700px) {
-    .item-header { justify-content: flex-start; gap: 0; align-items: baseline; }
-    .item-name { font-size: .95rem; white-space: nowrap; }
+    .item-header { 
+      justify-content: space-between; 
+      align-items: baseline; 
+    }
+    .item-name { font-size: 1.05rem; }
     .item-price { font-size: 1.1rem; }
   }
 
