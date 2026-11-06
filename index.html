@@ -125,42 +125,40 @@
   }
 
   /* 
-    CHICARA COLADA NA TELA (Mobile)
-    Usando position: fixed para ignorar o padding do .wrap
+    CHICARA ESTÁTICA NO MOBILE 
+    Posicionada para ficar ao lado do título na seção, acompanhando a rolagem.
   */
   .img-side {
     display: block;
-    position: fixed; /* Fixa na janela, não no container */
-    width: 75px; 
+    position: absolute;
+    width: 100px; /* Tamanho ajustado para o iPhone */
     opacity: 0.85;
-    z-index: 99; 
+    z-index: 0; 
     pointer-events: none;
     background: transparent !important;
     mix-blend-mode: multiply; /* Remove fundo branco */
   }
   
-  /* Colada na esquerda, alinhada com o topo do menu */
+  /* Ajuste fino da posição para alinhar com o título "COFFEE & TEA" */
   .img-side.left { 
-    left: 0; 
-    top: 120px; /* Ajuste para alinhar com a seção */
+    left: -15px; 
+    top: 10px; 
   }
   
-  /* Colada na direita */
   .img-side.right { 
-    right: 0; 
-    top: 120px; 
+    right: -15px; 
+    top: 10px; 
   }
 
-  /* No Desktop, volta ao comportamento original (posicionado ao lado do conteúdo) */
+  /* No Desktop, posiciona para fora do container principal */
   @media (min-width: 1050px) {
     .img-side {
-      position: absolute; /* Volta a ser absoluto no desktop */
-      width: 100px;
+      width: 140px;
       opacity: 0.9;
       z-index: -1; 
     }
-    .img-side.left { left: -120px; top: 50px; }
-    .img-side.right { right: -120px; top: 50px; }
+    .img-side.left { left: -170px; top: 50px; }
+    .img-side.right { right: -170px; top: 50px; }
   }
 
   /* ============ NAVEGAÇÃO FIXA ============ */
