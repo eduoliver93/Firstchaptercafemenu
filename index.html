@@ -66,7 +66,6 @@
     animation: floatLogo 6s ease-in-out infinite;
   }
   
-  /* Logo Ajustada (+10%) */
   .logo-header img {
     width: 88px; 
     height: 88px;
@@ -84,7 +83,6 @@
     margin-bottom: 1rem;
   }
   
-  /* Título Ajustado (+10%) */
   .hero h1{
     font-family: var(--sans);
     font-weight: 500;
@@ -95,7 +93,6 @@
     margin-bottom: 1rem;
   }
   
-  /* Informações Ajustadas (+10%) */
   .hero .hours, .hero .address{
     font-size: .85rem;
     letter-spacing: .1em;
@@ -105,7 +102,6 @@
   }
   .hero .address{ color: var(--ink-soft); font-size: .8rem; }
   
-  /* Instagram Destacado */
   .hero .address a{ 
     color: var(--active-txt); 
     background-color: var(--ink);
@@ -121,7 +117,6 @@
   }
 
   /* ============ ILUSTRAÇÕES ============ */
-  /* Imagem central */
   .img-center {
     display: block;
     margin: 1rem auto;
@@ -130,27 +125,36 @@
   }
 
   /* 
-    CORREÇÃO DA CHICARA NO MOBILE:
-    - mix-blend-mode: multiply remove fundos brancos de imagens PNG.
-    - background: transparent força transparência.
+    CHICARA COLADA NA TELA (Mobile)
+    Usando position: fixed para ignorar o padding do .wrap
   */
   .img-side {
     display: block;
-    position: absolute;
+    position: fixed; /* Fixa na janela, não no container */
     width: 75px; 
     opacity: 0.85;
-    z-index: 0; 
+    z-index: 99; 
     pointer-events: none;
     background: transparent !important;
-    mix-blend-mode: multiply; /* Remove o fundo branco magicamente */
+    mix-blend-mode: multiply; /* Remove fundo branco */
   }
   
-  .img-side.left { left: 5px; top: 10px; }
-  .img-side.right { right: 5px; top: 10px; }
+  /* Colada na esquerda, alinhada com o topo do menu */
+  .img-side.left { 
+    left: 0; 
+    top: 120px; /* Ajuste para alinhar com a seção */
+  }
+  
+  /* Colada na direita */
+  .img-side.right { 
+    right: 0; 
+    top: 120px; 
+  }
 
-  /* Ajuste para Desktop */
+  /* No Desktop, volta ao comportamento original (posicionado ao lado do conteúdo) */
   @media (min-width: 1050px) {
     .img-side {
+      position: absolute; /* Volta a ser absoluto no desktop */
       width: 100px;
       opacity: 0.9;
       z-index: -1; 
@@ -211,7 +215,6 @@
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   }
 
-  /* O GATINHO */
   .nav-cat-gif {
     position: absolute;
     height: 60px;
@@ -277,9 +280,6 @@
     .menu-grid { grid-template-columns: 1fr 1fr; gap: 2rem 2.5rem; }
   }
 
-  /* ==========================================
-     ITEM CARD (Imagem em cima, info embaixo)
-     ========================================== */
   .item-card {
     display: flex;
     flex-direction: column;
@@ -335,13 +335,11 @@
   .item-media:hover .video-btn { transform: scale(1.1); background: rgba(17,17,17,1); }
   .video-btn svg { width: 18px; height: 18px; fill: #fff; margin-left: 3px; }
 
-  /* Informações empilhadas abaixo da imagem */
   .item-info { 
     display: block; 
     width: 100%;
   }
 
-  /* Header do item (Nome e Preço na mesma linha) */
   .item-header {
     display: flex;
     align-items: baseline;
@@ -406,7 +404,6 @@
     line-height: 1.8;
   }
 
-  /* Ajustes finos para Desktop */
   @media (min-width: 700px) {
     .item-header { 
       justify-content: space-between; 
