@@ -140,7 +140,7 @@
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
-    overflow-y: hidden; /* Impede que o gato seja cortado por cima */
+    overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
     gap: 0.6rem;
     list-style: none;
@@ -414,7 +414,7 @@
 <div class="wrap">
 
   <div class="logo-header">
-    <img src="images/logo.png" alt="First Chapter Cafe Logo">
+    <img src="images/logo.png" alt="First Chapter Cafe Logo" onerror="this.style.display='none'">
   </div>
 
   <header class="hero">
@@ -423,7 +423,7 @@
     <div class="address">16 Fade Street, Dublin 2 · <a href="https://instagram.com/firstchaptercafe" target="_blank">@firstchaptercafe</a></div>
   </header>
 
-  <img src="images/maquina.png" alt="Coffee Machine" class="img-center">
+  <img src="images/maquina.png" alt="Coffee Machine" class="img-center" onerror="this.style.display='none'">
 
   <!-- NAVEGAÇÃO FIXA -->
   <div class="nav-container">
@@ -441,13 +441,14 @@
 
   <!-- ============ COFFEE & TEA ============ -->
   <section class="menu-block active" id="coffee-tea">
-    <img src="images/chicara.png" alt="Cup" class="img-side left">
+    <img src="images/chicara.png" alt="Cup" class="img-side left" onerror="this.style.display='none'">
     <div class="section-header"><h2>Coffee & Tea</h2></div>
     <div class="menu-grid">
 
       <div class="item-card">
-        <div class="item-media" data-video="videos/expresso.mp4">
-          <img src="images/expresso.png" alt="Espresso" loading="lazy">
+        <!-- Nome corrigido para espresso.png e espresso.mp4, e onerror adicionado -->
+        <div class="item-media" data-video="videos/espresso.mp4">
+          <img src="images/espresso.png" alt="Espresso" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -458,7 +459,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/americano.mp4">
-          <img src="images/americano.png" alt="Americano" loading="lazy">
+          <img src="images/americano.png" alt="Americano" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -469,7 +470,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/cappuccino.mp4">
-          <img src="images/cappuccino.png" alt="Cappuccino" loading="lazy">
+          <img src="images/cappuccino.png" alt="Cappuccino" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -480,7 +481,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/flat-white.mp4">
-          <img src="images/flat-white.png" alt="Flat White" loading="lazy">
+          <img src="images/flat-white.png" alt="Flat White" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -491,7 +492,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/latte.mp4">
-          <img src="images/latte.png" alt="Latte" loading="lazy">
+          <img src="images/latte.png" alt="Latte" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -502,7 +503,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/velvet-mocha.mp4">
-          <img src="images/velvet-mocha.png" alt="Velvet Mocha" loading="lazy">
+          <img src="images/velvet-mocha.png" alt="Velvet Mocha" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -513,7 +514,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/pure-matcha.mp4">
-          <img src="images/pure-matcha.png" alt="Pure Matcha" loading="lazy">
+          <img src="images/pure-matcha.png" alt="Pure Matcha" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -524,7 +525,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/spiced-chai-latte.mp4">
-          <img src="images/spiced-chai-latte.png" alt="Spiced Chai Latte" loading="lazy">
+          <img src="images/spiced-chai-latte.png" alt="Spiced Chai Latte" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -535,7 +536,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/dirty-chai-boost.mp4">
-          <img src="images/dirty-chai-boost.png" alt="Dirty Chai Boost" loading="lazy">
+          <img src="images/dirty-chai-boost.png" alt="Dirty Chai Boost" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -546,7 +547,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/signature-hot-chocolate.mp4">
-          <img src="images/signature-hot-chocolate.png" alt="Signature Hot Chocolate" loading="lazy">
+          <img src="images/signature-hot-chocolate.png" alt="Signature Hot Chocolate" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -557,7 +558,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/black-tea.mp4">
-          <img src="images/black-tea.png" alt="Black Tea" loading="lazy">
+          <img src="images/black-tea.png" alt="Black Tea" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -568,7 +569,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/earl-grey.mp4">
-          <img src="images/earl-grey.png" alt="Earl Grey" loading="lazy">
+          <img src="images/earl-grey.png" alt="Earl Grey" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -579,7 +580,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/peppermint.mp4">
-          <img src="images/peppermint.png" alt="Peppermint" loading="lazy">
+          <img src="images/peppermint.png" alt="Peppermint" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -590,7 +591,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/green-tea.mp4">
-          <img src="images/green-tea.png" alt="Green Tea" loading="lazy">
+          <img src="images/green-tea.png" alt="Green Tea" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -612,7 +613,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/mocha-boost.mp4">
-          <img src="images/mocha-boost.png" alt="Mocha Boost" loading="lazy">
+          <img src="images/mocha-boost.png" alt="Mocha Boost" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -624,7 +625,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/vanilla-fuel-latte.mp4">
-          <img src="images/vanilla-fuel-latte.png" alt="Vanilla Fuel Latte" loading="lazy">
+          <img src="images/vanilla-fuel-latte.png" alt="Vanilla Fuel Latte" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -645,7 +646,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/pineapple-juice.mp4">
-          <img src="images/pineapple-juice.png" alt="Fresh Pineapple Juice" loading="lazy">
+          <img src="images/pineapple-juice.png" alt="Fresh Pineapple Juice" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -656,7 +657,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/strawberry-juice.mp4">
-          <img src="images/strawberry-juice.png" alt="Strawberry Juice" loading="lazy">
+          <img src="images/strawberry-juice.png" alt="Strawberry Juice" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -667,7 +668,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/orange-juice.mp4">
-          <img src="images/orange-juice.png" alt="Orange Juice" loading="lazy">
+          <img src="images/orange-juice.png" alt="Orange Juice" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -678,7 +679,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/coke.mp4">
-          <img src="images/coke.png" alt="Coke" loading="lazy">
+          <img src="images/coke.png" alt="Coke" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -689,7 +690,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/still-water.mp4">
-          <img src="images/still-water.png" alt="Still Water" loading="lazy">
+          <img src="images/still-water.png" alt="Still Water" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -700,7 +701,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/sparkling-water.mp4">
-          <img src="images/sparkling-water.png" alt="Sparkling Water" loading="lazy">
+          <img src="images/sparkling-water.png" alt="Sparkling Water" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -719,7 +720,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/strawberry-smoothie.mp4">
-          <img src="images/strawberry-smoothie.png" alt="Strawberry Smoothie" loading="lazy">
+          <img src="images/strawberry-smoothie.png" alt="Strawberry Smoothie" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -731,7 +732,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/blue-antiox.mp4">
-          <img src="images/blue-antiox.png" alt="Blue Antiox" loading="lazy">
+          <img src="images/blue-antiox.png" alt="Blue Antiox" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -743,7 +744,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/strawberry-boost.mp4">
-          <img src="images/strawberry-boost.png" alt="Strawberry Boost" loading="lazy">
+          <img src="images/strawberry-boost.png" alt="Strawberry Boost" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -755,7 +756,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/berry-antiox.mp4">
-          <img src="images/berry-antiox.png" alt="Berry Antiox" loading="lazy">
+          <img src="images/berry-antiox.png" alt="Berry Antiox" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -775,7 +776,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/coffee-cloud-coconut.mp4">
-          <img src="images/coffee-cloud-coconut.png" alt="Coffee Cloud Coconut" loading="lazy">
+          <img src="images/coffee-cloud-coconut.png" alt="Coffee Cloud Coconut" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -787,7 +788,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/emerald-grey.mp4">
-          <img src="images/emerald-grey.png" alt="Emerald Grey" loading="lazy">
+          <img src="images/emerald-grey.png" alt="Emerald Grey" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -798,7 +799,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/green-garden-detox.mp4">
-          <img src="images/green-garden-detox.png" alt="Green Garden Detox" loading="lazy">
+          <img src="images/green-garden-detox.png" alt="Green Garden Detox" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -809,7 +810,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/strawberry-matcha.mp4">
-          <img src="images/strawberry-matcha.png" alt="Strawberry Matcha" loading="lazy">
+          <img src="images/strawberry-matcha.png" alt="Strawberry Matcha" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -823,13 +824,13 @@
 
   <!-- ============ WINE & BUBBLES ============ -->
   <section class="menu-block" id="drinks-alcohol">
-    <img src="images/flor.png" alt="Flower" class="img-side right">
+    <img src="images/flor.png" alt="Flower" class="img-side right" onerror="this.style.display='none'">
     <div class="section-header"><h2>Wine & Bubbles</h2><div class="sub">Made for Slow Mornings!</div></div>
     <div class="menu-grid">
 
       <div class="item-card">
         <div class="item-media" data-video="videos/rose-berry-spritz.mp4">
-          <img src="images/rose-berry-spritz.png" alt="Rose & Berry Spritz" loading="lazy">
+          <img src="images/rose-berry-spritz.png" alt="Rose & Berry Spritz" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -840,7 +841,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/aperol-spritz.mp4">
-          <img src="images/aperol-spritz.png" alt="Aperol Spritz" loading="lazy">
+          <img src="images/aperol-spritz.png" alt="Aperol Spritz" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -851,7 +852,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/lemon-spritz.mp4">
-          <img src="images/lemon-spritz.png" alt="Lemon Spritz" loading="lazy">
+          <img src="images/lemon-spritz.png" alt="Lemon Spritz" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -862,7 +863,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/mimosa.mp4">
-          <img src="images/mimosa.png" alt="Mimosa" loading="lazy">
+          <img src="images/mimosa.png" alt="Mimosa" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -873,7 +874,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/prosecco.mp4">
-          <img src="images/prosecco.png" alt="Prosecco" loading="lazy">
+          <img src="images/prosecco.png" alt="Prosecco" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -885,7 +886,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/white-wine.mp4">
-          <img src="images/white-wine.png" alt="White Wine" loading="lazy">
+          <img src="images/white-wine.png" alt="White Wine" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -897,7 +898,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/red-wine.mp4">
-          <img src="images/red-wine.png" alt="Red Wine" loading="lazy">
+          <img src="images/red-wine.png" alt="Red Wine" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -920,7 +921,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/avocado-toast.mp4">
-          <img src="images/avocado-toast.png" alt="Avocado on Toast" loading="lazy">
+          <img src="images/avocado-toast.png" alt="Avocado on Toast" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -932,7 +933,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/eggs-hemingway.mp4">
-          <img src="images/eggs-hemingway.png" alt="Eggs Hemingway" loading="lazy">
+          <img src="images/eggs-hemingway.png" alt="Eggs Hemingway" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -944,7 +945,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/eggs-benedict.mp4">
-          <img src="images/eggs-benedict.png" alt="Eggs Benedict" loading="lazy">
+          <img src="images/eggs-benedict.png" alt="Eggs Benedict" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -956,7 +957,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/cheese-bagel.mp4">
-          <img src="images/cheese-bagel.png" alt="Cheese Bagel" loading="lazy">
+          <img src="images/cheese-bagel.png" alt="Cheese Bagel" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -968,7 +969,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/french-toast.mp4">
-          <img src="images/french-toast.png" alt="French Toast" loading="lazy">
+          <img src="images/french-toast.png" alt="French Toast" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -980,7 +981,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/toast-scrambled-eggs.mp4">
-          <img src="images/toast-scrambled-eggs.png" alt="Toast & Scrambled Eggs" loading="lazy">
+          <img src="images/toast-scrambled-eggs.png" alt="Toast & Scrambled Eggs" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -1000,7 +1001,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/pao-de-queijo.mp4">
-          <img src="images/pao-de-queijo.png" alt="Brazilian Cheese Bites" loading="lazy">
+          <img src="images/pao-de-queijo.png" alt="Brazilian Cheese Bites" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -1012,7 +1013,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/croissant.mp4">
-          <img src="images/croissant.png" alt="Croissant" loading="lazy">
+          <img src="images/croissant.png" alt="Croissant" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -1024,7 +1025,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/pistachio-croissant.mp4">
-          <img src="images/pistachio-croissant.png" alt="Pistachio Croissant" loading="lazy">
+          <img src="images/pistachio-croissant.png" alt="Pistachio Croissant" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -1036,7 +1037,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/acai-bowl.mp4">
-          <img src="images/acai-bowl.png" alt="Açaí Bowl" loading="lazy">
+          <img src="images/acai-bowl.png" alt="Açaí Bowl" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -1048,7 +1049,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/brownie.mp4">
-          <img src="images/brownie.png" alt="Brownie with Ice Cream" loading="lazy">
+          <img src="images/brownie.png" alt="Brownie with Ice Cream" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -1060,7 +1061,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/pancakes.mp4">
-          <img src="images/pancakes.png" alt="Fluffy Pancake Stack" loading="lazy">
+          <img src="images/pancakes.png" alt="Fluffy Pancake Stack" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -1072,7 +1073,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/chocolate-melt-cake.mp4">
-          <img src="images/chocolate-melt-cake.png" alt="Chocolate Melt Cake" loading="lazy">
+          <img src="images/chocolate-melt-cake.png" alt="Chocolate Melt Cake" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
@@ -1084,7 +1085,7 @@
 
       <div class="item-card">
         <div class="item-media" data-video="videos/mini-profiteroles.mp4">
-          <img src="images/mini-profiteroles.png" alt="Mini Profiteroles" loading="lazy">
+          <img src="images/mini-profiteroles.png" alt="Mini Profiteroles" loading="lazy" onerror="this.style.display='none'">
           <div class="video-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
         <div class="item-info">
