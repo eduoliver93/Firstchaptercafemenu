@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<!-- Bloqueio de zoom (maximum-scale e user-scalable) -->
+<!-- Bloqueio de zoom nativo no Android -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#f7f5ef">
 <title>First Chapter Cafe — Menu</title>
@@ -38,7 +38,8 @@
     overflow-x: hidden;
     background-image: radial-gradient(rgba(120,110,90,.06) 1px, transparent 1px);
     background-size: 4px 4px;
-    /* Impede o zoom de gestos no celular (iOS/Android) */
+    
+    /* Bloqueia zoom de gestos no celular, mas permite rolagem (pan) */
     touch-action: pan-x pan-y; 
   }
 
@@ -1103,6 +1104,7 @@
 </div>
 
 <script>
+  // LÓGICA DAS ABAS
   const tabButtons = document.querySelectorAll('.tab-btn');
   const sections = document.querySelectorAll('.menu-block');
 
@@ -1119,6 +1121,7 @@
     });
   });
 
+  // LÓGICA DO MODAL DE VÍDEO
   const modal = document.getElementById('videoModal');
   const modalVideo = document.getElementById('modalVideo');
   const closeBtn = document.getElementById('closeModal');
@@ -1148,6 +1151,14 @@
   closeBtn.addEventListener('click', closeModal);
   modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // ==========================================
+  // BLOQUEIO TOTAL DE ZOOM (PINÇA) NO CELULAR
+  // ==========================================
+  // Isso impede o zoom de 2 dedos no iOS, sem atrapalhar a rolagem (scroll) e os cliques nos botões.
+  document.addEventListener('gesturestart', function (e) {
+    e.preventDefault();
+  });
 </script>
 
 </body>
