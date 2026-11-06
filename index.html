@@ -51,6 +51,43 @@
     50% { transform: translateY(-5px); }
   }
 
+  /* 
+    IMAGEM LATERAL FIXA GLOBAL
+    Fora do .wrap para garantir compatibilidade total com iOS (iPhone)
+  */
+  .img-side {
+    display: block;
+    position: fixed; /* Fixa na janela em todos os aparelhos */
+    width: 75px; /* Tamanho no mobile */
+    opacity: 0.85;
+    z-index: 99; 
+    pointer-events: none;
+    background: transparent !important;
+    mix-blend-mode: multiply; /* Remove fundo branco */
+    
+    top: 130px; /* Alinhada abaixo da barra de navegação */
+  }
+  
+  /* Canto esquerdo no iPhone */
+  .img-side.left { 
+    left: max(10px, env(safe-area-inset-left)); 
+  }
+  
+  /* Canto direito no iPhone */
+  .img-side.right { 
+    right: max(10px, env(safe-area-inset-right)); 
+  }
+
+  /* Desktop */
+  @media (min-width: 1050px) {
+    .img-side {
+      width: 130px;
+      top: 180px;
+    }
+    .img-side.left { left: calc(50% - 450px - 150px); }
+    .img-side.right { right: calc(50% - 450px - 150px); }
+  }
+
   .wrap{
     max-width: 900px;
     margin: 0 auto;
@@ -122,45 +159,6 @@
     margin: 1rem auto;
     max-width: 80px; 
     opacity: 0.9;
-  }
-
-  /* 
-    IMAGEM LATERAL (FIXA NA TELA EM TODOS OS DISPOSITIVOS)
-    Usando position: fixed para ficar parada enquanto a página rola.
-  */
-  .img-side {
-    display: block;
-    position: fixed; /* FIXA NA TELA */
-    width: 80px; /* Tamanho no mobile */
-    opacity: 0.85;
-    z-index: 99; /* Acima do fundo, abaixo dos modais */
-    pointer-events: none;
-    background: transparent !important;
-    mix-blend-mode: multiply; 
-    
-    /* Posicionamento base (Mobile) */
-    top: 150px; 
-  }
-  
-  /* Canto Esquerdo (Chícara) no Mobile */
-  .img-side.left { 
-    left: 10px; 
-  }
-  
-  /* Canto Direito (Flor) no Mobile */
-  .img-side.right { 
-    right: 10px; 
-  }
-
-  /* Desktop: Ajusta o tamanho e a posição para ficar ao lado do conteúdo de 900px */
-  @media (min-width: 1050px) {
-    .img-side {
-      width: 130px;
-      top: 180px;
-    }
-    /* Calcula para ficar a 20px de distância do container central */
-    .img-side.left { left: calc(50% - 450px - 150px); }
-    .img-side.right { right: calc(50% - 450px - 150px); }
   }
 
   /* ============ NAVEGAÇÃO FIXA ============ */
@@ -446,6 +444,10 @@
 </head>
 <body>
 
+<!-- IMAGENS FIXAS MOVIDAS PARA FORA DO CONTAINER PRINCIPAL -->
+<img src="images/chicara.png" alt="Cup" class="img-side left">
+<img src="images/flor.png" alt="Flower" class="img-side right">
+
 <div class="wrap">
 
   <div class="logo-header">
@@ -479,7 +481,6 @@
 
   <!-- ============ COFFEE & TEA ============ -->
   <section class="menu-block active" id="coffee-tea">
-    <img src="images/chicara.png" alt="Cup" class="img-side left">
     <div class="section-header"><h2>Coffee & Tea</h2></div>
     <div class="menu-grid">
 
@@ -861,7 +862,6 @@
 
   <!-- ============ WINE & BUBBLES ============ -->
   <section class="menu-block" id="drinks-alcohol">
-    <img src="images/flor.png" alt="Flower" class="img-side right">
     <div class="section-header"><h2>Wine & Bubbles</h2><div class="sub">Made for Slow Mornings!</div></div>
     <div class="menu-grid">
 
