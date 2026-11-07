@@ -179,15 +179,10 @@
     scrollbar-width: none;
     padding-top: 70px; 
     margin-top: -70px; 
-    
-    /* ADICIONADO: Permite o cursor de "arrastar" */
     cursor: grab;
   }
   
-  /* ADICIONADO: Muda o cursor enquanto arrasta */
-  .nav-scroll:active {
-    cursor: grabbing;
-  }
+  .nav-scroll:active { cursor: grabbing; }
   
   .nav-scroll::-webkit-scrollbar { display: none; }
 
@@ -209,8 +204,6 @@
     cursor: pointer;
     -webkit-appearance: none;
     position: relative;
-    
-    /* ADICIONADO: Impede que o texto seja selecionado ao arrastar */
     user-select: none; 
   }
 
@@ -286,23 +279,28 @@
     .menu-grid { grid-template-columns: 1fr 1fr; gap: 2rem 2.5rem; }
   }
 
+  /* ==========================================
+     O NOVO CARD (ESTILO DO PRINT)
+     ========================================== */
   .item-card {
     display: flex;
     flex-direction: column;
-    gap: .8rem;
+    border: 2px solid var(--ink);
+    border-radius: 12px;
+    overflow: hidden; 
+    background-color: #fff;
+    box-shadow: 4px 4px 0px rgba(0,0,0,0.15); 
     width: 100%;
-    max-width: 340px; 
+    max-width: 360px; 
     margin: 0 auto; 
   }
 
+  /* Área da Imagem */
   .item-media {
     position: relative;
     width: 100%;
     aspect-ratio: 4 / 3; 
-    background: var(--media-bg);
-    border: 1px solid var(--ink);
-    border-radius: 4px; 
-    overflow: hidden; 
+    background-color: var(--media-bg);
   }
 
   .item-media img {
@@ -312,49 +310,51 @@
     display: block;
   }
 
+  /* Preço flutuante na imagem (Tag) */
+  .item-price-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background-color: #fff;
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 50px;
+    border: 2px solid var(--ink);
+    box-shadow: 2px 2px 0px rgba(0,0,0,1);
+    z-index: 10;
+  }
+
+  /* Área do Texto */
   .item-info { 
     display: flex; 
     flex-direction: column;
-    width: 100%;
-  }
-
-  .item-header {
-    display: flex;
-    align-items: baseline;
-    width: 100%;
-    margin-bottom: .2rem;
-    justify-content: space-between;
-    gap: 1rem;
+    padding: 1.2rem;
   }
 
   .item-name {
-    font-size: 1.05rem;
-    font-weight: 500;
-    letter-spacing: .05em;
-    text-transform: uppercase;
-    line-height: 1.3;
-  }
-
-  .item-price {
     font-family: var(--sans);
-    font-size: 1.05rem;
-    font-weight: 600;
-    white-space: nowrap;
-    color: var(--ink);
-    letter-spacing: .04em;
-    line-height: 1;
-    text-align: right;
-    margin-left: auto;
-    font-variant-numeric: tabular-nums;
+    font-size: 1.1rem;
+    font-weight: 600; 
+    letter-spacing: .02em;
+    text-transform: none; 
+    line-height: 1.2;
+    margin-bottom: 0.4rem;
   }
 
   .item-desc {
-    font-size: .82rem;
+    font-family: var(--sans);
+    font-size: .85rem;
     color: var(--ink-soft);
     line-height: 1.4;
-    margin-top: 0;
-    font-weight: 300;
-    display: block;
+    margin-bottom: 1rem;
+    font-weight: 400;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   .item-allergens {
@@ -380,11 +380,6 @@
     border-top: 1px dashed var(--line);
     text-transform: uppercase;
     line-height: 1.8;
-  }
-
-  @media (min-width: 700px) {
-    .item-name { font-size: 1.05rem; }
-    .item-price { font-size: 1.1rem; }
   }
 
   footer{
@@ -440,9 +435,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/espresso.png" alt="Espresso" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€3.00</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Espresso</span><span class="item-price">€3.00</span></div>
+          <div class="item-name">Espresso</div>
           <p class="item-desc">Espresso coffee.</p>
         </div>
       </div>
@@ -450,9 +446,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/americano.png" alt="Americano" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€3.50</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Americano</span><span class="item-price">€3.50</span></div>
+          <div class="item-name">Americano</div>
           <p class="item-desc">Espresso diluted with hot water.</p>
         </div>
       </div>
@@ -460,9 +457,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/cappuccino.png" alt="Cappuccino" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€4.00</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Cappuccino</span><span class="item-price">€4.00</span></div>
+          <div class="item-name">Cappuccino</div>
           <p class="item-desc">Espresso with steamed milk and foam.</p>
         </div>
       </div>
@@ -470,9 +468,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/flat-white.png" alt="Flat White" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€3.80</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Flat White</span><span class="item-price">€3.80</span></div>
+          <div class="item-name">Flat White</div>
           <p class="item-desc">Espresso with steamed milk.</p>
         </div>
       </div>
@@ -480,9 +479,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/latte.png" alt="Latte" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€4.50</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Latte</span><span class="item-price">€4.50</span></div>
+          <div class="item-name">Latte</div>
           <p class="item-desc">Coffee with creamy steamed milk.</p>
         </div>
       </div>
@@ -490,9 +490,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/velvet-mocha.png" alt="Velvet Mocha" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€4.90</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Velvet Mocha</span><span class="item-price">€4.90</span></div>
+          <div class="item-name">Velvet Mocha</div>
           <p class="item-desc">Smooth, rich chocolate coffee — pure comfort in a cup.</p>
         </div>
       </div>
@@ -500,9 +501,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/pure-matcha.png" alt="Pure Matcha" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€4.50</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Pure Matcha</span><span class="item-price">€4.50</span></div>
+          <div class="item-name">Pure Matcha</div>
           <p class="item-desc">Clean, earthy matcha with a smooth, balanced finish.</p>
         </div>
       </div>
@@ -510,9 +512,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/spiced-chai-latte.png" alt="Spiced Chai Latte" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€4.50</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Spiced Chai Latte</span><span class="item-price">€4.50</span></div>
+          <div class="item-name">Spiced Chai Latte</div>
           <p class="item-desc">Warm, aromatic spices blended into a creamy, comforting latte.</p>
         </div>
       </div>
@@ -520,9 +523,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/dirty-chai-boost.png" alt="Dirty Chai Boost" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€4.80</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Dirty Chai Boost</span><span class="item-price">€4.80</span></div>
+          <div class="item-name">Dirty Chai Boost</div>
           <p class="item-desc">Chai latte with a shot of espresso — bold, warm, and energizing.</p>
         </div>
       </div>
@@ -530,9 +534,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/signature-hot-chocolate.png" alt="Signature Hot Chocolate" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€5.00</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Signature Hot Chocolate</span><span class="item-price">€5.00</span></div>
+          <div class="item-name">Signature Hot Chocolate</div>
           <p class="item-desc">Thick, rich, and deeply chocolatey — made to indulge.</p>
         </div>
       </div>
@@ -540,9 +545,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/black-tea.png" alt="Black Tea" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€3.00</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Black Tea</span><span class="item-price">€3.00</span></div>
+          <div class="item-name">Black Tea</div>
           <p class="item-desc">Classic black tea.</p>
         </div>
       </div>
@@ -550,9 +556,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/earl-grey.png" alt="Earl Grey" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€3.00</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Earl Grey</span><span class="item-price">€3.00</span></div>
+          <div class="item-name">Earl Grey</div>
           <p class="item-desc">Aromatic black tea.</p>
         </div>
       </div>
@@ -560,9 +567,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/peppermint.png" alt="Peppermint" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€3.00</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Peppermint</span><span class="item-price">€3.00</span></div>
+          <div class="item-name">Peppermint</div>
           <p class="item-desc">Peppermint tea.</p>
         </div>
       </div>
@@ -570,9 +578,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/green-tea.png" alt="Green Tea" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€3.00</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Green Tea</span><span class="item-price">€3.00</span></div>
+          <div class="item-name">Green Tea</div>
           <p class="item-desc">Green tea.</p>
         </div>
       </div>
@@ -591,9 +600,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/mocha-boost.png" alt="Mocha Boost" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€7.90</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Mocha Boost</span><span class="item-price">€7.90</span></div>
+          <div class="item-name">Mocha Boost</div>
           <p class="item-desc">Rich mocha coffee blended with protein for a smooth, chocolatey boost that actually satisfies.</p>
           <span class="item-allergens">(7, 6)</span>
         </div>
@@ -602,9 +612,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/vanilla-fuel-latte.png" alt="Vanilla Fuel Latte" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€7.50</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Vanilla Fuel Latte</span><span class="item-price">€7.50</span></div>
+          <div class="item-name">Vanilla Fuel Latte</div>
           <p class="item-desc">Cold, creamy latte with a hint of vanilla and added protein — refreshing, light, and energizing.</p>
           <span class="item-allergens">(7, 6)</span>
         </div>
@@ -622,9 +633,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/pineapple-juice.png" alt="Fresh Pineapple Juice" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€6.50</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Fresh Pineapple Juice</span><span class="item-price">€6.50</span></div>
+          <div class="item-name">Fresh Pineapple Juice</div>
           <p class="item-desc">Fresh pineapple juice.</p>
         </div>
       </div>
@@ -632,9 +644,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/strawberry-juice.png" alt="Strawberry Juice" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€5.50</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Strawberry Juice</span><span class="item-price">€5.50</span></div>
+          <div class="item-name">Strawberry Juice</div>
           <p class="item-desc">Strawberry juice.</p>
         </div>
       </div>
@@ -642,9 +655,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/orange-juice.png" alt="Orange Juice" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€4.00</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Orange Juice</span><span class="item-price">€4.00</span></div>
+          <div class="item-name">Orange Juice</div>
           <p class="item-desc">Fresh orange juice.</p>
         </div>
       </div>
@@ -652,9 +666,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/coke.png" alt="Coke" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€3.50</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Coke / Coke Zero</span><span class="item-price">€3.50</span></div>
+          <div class="item-name">Coke / Coke Zero</div>
           <p class="item-desc">Coca-Cola or Coca-Cola Zero.</p>
         </div>
       </div>
@@ -662,9 +677,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/still-water.png" alt="Still Water" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€3.00</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Still Water</span><span class="item-price">€3.00</span></div>
+          <div class="item-name">Still Water</div>
           <p class="item-desc">Still bottled water.</p>
         </div>
       </div>
@@ -672,9 +688,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/sparkling-water.png" alt="Sparkling Water" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€3.50</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Sparkling Water</span><span class="item-price">€3.50</span></div>
+          <div class="item-name">Sparkling Water</div>
           <p class="item-desc">Sparkling water.</p>
         </div>
       </div>
@@ -690,9 +707,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/strawberry-smoothie.png" alt="Strawberry Smoothie" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€6.50</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Strawberry Smoothie</span><span class="item-price">€6.50</span></div>
+          <div class="item-name">Strawberry Smoothie</div>
           <p class="item-desc">Fresh, creamy strawberry blend — naturally sweet and refreshing.</p>
           <span class="item-allergens">(7)</span>
         </div>
@@ -701,9 +719,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/blue-antiox.png" alt="Blue Antiox" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€8.50</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Blue Antiox</span><span class="item-price">€8.50</span></div>
+          <div class="item-name">Blue Antiox</div>
           <p class="item-desc">Blueberry, milk, and protein — smooth, antioxidant-rich, and energizing.</p>
           <span class="item-allergens">(7)</span>
         </div>
@@ -712,9 +731,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/strawberry-boost.png" alt="Strawberry Boost" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€8.50</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Strawberry Boost</span><span class="item-price">€8.50</span></div>
+          <div class="item-name">Strawberry Boost</div>
           <p class="item-desc">Strawberry, beetroot, and vanilla protein — vibrant, naturally sweet, and energizing.</p>
           <span class="item-allergens">(7)</span>
         </div>
@@ -723,9 +743,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/berry-antiox.png" alt="Berry Antiox" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€8.50</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Berry Antiox</span><span class="item-price">€8.50</span></div>
+          <div class="item-name">Berry Antiox</div>
           <p class="item-desc">Blueberry and strawberry with protein and a touch of honey — light, smooth, and refreshing.</p>
           <span class="item-allergens">(7)</span>
         </div>
@@ -742,9 +763,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/coffee-cloud-coconut.png" alt="Coffee Cloud Coconut" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€6.90</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Coffee Cloud Coconut</span><span class="item-price">€6.90</span></div>
+          <div class="item-name">Coffee Cloud Coconut</div>
           <p class="item-desc">Coconut water, espresso, and ice. Smooth, refreshing, and naturally energizing.</p>
           <span class="item-allergens">(7)</span>
         </div>
@@ -753,9 +775,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/emerald-grey.png" alt="Emerald Grey" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€6.50</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Emerald Grey</span><span class="item-price">€6.50</span></div>
+          <div class="item-name">Emerald Grey</div>
           <p class="item-desc">Matcha blended with Earl Grey tea and a hint of vanilla. Aromatic, smooth, and lightly floral.</p>
         </div>
       </div>
@@ -763,9 +786,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/green-garden-detox.png" alt="Green Garden Detox" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€5.50</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Green Garden Detox</span><span class="item-price">€5.50</span></div>
+          <div class="item-name">Green Garden Detox</div>
           <p class="item-desc">Cucumber, lemon, and mint with soda water. Fresh, clean, and revitalizing.</p>
         </div>
       </div>
@@ -773,9 +797,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/strawberry-matcha.png" alt="Strawberry Matcha" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€6.50</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Strawberry Matcha</span><span class="item-price">€6.50</span></div>
+          <div class="item-name">Strawberry Matcha</div>
           <p class="item-desc">Iced matcha layered with coconut water and strawberry purée.</p>
         </div>
       </div>
@@ -791,9 +816,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/rose-berry-spritz.png" alt="Rose & Berry Spritz" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€12.50</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Rose & Berry Spritz</span><span class="item-price">€12.50</span></div>
+          <div class="item-name">Rose & Berry Spritz</div>
           <p class="item-desc">Rose, mixed berries, soda water, prosecco. Floral, fruity, and refreshingly light.</p>
         </div>
       </div>
@@ -801,9 +827,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/aperol-spritz.png" alt="Aperol Spritz" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€12.50</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Aperol Spritz</span><span class="item-price">€12.50</span></div>
+          <div class="item-name">Aperol Spritz</div>
           <p class="item-desc">Bitter-sweet, sparkling, and vibrant — a timeless classic.</p>
         </div>
       </div>
@@ -811,9 +838,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/lemon-spritz.png" alt="Lemon Spritz" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€12.50</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Lemon Spritz</span><span class="item-price">€12.50</span></div>
+          <div class="item-name">Lemon Spritz</div>
           <p class="item-desc">Crisp, citrusy, and refreshing with a sparkling finish.</p>
         </div>
       </div>
@@ -821,9 +849,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/mimosa.png" alt="Mimosa" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€9.50</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Mimosa</span><span class="item-price">€9.50</span></div>
+          <div class="item-name">Mimosa</div>
           <p class="item-desc">Prosecco topped with fresh orange juice — bright, refreshing, and effortless.</p>
         </div>
       </div>
@@ -831,9 +860,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/prosecco.png" alt="Prosecco" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€9.50</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Prosecco (Glass)</span><span class="item-price">€9.50</span></div>
+          <div class="item-name">Prosecco (Glass)</div>
           <p class="item-desc">Light, crisp, and perfectly sparkling — made for brunch moments.</p>
           <span class="item-allergens">(12)</span>
         </div>
@@ -842,9 +872,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/white-wine.png" alt="White Wine" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€8.50</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">White Wine (Glass)</span><span class="item-price">€8.50</span></div>
+          <div class="item-name">White Wine (Glass)</div>
           <p class="item-desc">Fresh, crisp, and easy to drink — the perfect light pairing.</p>
           <span class="item-allergens">(12)</span>
         </div>
@@ -853,9 +884,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/red-wine.png" alt="Red Wine" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€8.50</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Red Wine (Glass)</span><span class="item-price">€8.50</span></div>
+          <div class="item-name">Red Wine (Glass)</div>
           <p class="item-desc">Smooth, balanced, and rich — ideal for a relaxed brunch.</p>
           <span class="item-allergens">(12)</span>
         </div>
@@ -875,9 +907,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/avocado-toast.png" alt="Avocado on Toast" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€14.50</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Avocado on Toast</span><span class="item-price">€14.50</span></div>
+          <div class="item-name">Avocado on Toast</div>
           <p class="item-desc">Creamy smashed avocado on warm focaccia, topped with perfectly poached eggs, parmesan, and balsamic glaze. Add bacon +€3 / Smoked Salmon +€4. Spice it up with crispy chilli.</p>
           <span class="item-allergens">(1 wheat, 3, 6, 7, 11, 12)</span>
         </div>
@@ -886,9 +919,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/eggs-hemingway.png" alt="Eggs Hemingway" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€15.00</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Eggs Hemingway</span><span class="item-price">€15.00</span></div>
+          <div class="item-name">Eggs Hemingway</div>
           <p class="item-desc">Smoked salmon, perfectly poached eggs, and rich hollandaise on a toasted English muffin. Smooth, delicate, and made for a slow brunch.</p>
           <span class="item-allergens">(1 wheat, 3, 4, 7, 12)</span>
         </div>
@@ -897,9 +931,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/eggs-benedict.png" alt="Eggs Benedict" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€14.50</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Eggs Benedict</span><span class="item-price">€14.50</span></div>
+          <div class="item-name">Eggs Benedict</div>
           <p class="item-desc">Poached eggs on a toasted English muffin with crispy bacon and silky hollandaise. Served with mixed leaves.</p>
           <span class="item-allergens">(1 wheat, 3, 7, 12)</span>
         </div>
@@ -908,9 +943,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/cheese-bagel.png" alt="Cheese Bagel" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€15.90</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Cheese Bagel</span><span class="item-price">€15.90</span></div>
+          <div class="item-name">Cheese Bagel</div>
           <p class="item-desc">Freshly toasted bagel with mixed leaves on the side. Crispy bacon, scrambled eggs & melted cheese / Seasoned chicken with melted cheese.</p>
           <span class="item-allergens">(1 wheat, 3, 7, 11)</span>
         </div>
@@ -919,9 +955,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/french-toast.png" alt="French Toast" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€13.90</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">French Toast</span><span class="item-price">€13.90</span></div>
+          <div class="item-name">French Toast</div>
           <p class="item-desc">Golden brioche, perfectly toasted and soft inside. Dulce de Leche with a creamy finish / Crispy Bacon with a touch of maple sweetness.</p>
           <span class="item-allergens">(1 wheat, 3, 7)</span>
         </div>
@@ -930,9 +967,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/toast-scrambled-eggs.png" alt="Toast & Scrambled Eggs" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€11.50</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Toast & Scrambled Eggs</span><span class="item-price">€11.50</span></div>
+          <div class="item-name">Toast & Scrambled Eggs</div>
           <p class="item-desc">Scrambled eggs and cheese served on toasted focaccia, topped with hollandaise sauce. Served with mixed leaves. Add Bacon +€3 / Smoked Salmon +€4.</p>
           <span class="item-allergens">(1 wheat, 3, 4, 7)</span>
         </div>
@@ -949,9 +987,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/pao-de-queijo.png" alt="Brazilian Cheese Bites" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€3.50</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Brazilian Cheese Bites</span><span class="item-price">€3.50</span></div>
+          <div class="item-name">Brazilian Cheese Bites</div>
           <p class="item-desc">Traditional Brazilian cheese bread (Pão de Queijo), light and fluffy, served warm.</p>
           <span class="item-allergens">(3, 7)</span>
         </div>
@@ -960,9 +999,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/croissant.png" alt="Croissant" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€3.50</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Croissant (Plain)</span><span class="item-price">€3.50</span></div>
+          <div class="item-name">Croissant (Plain)</div>
           <p class="item-desc">Buttery, flaky croissant baked fresh daily.</p>
           <span class="item-allergens">(1 wheat, 3, 7)</span>
         </div>
@@ -971,9 +1011,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/pistachio-croissant.png" alt="Pistachio Croissant" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€9.99</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Pistachio Croissant</span><span class="item-price">€9.99</span></div>
+          <div class="item-name">Pistachio Croissant</div>
           <p class="item-desc">Flaky croissant filled with rich pistachio cream and finished with a smooth pistachio topping.</p>
           <span class="item-allergens">(1 wheat, 3, 7, 8 pistachio)</span>
         </div>
@@ -982,9 +1023,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/acai-bowl.png" alt="Açaí Bowl" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€9.99</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Açaí Bowl</span><span class="item-price">€9.99</span></div>
+          <div class="item-name">Açaí Bowl</div>
           <p class="item-desc">Refreshing, creamy açaí topped with crunchy granola, strawberries, milk powder & condensed milk.</p>
           <span class="item-allergens">(1 wheat, 7)</span>
         </div>
@@ -993,9 +1035,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/brownie.png" alt="Brownie with Ice Cream" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€8.50</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Brownie with Ice Cream</span><span class="item-price">€8.50</span></div>
+          <div class="item-name">Brownie with Ice Cream</div>
           <p class="item-desc">A gluten-free brownie made with almond flour, served with a scoop of vanilla ice cream.</p>
           <span class="item-allergens">(3, 7, 8 almond)</span>
         </div>
@@ -1004,9 +1047,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/pancakes.png" alt="Fluffy Pancake Stack" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€9.50</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Fluffy Pancake Stack</span><span class="item-price">€9.50</span></div>
+          <div class="item-name">Fluffy Pancake Stack</div>
           <p class="item-desc">Soft, fluffy pancakes served warm. Dulce de Leche & Vanilla ice cream / Nutella & Fresh Strawberries.</p>
           <span class="item-allergens">(1 wheat, 3, 7)</span>
         </div>
@@ -1015,9 +1059,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/chocolate-melt-cake.png" alt="Chocolate Melt Cake" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€7.50</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Chocolate Melt Cake</span><span class="item-price">€7.50</span></div>
+          <div class="item-name">Chocolate Melt Cake</div>
           <p class="item-desc">Warm molten cake with a soft, gooey center. Carrot Cake & Chocolate / Ferrero Rocher / Nutella & Strawberry.</p>
           <span class="item-allergens">(1 wheat, 3, 7)</span>
         </div>
@@ -1026,9 +1071,10 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/mini-profiteroles.png" alt="Mini Profiteroles" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€3.50</div>
         </div>
         <div class="item-info">
-          <div class="item-header"><span class="item-name">Mini Profiteroles</span><span class="item-price">€3.50</span></div>
+          <div class="item-name">Mini Profiteroles</div>
           <p class="item-desc">Coconut, Nutella, or Pistachio.</p>
           <span class="item-allergens">(1 wheat, 3, 7, 8 pistachio, hazelnut, coconut)</span>
         </div>
@@ -1083,9 +1129,7 @@
 
   navScroll.addEventListener('mousedown', (e) => {
     isDown = true;
-    // Adiciona a classe para mudar o cursor para 'grabbing' (opcional, mas ajuda no visual)
     navScroll.style.cursor = 'grabbing';
-    // Pega a posição inicial do mouse e o scroll atual
     startX = e.pageX - navScroll.offsetLeft;
     scrollLeft = navScroll.scrollLeft;
   });
@@ -1102,16 +1146,14 @@
 
   navScroll.addEventListener('mousemove', (e) => {
     if (!isDown) return;
-    e.preventDefault(); // Evita que o navegador tente selecionar texto ou agir estranho
+    e.preventDefault(); 
     const x = e.pageX - navScroll.offsetLeft;
-    const walk = (x - startX) * 1.5; // Multiplicador de 1.5 para arrastar mais rápido
+    const walk = (x - startX) * 1.5; 
     navScroll.scrollLeft = scrollLeft - walk;
   });
 
-  // Rolar com a rodinha do mouse para os lados (se o mouse suportar)
   navScroll.addEventListener('wheel', (e) => {
     if (e.deltaY !== 0) {
-      // Se rolar a rodinha pra baixo, rola os botões pra direita
       e.preventDefault();
       navScroll.scrollLeft += e.deltaY;
     }
