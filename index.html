@@ -124,13 +124,13 @@
     align-items: center;
     margin: 2.5rem 0; 
     width: 100%;
-    height: 160px; 
+    height: 180px; 
     overflow: hidden; 
   }
 
   .img-center {
     display: block;
-    max-width: 96px; 
+    max-width: 150px; 
     opacity: 0.9;
     z-index: 2; 
     position: relative;
@@ -150,7 +150,7 @@
   @media (min-width: 700px) {
     .hero-visuals {
       overflow: visible; 
-      height: 200px; 
+      height: 220px; 
     }
     .img-cat-walk {
       left: calc(50% - 250px); 
@@ -179,7 +179,16 @@
     scrollbar-width: none;
     padding-top: 70px; 
     margin-top: -70px; 
+    
+    /* ADICIONADO: Permite o cursor de "arrastar" */
+    cursor: grab;
   }
+  
+  /* ADICIONADO: Muda o cursor enquanto arrasta */
+  .nav-scroll:active {
+    cursor: grabbing;
+  }
+  
   .nav-scroll::-webkit-scrollbar { display: none; }
 
   .nav-btn {
@@ -200,6 +209,9 @@
     cursor: pointer;
     -webkit-appearance: none;
     position: relative;
+    
+    /* ADICIONADO: Impede que o texto seja selecionado ao arrastar */
+    user-select: none; 
   }
 
   .nav-btn.active {
@@ -274,22 +286,18 @@
     .menu-grid { grid-template-columns: 1fr 1fr; gap: 2rem 2.5rem; }
   }
 
-  /* ==========================================
-     CARD ALINHADO (IMAGEM E TEXTO MESMA LARGURA)
-     ========================================== */
   .item-card {
     display: flex;
     flex-direction: column;
     gap: .8rem;
     width: 100%;
-    max-width: 340px; /* Largura máxima do card inteiro */
-    margin: 0 auto; /* Centraliza o card na coluna */
+    max-width: 340px; 
+    margin: 0 auto; 
   }
 
   .item-media {
     position: relative;
     width: 100%;
-    /* Proporção 4:3 - Horizontal, mas não tão exagerada quanto a 16:9 */
     aspect-ratio: 4 / 3; 
     background: var(--media-bg);
     border: 1px solid var(--ink);
@@ -300,7 +308,6 @@
   .item-media img {
     width: 100%;
     height: 100%;
-    /* Cover preenche o espaço, mas como a proporção é mais suave, não dá o zoom exagerado */
     object-fit: cover; 
     display: block;
   }
@@ -413,7 +420,7 @@
 
   <!-- NAVEGAÇÃO FIXA -->
   <div class="nav-container">
-    <ul class="nav-scroll">
+    <ul class="nav-scroll" id="navScroll">
       <li><button class="nav-btn tab-btn active" data-target="coffee-tea"><img src="images/gato.gif" alt="Cat" class="nav-cat-gif">Coffee & Tea</button></li>
       <li><button class="nav-btn tab-btn" data-target="protein-coffee"><img src="images/gato.gif" alt="Cat" class="nav-cat-gif">Protein Coffee</button></li>
       <li><button class="nav-btn tab-btn" data-target="beverages"><img src="images/gato.gif" alt="Cat" class="nav-cat-gif">Beverages & Juices</button></li>
@@ -1065,6 +1072,50 @@
   document.addEventListener('gesturestart', function (e) {
     e.preventDefault();
   });
+
+  // ==========================================
+  // LÓGICA DE ARRASTAR COM O MOUSE (DESKTOP)
+  // ==========================================
+  const navScroll = document.getElementById('navScroll');
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  navScroll.addEventListener('mousedown', (e) => {
+    isDown = true;
+    // Adiciona a classe para mudar o cursor para 'grabbing' (opcional, mas ajuda no visual)
+    navScroll.style.cursor = 'grabbing';
+    // Pega a posição inicial do mouse e o scroll atual
+    startX = e.pageX - navScroll.offsetLeft;
+    scrollLeft = navScroll.scrollLeft;
+  });
+
+  navScroll.addEventListener('mouseleave', () => {
+    isDown = false;
+    navScroll.style.cursor = 'grab';
+  });
+
+  navScroll.addEventListener('mouseup', () => {
+    isDown = false;
+    navScroll.style.cursor = 'grab';
+  });
+
+  navScroll.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault(); // Evita que o navegador tente selecionar texto ou agir estranho
+    const x = e.pageX - navScroll.offsetLeft;
+    const walk = (x - startX) * 1.5; // Multiplicador de 1.5 para arrastar mais rápido
+    navScroll.scrollLeft = scrollLeft - walk;
+  });
+
+  // Rolar com a rodinha do mouse para os lados (se o mouse suportar)
+  navScroll.addEventListener('wheel', (e) => {
+    if (e.deltaY !== 0) {
+      // Se rolar a rodinha pra baixo, rola os botões pra direita
+      e.preventDefault();
+      navScroll.scrollLeft += e.deltaY;
+    }
+  }, { passive: false });
 </script>
 
 </body>
