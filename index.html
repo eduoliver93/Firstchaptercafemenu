@@ -116,12 +116,45 @@
     background-color: #333;
   }
 
-  /* ============ ILUSTRAÇÃO CENTRAL (MÁQUINA) ============ */
+  /* ============ ÁREA DOS ANIMAIS / MÁQUINA ============ */
+  .hero-visuals {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2.5rem 0; 
+    width: 100%;
+    height: 160px; 
+    overflow: hidden; 
+  }
+
   .img-center {
     display: block;
-    margin: 2.5rem auto; 
     max-width: 96px; 
     opacity: 0.9;
+    z-index: 2; 
+    position: relative;
+  }
+
+  .img-cat-walk {
+    position: absolute;
+    left: 0; 
+    width: 240px; 
+    z-index: 1; 
+    mix-blend-mode: multiply; 
+    pointer-events: none;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  @media (min-width: 700px) {
+    .hero-visuals {
+      overflow: visible; 
+      height: 200px; 
+    }
+    .img-cat-walk {
+      left: calc(50% - 250px); 
+    }
   }
 
   /* ============ NAVEGAÇÃO FIXA ============ */
@@ -241,34 +274,40 @@
     .menu-grid { grid-template-columns: 1fr 1fr; gap: 2rem 2.5rem; }
   }
 
+  /* ==========================================
+     CARD ALINHADO (IMAGEM E TEXTO MESMA LARGURA)
+     ========================================== */
   .item-card {
     display: flex;
     flex-direction: column;
     gap: .8rem;
+    width: 100%;
+    max-width: 340px; /* Largura máxima do card inteiro */
+    margin: 0 auto; /* Centraliza o card na coluna */
   }
 
-  /* Moldura das imagens */
   .item-media {
     position: relative;
     width: 100%;
-    aspect-ratio: 1 / 1; 
-    max-width: 260px; 
-    margin: 0 auto;   
+    /* Proporção 4:3 - Horizontal, mas não tão exagerada quanto a 16:9 */
+    aspect-ratio: 4 / 3; 
     background: var(--media-bg);
     border: 1px solid var(--ink);
     border-radius: 4px; 
-    overflow: hidden; /* Garante que a imagem não saia da moldura */
+    overflow: hidden; 
   }
 
   .item-media img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Preenche a moldura sem distorcer */
+    /* Cover preenche o espaço, mas como a proporção é mais suave, não dá o zoom exagerado */
+    object-fit: cover; 
     display: block;
   }
 
   .item-info { 
-    display: block; 
+    display: flex; 
+    flex-direction: column;
     width: 100%;
   }
 
@@ -276,7 +315,7 @@
     display: flex;
     align-items: baseline;
     width: 100%;
-    margin-bottom: .4rem;
+    margin-bottom: .2rem;
     justify-content: space-between;
     gap: 1rem;
   }
@@ -305,8 +344,8 @@
   .item-desc {
     font-size: .82rem;
     color: var(--ink-soft);
-    line-height: 1.5;
-    margin-top: .2rem;
+    line-height: 1.4;
+    margin-top: 0;
     font-weight: 300;
     display: block;
   }
@@ -337,10 +376,6 @@
   }
 
   @media (min-width: 700px) {
-    .item-header { 
-      justify-content: space-between; 
-      align-items: baseline; 
-    }
     .item-name { font-size: 1.05rem; }
     .item-price { font-size: 1.1rem; }
   }
@@ -370,7 +405,11 @@
     </div>
   </header>
 
-  <img src="images/maquina.gif" alt="Coffee Machine" class="img-center">
+  <!-- ÁREA DO GATO E DA MÁQUINA -->
+  <div class="hero-visuals">
+    <img src="images/gato-andando.gif" alt="Gato andando" class="img-cat-walk" onerror="this.style.display='none'">
+    <img src="images/maquina.gif" alt="Coffee Machine" class="img-center" onerror="this.style.display='none'">
+  </div>
 
   <!-- NAVEGAÇÃO FIXA -->
   <div class="nav-container">
