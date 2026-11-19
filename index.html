@@ -51,6 +51,17 @@
     50% { transform: translateY(-5px); }
   }
 
+  /* ============ NEVE NA TELA INTEIRA ============ */
+  #snowCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none; /* Não bloqueia cliques */
+    z-index: 9999;        /* Acima de tudo, mas transparente */
+  }
+
   .wrap{
     max-width: 900px;
     margin: 0 auto;
@@ -59,7 +70,14 @@
     z-index: 1;
   }
 
-  /* ============ LOGO E HERO ============ */
+  /* ============ ÁREA DA LOGO E HERO ============ */
+  .snow-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding-bottom: 1rem;
+  }
+
   .logo-header {
     text-align: center;
     margin-bottom: 1rem;
@@ -67,19 +85,27 @@
   }
   
   .logo-header img {
-    width: 88px; 
-    height: 88px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid var(--ink);
-    background-color: #fff;
-    padding: 2px;
+    width: 160px;
+    height: auto;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+    filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.08));
+    transition: transform 0.3s ease;
+  }
+
+  .logo-header img:hover {
+    transform: scale(1.03);
+  }
+
+  @media (max-width: 699px) {
+    .logo-header img {
+      width: 130px;
+    }
   }
 
   .hero{
     text-align: center;
     padding: 0 0 1rem;
-    border-bottom: 1px solid var(--ink);
     margin-bottom: 1rem;
   }
   
@@ -116,44 +142,33 @@
     background-color: #333;
   }
 
-  /* ============ ÁREA DOS ANIMAIS / MÁQUINA ============ */
+  /* ============ MÁQUINA DE CAFÉ ============ */
   .hero-visuals {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 2.5rem 0; 
+    margin: 1rem 0 2rem 0; 
     width: 100%;
-    height: 180px; 
-    overflow: hidden; 
+    height: 160px; 
+    overflow: visible;
+    z-index: 10;
   }
 
   .img-center {
     display: block;
-    max-width: 150px; 
+    max-width: 140px; 
     opacity: 0.9;
     z-index: 2; 
     position: relative;
   }
 
-  .img-cat-walk {
-    position: absolute;
-    left: 0; 
-    width: 240px; 
-    z-index: 1; 
-    mix-blend-mode: multiply; 
-    pointer-events: none;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  @media (min-width: 700px) {
+  @media (max-width: 250px) {
     .hero-visuals {
-      overflow: visible; 
-      height: 220px; 
+      height: 130px;
     }
-    .img-cat-walk {
-      left: calc(50% - 250px); 
+    .img-center {
+      max-width: 100px;
     }
   }
 
@@ -162,9 +177,32 @@
     position: sticky;
     top: 0;
     z-index: 50;
-    background-color: transparent;
-    padding: 5rem 0 1rem 0;
-    margin: 0 -1rem 2rem -1rem;
+    background-color: rgba(247, 245, 239, 0.95);
+    backdrop-filter: blur(5px);
+    padding: 6rem 0 1rem 0;
+    margin: 0 -1rem 1rem -1rem;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+
+  .img-cat-walk {
+    position: absolute;
+    top: -20px; 
+    left: 0; 
+    width: 70px;
+    height: auto;
+    z-index: 60;
+    pointer-events: none;
+    display: block;
+    visibility: visible;
+    opacity: 1;
+    transition: left 0.4s cubic-bezier(.22,.61,.36,1);
+  }
+
+  @media (max-width: 699px) {
+    .img-cat-walk {
+      width: 90px;
+      top: -10px; 
+    }
   }
 
   .nav-scroll {
@@ -177,9 +215,10 @@
     list-style: none;
     padding: 0 1rem;
     scrollbar-width: none;
-    padding-top: 70px; 
-    margin-top: -70px; 
+    padding-top: 40px; 
+    margin-top: -20px; 
     cursor: grab;
+    position: relative;
   }
   
   .nav-scroll:active { cursor: grabbing; }
@@ -214,37 +253,20 @@
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   }
 
-  .nav-cat-gif {
-    position: absolute;
-    height: 60px;
-    width: auto;
-    max-width: none;
-    flex-shrink: 0;
-    bottom: 100%; 
-    left: 50%;
-    transform: translate(-50%, 10px); 
-    opacity: 0;
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    pointer-events: none;
-    z-index: 100;
-    margin-bottom: 2px; 
-  }
-
-  .nav-btn.active .nav-cat-gif {
-    opacity: 1;
-    transform: translate(-50%, 0); 
-  }
-
-  section.menu-block { scroll-margin-top: 150px; }
+  section.menu-block { scroll-margin-top: 180px; }
 
   /* ============ ESTRUTURA DO MENU ============ */
   section.menu-block{
-    display: none;
-    padding: 1rem 0 3rem;
+    display: block; 
+    padding: 2rem 0 3rem;
     animation: fadeIn 0.4s ease;
     position: relative; 
+    border-bottom: 1px dashed var(--line);
   }
-  section.menu-block.active { display: block; }
+  
+  section.menu-block:last-of-type {
+    border-bottom: none;
+  }
 
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
@@ -279,9 +301,6 @@
     .menu-grid { grid-template-columns: 1fr 1fr; gap: 2rem 2.5rem; }
   }
 
-  /* ==========================================
-     O NOVO CARD (ESTILO DO PRINT)
-     ========================================== */
   .item-card {
     display: flex;
     flex-direction: column;
@@ -295,7 +314,6 @@
     margin: 0 auto; 
   }
 
-  /* Área da Imagem */
   .item-media {
     position: relative;
     width: 100%;
@@ -310,7 +328,6 @@
     display: block;
   }
 
-  /* Preço flutuante na imagem (Tag) */
   .item-price-badge {
     position: absolute;
     top: 12px;
@@ -327,7 +344,6 @@
     z-index: 10;
   }
 
-  /* Área do Texto */
   .item-info { 
     display: flex; 
     flex-direction: column;
@@ -352,7 +368,7 @@
     margin-bottom: 1rem;
     font-weight: 400;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
@@ -392,43 +408,252 @@
 </head>
 <body>
 
+<!-- NEVE NA TELA INTEIRA -->
+<canvas id="snowCanvas"></canvas>
+
 <div class="wrap">
 
-  <div class="logo-header">
-    <img src="images/logo.png" alt="First Chapter Cafe Logo">
+  <!-- ÁREA DO CABEÇALHO -->
+  <div class="snow-wrapper">
+    <div class="logo-header">
+      <img src="images/logo.png" alt="First Chapter Cafe Logo">
+    </div>
+
+    <header class="hero">
+      <h1>First Chapter Cafe</h1>
+      <div class="hours">Mon–Fri 9–16 · Sat 9–17 · Sun 10–17</div>
+      <div class="address">
+        16 Fade Street, Dublin 2 · 
+        <a href="https://instagram.com/firstchaptercafe" target="_blank">@firstchaptercafe</a>
+      </div>
+    </header>
   </div>
 
-  <header class="hero">
-    <h1>First Chapter Cafe</h1>
-    <div class="hours">Mon–Fri 9–17 · Sat 9–18 · Sun 10–18</div>
-    <div class="address">
-      16 Fade Street, Dublin 2 · 
-      <a href="https://instagram.com/firstchaptercafe" target="_blank">@firstchaptercafe</a>
-    </div>
-  </header>
-
-  <!-- ÁREA DO GATO E DA MÁQUINA -->
+  <!-- MÁQUINA DE CAFÉ -->
   <div class="hero-visuals">
-    <img src="images/gato-andando.gif" alt="Gato andando" class="img-cat-walk" onerror="this.style.display='none'">
     <img src="images/maquina.gif" alt="Coffee Machine" class="img-center" onerror="this.style.display='none'">
   </div>
 
   <!-- NAVEGAÇÃO FIXA -->
-  <div class="nav-container">
+  <div class="nav-container" id="navContainer">
     <ul class="nav-scroll" id="navScroll">
-      <li><button class="nav-btn tab-btn active" data-target="coffee-tea"><img src="images/gato.gif" alt="Cat" class="nav-cat-gif">Coffee & Tea</button></li>
-      <li><button class="nav-btn tab-btn" data-target="protein-coffee"><img src="images/gato.gif" alt="Cat" class="nav-cat-gif">Protein Coffee</button></li>
-      <li><button class="nav-btn tab-btn" data-target="beverages"><img src="images/gato.gif" alt="Cat" class="nav-cat-gif">Beverages & Juices</button></li>
-      <li><button class="nav-btn tab-btn" data-target="smoothies"><img src="images/gato.gif" alt="Cat" class="nav-cat-gif">Smoothies</button></li>
-      <li><button class="nav-btn tab-btn" data-target="signature"><img src="images/gato.gif" alt="Cat" class="nav-cat-gif">Signature Drinks</button></li>
-      <li><button class="nav-btn tab-btn" data-target="drinks-alcohol"><img src="images/gato.gif" alt="Cat" class="nav-cat-gif">Wine & Bubbles</button></li>
-      <li><button class="nav-btn tab-btn" data-target="brunch"><img src="images/gato.gif" alt="Cat" class="nav-cat-gif">Brunch</button></li>
-      <li><button class="nav-btn tab-btn" data-target="bites-sweets"><img src="images/gato.gif" alt="Cat" class="nav-cat-gif">Bites & Sweets</button></li>
+      <img src="images/gato.gif" alt="Gato" class="img-cat-walk" id="catWalker">
+      <li><button class="nav-btn tab-btn active" data-target="brunch">Brunch</button></li>
+      <li><button class="nav-btn tab-btn" data-target="bites-sweets">Bites & Sweets</button></li>
+      <li><button class="nav-btn tab-btn" data-target="coffee-tea">Coffee & Tea</button></li>
+      <li><button class="nav-btn tab-btn" data-target="protein-coffee">Protein Coffee</button></li>
+      <li><button class="nav-btn tab-btn" data-target="signature">Signature Drinks</button></li>
+      <li><button class="nav-btn tab-btn" data-target="drinks-alcohol">Wine & Bubbles</button></li>
+      <li><button class="nav-btn tab-btn" data-target="beverages">Beverages & Juices</button></li>
+      <li><button class="nav-btn tab-btn" data-target="smoothies">Smoothies</button></li>
     </ul>
   </div>
 
+  <!-- ============ BRUNCH ============ -->
+  <section class="menu-block active" id="brunch">
+    <div class="section-header"><h2>Brunch</h2><div class="sub">Made for Brunch Lovers</div></div>
+    <div class="menu-grid">
+
+      <div class="item-card">
+        <div class="item-media">
+          <img src="images/avocado-toast.png" alt="Avocado on Toast" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€15.50</div>
+        </div>
+        <div class="item-info">
+          <div class="item-name">Avocado on Toast</div>
+          <p class="item-desc">Smashed avocado on toasted focaccia, topped with poached eggs, Parmesan and balsamic glaze. Add our signature crispy chilli. Add bacon +€3.50 / Smoked salmon +€4.</p>
+          <span class="item-allergens">(1 wheat, 3, 6, 7, 11, 12)</span>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-media">
+          <img src="images/eggs-hemingway.png" alt="Eggs Hemingway" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€15.90</div>
+        </div>
+        <div class="item-info">
+          <div class="item-name">Eggs Hemingway</div>
+          <p class="item-desc">Smoked salmon, poached eggs and rich hollandaise on a toasted English muffin, served with mixed leaves and honey mustard dressing.</p>
+          <span class="item-allergens">(1 wheat, 3, 4, 7, 10, 12)</span>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-media">
+          <img src="images/eggs-benedict.png" alt="Eggs Benedict" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€15.00</div>
+        </div>
+        <div class="item-info">
+          <div class="item-name">Eggs Benedict</div>
+          <p class="item-desc">Poached eggs and crispy bacon on a toasted English muffin, topped with silky hollandaise. Served with mixed leaves and honey mustard dressing.</p>
+          <span class="item-allergens">(1 wheat, 3, 7, 10, 12)</span>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-media">
+          <img src="images/cranberry-herb-chicken-bagel.png" alt="Cranberry & Herb Chicken Bagel" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€15.90</div>
+        </div>
+        <div class="item-info">
+          <div class="item-name">Cranberry & Herb Chicken Bagel</div>
+          <p class="item-desc">Herb chicken with cranberry sauce in a toasted bagel.</p>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-media">
+          <img src="images/winter-french-toast.png" alt="Winter French Toast" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€14.90</div>
+        </div>
+        <div class="item-info">
+          <div class="item-name">Winter French Toast</div>
+          <p class="item-desc">Golden French toast topped with warm cinnamon apple compote and homemade spiced crumble, finished with a drizzle of maple syrup. Served with vanilla ice cream.</p>
+          <span class="item-allergens">(1 wheat, 3, 7, 8 walnuts)</span>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-media">
+          <img src="images/christmas-french-toast.png" alt="Christmas French Toast" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€14.90</div>
+        </div>
+        <div class="item-info">
+          <div class="item-name">Christmas French Toast</div>
+          <p class="item-desc">Golden French toast with festive toppings.</p>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-media">
+          <img src="images/toast-scrambled-eggs.png" alt="Toast & Scrambled Eggs" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€12.50</div>
+        </div>
+        <div class="item-info">
+          <div class="item-name">Toast & Scrambled Eggs</div>
+          <p class="item-desc">Creamy cheesy scrambled eggs on toasted focaccia, topped with hollandaise. Served with mixed leaves and honey mustard dressing. Add bacon +€3.50 / Smoked salmon +€4. Ask for crispy chilli!</p>
+          <span class="item-allergens">(1 wheat, 3, 7, 10, 12)</span>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-media">
+          <img src="images/pancakes.png" alt="Pancakes" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€12.50</div>
+        </div>
+        <div class="item-info">
+          <div class="item-name">Pancakes</div>
+          <p class="item-desc">Fluffy, golden pancakes served warm. Choose one topping: cinnamon apple compote or homemade vanilla strawberry compote, both finished with our homemade walnut crumble and a drizzle of maple syrup. Served with vanilla ice cream.</p>
+          <span class="item-allergens">(1 wheat, 3, 6, 7, 8 walnuts)</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ BITES & SWEETS ============ -->
+  <section class="menu-block" id="bites-sweets">
+    <div class="section-header"><h2>Bites & Sweets</h2><div class="sub">Treat yourself to a little happiness.</div></div>
+    <div class="menu-grid">
+
+      <div class="item-card">
+        <div class="item-media">
+          <img src="images/pao-de-queijo.png" alt="Pão de Queijo" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€3.50</div>
+        </div>
+        <div class="item-info">
+          <div class="item-name">Pão de Queijo</div>
+          <p class="item-desc">Traditional Brazilian cheese bread, light and fluffy, served warm.</p>
+          <span class="item-allergens">(3, 7)</span>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-media">
+          <img src="images/croissant.png" alt="Croissant (Plain)" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€3.50</div>
+        </div>
+        <div class="item-info">
+          <div class="item-name">Croissant (Plain)</div>
+          <p class="item-desc">Buttery, flaky croissant baked fresh daily. Add extras: Bacon €3.50 / Smoked salmon €4 / Scrambled eggs and cheese €4.</p>
+          <span class="item-allergens">(1 wheat, 3, 4, 7)</span>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-media">
+          <img src="images/pain-au-chocolat.png" alt="Pain au Chocolat" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€3.50</div>
+        </div>
+        <div class="item-info">
+          <div class="item-name">Pain au Chocolat</div>
+          <p class="item-desc">Flaky pastry filled with chocolate.</p>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-media">
+          <img src="images/pistachio-croissant.png" alt="Pistachio Croissant" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€9.99</div>
+        </div>
+        <div class="item-info">
+          <div class="item-name">Pistachio Croissant</div>
+          <p class="item-desc">Flaky, golden croissant filled with rich pistachio cream and finished with a smooth pistachio topping.</p>
+          <span class="item-allergens">(1 wheat, 3, 7, 8 pistachio)</span>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-media">
+          <img src="images/acai-bowl.png" alt="Açaí Bowl" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€10.99</div>
+        </div>
+        <div class="item-info">
+          <div class="item-name">Açaí Bowl</div>
+          <p class="item-desc">Thick, ice-cream-style açaí served frozen, topped with fresh strawberries, crunchy granola, coconut flakes and a drizzle of honey.</p>
+          <span class="item-allergens">(1 wheat, 7)</span>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-media">
+          <img src="images/brownie.png" alt="Brownie with Ice Cream" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€8.50</div>
+        </div>
+        <div class="item-info">
+          <div class="item-name">Brownie with Ice Cream</div>
+          <p class="item-desc">A gluten-free brownie made with almond flour, served with a scoop of vanilla ice cream topped with chocolate sauce.</p>
+          <span class="item-allergens">(3, 7, 8 almond)</span>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-media">
+          <img src="images/profiteroles.png" alt="Profiteroles" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€3.50</div>
+        </div>
+        <div class="item-info">
+          <div class="item-name">Profiteroles</div>
+          <p class="item-desc">Ask us about today's flavour!</p>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-media">
+          <img src="images/chocolate-cookie.png" alt="Chocolate Cookie" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€4.50</div>
+        </div>
+        <div class="item-info">
+          <div class="item-name">Chocolate Cookie</div>
+          <p class="item-desc">Check today's flavour.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <!-- ============ COFFEE & TEA ============ -->
-  <section class="menu-block active" id="coffee-tea">
+  <section class="menu-block" id="coffee-tea">
     <div class="section-header"><h2>Coffee & Tea</h2></div>
     <div class="menu-grid">
 
@@ -489,23 +714,23 @@
 
       <div class="item-card">
         <div class="item-media">
-          <img src="images/velvet-mocha.png" alt="Velvet Mocha" loading="lazy" onerror="this.style.display='none'">
+          <img src="images/mocha.png" alt="Mocha" loading="lazy" onerror="this.style.display='none'">
           <div class="item-price-badge">€4.90</div>
         </div>
         <div class="item-info">
-          <div class="item-name">Velvet Mocha</div>
-          <p class="item-desc">Smooth, rich chocolate coffee — pure comfort in a cup.</p>
+          <div class="item-name">Mocha</div>
+          <p class="item-desc">Chocolate powder and espresso, finished with your choice of milk.</p>
         </div>
       </div>
 
       <div class="item-card">
         <div class="item-media">
-          <img src="images/pure-matcha.png" alt="Pure Matcha" loading="lazy" onerror="this.style.display='none'">
+          <img src="images/matcha.png" alt="Matcha" loading="lazy" onerror="this.style.display='none'">
           <div class="item-price-badge">€4.50</div>
         </div>
         <div class="item-info">
-          <div class="item-name">Pure Matcha</div>
-          <p class="item-desc">Clean, earthy matcha with a smooth, balanced finish.</p>
+          <div class="item-name">Matcha</div>
+          <p class="item-desc">Ceremonial matcha, finished with your choice of milk.</p>
         </div>
       </div>
 
@@ -516,18 +741,18 @@
         </div>
         <div class="item-info">
           <div class="item-name">Spiced Chai Latte</div>
-          <p class="item-desc">Warm, aromatic spices blended into a creamy, comforting latte.</p>
+          <p class="item-desc">Warm, aromatic spices blended with your favorite milk.</p>
         </div>
       </div>
 
       <div class="item-card">
         <div class="item-media">
-          <img src="images/dirty-chai-boost.png" alt="Dirty Chai Boost" loading="lazy" onerror="this.style.display='none'">
+          <img src="images/dirty-chai-latte.png" alt="Dirty Chai Latte" loading="lazy" onerror="this.style.display='none'">
           <div class="item-price-badge">€4.80</div>
         </div>
         <div class="item-info">
-          <div class="item-name">Dirty Chai Boost</div>
-          <p class="item-desc">Chai latte with a shot of espresso — bold, warm, and energizing.</p>
+          <div class="item-name">Dirty Chai Latte</div>
+          <p class="item-desc">Chai latte with a shot of espresso. Bold, warm and energising.</p>
         </div>
       </div>
 
@@ -538,25 +763,26 @@
         </div>
         <div class="item-info">
           <div class="item-name">Signature Hot Chocolate</div>
-          <p class="item-desc">Thick, rich, and deeply chocolatey — made to indulge.</p>
+          <p class="item-desc">Add cream or marshmallow €1 each.</p>
+          <span class="item-allergens">(6, 7)</span>
         </div>
       </div>
 
       <div class="item-card">
         <div class="item-media">
-          <img src="images/black-tea.png" alt="Black Tea" loading="lazy" onerror="this.style.display='none'">
-          <div class="item-price-badge">€3.00</div>
+          <img src="images/breakfast-tea.png" alt="Breakfast Tea" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€3.50</div>
         </div>
         <div class="item-info">
-          <div class="item-name">Black Tea</div>
-          <p class="item-desc">Classic black tea.</p>
+          <div class="item-name">Breakfast Tea</div>
+          <p class="item-desc">Classic breakfast tea.</p>
         </div>
       </div>
 
       <div class="item-card">
         <div class="item-media">
           <img src="images/earl-grey.png" alt="Earl Grey" loading="lazy" onerror="this.style.display='none'">
-          <div class="item-price-badge">€3.00</div>
+          <div class="item-price-badge">€3.50</div>
         </div>
         <div class="item-info">
           <div class="item-name">Earl Grey</div>
@@ -567,7 +793,7 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/peppermint.png" alt="Peppermint" loading="lazy" onerror="this.style.display='none'">
-          <div class="item-price-badge">€3.00</div>
+          <div class="item-price-badge">€3.50</div>
         </div>
         <div class="item-info">
           <div class="item-name">Peppermint</div>
@@ -578,7 +804,7 @@
       <div class="item-card">
         <div class="item-media">
           <img src="images/green-tea.png" alt="Green Tea" loading="lazy" onerror="this.style.display='none'">
-          <div class="item-price-badge">€3.00</div>
+          <div class="item-price-badge">€3.50</div>
         </div>
         <div class="item-info">
           <div class="item-name">Green Tea</div>
@@ -588,7 +814,7 @@
 
     </div>
     <div class="section-note">
-      Add cream or marshmallow: €1 each · Ice, syrups or alternative milk: +€0.50 each
+      Extras: Syrups €0.50 (Hazelnut, Caramel, Vanilla, Gingerbread, Pumpkin Spice, Pistachio, Coconut) · Alternative Milks €0.50 (Oat, Coconut, Almond)
     </div>
   </section>
 
@@ -599,156 +825,49 @@
 
       <div class="item-card">
         <div class="item-media">
-          <img src="images/mocha-boost.png" alt="Mocha Boost" loading="lazy" onerror="this.style.display='none'">
+          <img src="images/iced-mocha-boost.png" alt="Iced Mocha Boost" loading="lazy" onerror="this.style.display='none'">
           <div class="item-price-badge">€7.90</div>
         </div>
         <div class="item-info">
-          <div class="item-name">Mocha Boost</div>
-          <p class="item-desc">Rich mocha coffee blended with protein for a smooth, chocolatey boost that actually satisfies.</p>
-          <span class="item-allergens">(7, 6)</span>
+          <div class="item-name">Iced Mocha Boost</div>
+          <p class="item-desc">Chocolate & espresso blended with ice and protein.</p>
+          <span class="item-allergens">(6, 7)</span>
         </div>
       </div>
 
       <div class="item-card">
         <div class="item-media">
-          <img src="images/vanilla-fuel-latte.png" alt="Vanilla Fuel Latte" loading="lazy" onerror="this.style.display='none'">
-          <div class="item-price-badge">€7.50</div>
+          <img src="images/iced-vanilla-boost.png" alt="Iced Vanilla Boost" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€7.90</div>
         </div>
         <div class="item-info">
-          <div class="item-name">Vanilla Fuel Latte</div>
-          <p class="item-desc">Cold, creamy latte with a hint of vanilla and added protein — refreshing, light, and energizing.</p>
-          <span class="item-allergens">(7, 6)</span>
-        </div>
-      </div>
-
-    </div>
-    <div class="section-note">Alternative milk: +€1 · +15g protein: +€1</div>
-  </section>
-
-  <!-- ============ BEVERAGES & JUICES ============ -->
-  <section class="menu-block" id="beverages">
-    <div class="section-header"><h2>Beverages & Juices</h2></div>
-    <div class="menu-grid">
-
-      <div class="item-card">
-        <div class="item-media">
-          <img src="images/pineapple-juice.png" alt="Fresh Pineapple Juice" loading="lazy" onerror="this.style.display='none'">
-          <div class="item-price-badge">€6.50</div>
-        </div>
-        <div class="item-info">
-          <div class="item-name">Fresh Pineapple Juice</div>
-          <p class="item-desc">Fresh pineapple juice.</p>
+          <div class="item-name">Iced Vanilla Boost</div>
+          <p class="item-desc">Vanilla syrup, espresso, ice & whey protein.</p>
+          <span class="item-allergens">(6, 7)</span>
         </div>
       </div>
 
       <div class="item-card">
         <div class="item-media">
-          <img src="images/strawberry-juice.png" alt="Strawberry Juice" loading="lazy" onerror="this.style.display='none'">
-          <div class="item-price-badge">€5.50</div>
-        </div>
-        <div class="item-info">
-          <div class="item-name">Strawberry Juice</div>
-          <p class="item-desc">Strawberry juice.</p>
-        </div>
-      </div>
-
-      <div class="item-card">
-        <div class="item-media">
-          <img src="images/orange-juice.png" alt="Orange Juice" loading="lazy" onerror="this.style.display='none'">
-          <div class="item-price-badge">€4.00</div>
-        </div>
-        <div class="item-info">
-          <div class="item-name">Orange Juice</div>
-          <p class="item-desc">Fresh orange juice.</p>
-        </div>
-      </div>
-
-      <div class="item-card">
-        <div class="item-media">
-          <img src="images/coke.png" alt="Coke" loading="lazy" onerror="this.style.display='none'">
-          <div class="item-price-badge">€3.50</div>
-        </div>
-        <div class="item-info">
-          <div class="item-name">Coke / Coke Zero</div>
-          <p class="item-desc">Coca-Cola or Coca-Cola Zero.</p>
-        </div>
-      </div>
-
-      <div class="item-card">
-        <div class="item-media">
-          <img src="images/still-water.png" alt="Still Water" loading="lazy" onerror="this.style.display='none'">
-          <div class="item-price-badge">€3.00</div>
-        </div>
-        <div class="item-info">
-          <div class="item-name">Still Water</div>
-          <p class="item-desc">Still bottled water.</p>
-        </div>
-      </div>
-
-      <div class="item-card">
-        <div class="item-media">
-          <img src="images/sparkling-water.png" alt="Sparkling Water" loading="lazy" onerror="this.style.display='none'">
-          <div class="item-price-badge">€3.50</div>
-        </div>
-        <div class="item-info">
-          <div class="item-name">Sparkling Water</div>
-          <p class="item-desc">Sparkling water.</p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ============ SMOOTHIES ============ -->
-  <section class="menu-block" id="smoothies">
-    <div class="section-header"><h2>Smoothies & Protein</h2></div>
-    <div class="menu-grid">
-
-      <div class="item-card">
-        <div class="item-media">
-          <img src="images/strawberry-smoothie.png" alt="Strawberry Smoothie" loading="lazy" onerror="this.style.display='none'">
-          <div class="item-price-badge">€6.50</div>
-        </div>
-        <div class="item-info">
-          <div class="item-name">Strawberry Smoothie</div>
-          <p class="item-desc">Fresh, creamy strawberry blend — naturally sweet and refreshing.</p>
-          <span class="item-allergens">(7)</span>
-        </div>
-      </div>
-
-      <div class="item-card">
-        <div class="item-media">
-          <img src="images/blue-antiox.png" alt="Blue Antiox" loading="lazy" onerror="this.style.display='none'">
-          <div class="item-price-badge">€8.50</div>
-        </div>
-        <div class="item-info">
-          <div class="item-name">Blue Antiox</div>
-          <p class="item-desc">Blueberry, milk, and protein — smooth, antioxidant-rich, and energizing.</p>
-          <span class="item-allergens">(7)</span>
-        </div>
-      </div>
-
-      <div class="item-card">
-        <div class="item-media">
-          <img src="images/strawberry-boost.png" alt="Strawberry Boost" loading="lazy" onerror="this.style.display='none'">
+          <img src="images/strawberry-boost-protein.png" alt="Strawberry Boost" loading="lazy" onerror="this.style.display='none'">
           <div class="item-price-badge">€8.50</div>
         </div>
         <div class="item-info">
           <div class="item-name">Strawberry Boost</div>
-          <p class="item-desc">Strawberry, beetroot, and vanilla protein — vibrant, naturally sweet, and energizing.</p>
-          <span class="item-allergens">(7)</span>
+          <p class="item-desc">Frozen strawberries blended with milk and protein.</p>
+          <span class="item-allergens">(6, 7)</span>
         </div>
       </div>
 
       <div class="item-card">
         <div class="item-media">
-          <img src="images/berry-antiox.png" alt="Berry Antiox" loading="lazy" onerror="this.style.display='none'">
+          <img src="images/banana-bread-protein-shake.png" alt="Banana Bread Protein Shake" loading="lazy" onerror="this.style.display='none'">
           <div class="item-price-badge">€8.50</div>
         </div>
         <div class="item-info">
-          <div class="item-name">Berry Antiox</div>
-          <p class="item-desc">Blueberry and strawberry with protein and a touch of honey — light, smooth, and refreshing.</p>
-          <span class="item-allergens">(7)</span>
+          <div class="item-name">Banana Bread Protein Shake</div>
+          <p class="item-desc">Frozen banana blended with milk, protein & cinnamon.</p>
+          <span class="item-allergens">(6, 7)</span>
         </div>
       </div>
 
@@ -757,51 +876,53 @@
 
   <!-- ============ SIGNATURE DRINKS ============ -->
   <section class="menu-block" id="signature">
-    <div class="section-header"><h2>Spring Summer Signature Drinks</h2></div>
+    <div class="section-header"><h2>Signature Drinks</h2><div class="sub">Fuel Your Day!</div></div>
     <div class="menu-grid">
 
       <div class="item-card">
         <div class="item-media">
-          <img src="images/coffee-cloud-coconut.png" alt="Coffee Cloud Coconut" loading="lazy" onerror="this.style.display='none'">
+          <img src="images/iced-coconut-dream.png" alt="Iced Coconut Dream" loading="lazy" onerror="this.style.display='none'">
           <div class="item-price-badge">€6.90</div>
         </div>
         <div class="item-info">
-          <div class="item-name">Coffee Cloud Coconut</div>
-          <p class="item-desc">Coconut water, espresso, and ice. Smooth, refreshing, and naturally energizing.</p>
+          <div class="item-name">Iced Coconut Dream</div>
+          <p class="item-desc">Espresso, coconut milk & coconut syrup, topped with coconut whipped cream. Smooth and creamy.</p>
+          <span class="item-allergens">(7, 8)</span>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-media">
+          <img src="images/iced-tiramisu-latte.png" alt="Iced Tiramisu Latte" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€6.90</div>
+        </div>
+        <div class="item-info">
+          <div class="item-name">Iced Tiramisu Latte</div>
+          <p class="item-desc">Espresso, milk and vanilla syrup, topped with whipped mascarpone cream and cocoa powder.</p>
           <span class="item-allergens">(7)</span>
         </div>
       </div>
 
       <div class="item-card">
         <div class="item-media">
-          <img src="images/emerald-grey.png" alt="Emerald Grey" loading="lazy" onerror="this.style.display='none'">
-          <div class="item-price-badge">€6.50</div>
-        </div>
-        <div class="item-info">
-          <div class="item-name">Emerald Grey</div>
-          <p class="item-desc">Matcha blended with Earl Grey tea and a hint of vanilla. Aromatic, smooth, and lightly floral.</p>
-        </div>
-      </div>
-
-      <div class="item-card">
-        <div class="item-media">
-          <img src="images/green-garden-detox.png" alt="Green Garden Detox" loading="lazy" onerror="this.style.display='none'">
-          <div class="item-price-badge">€5.50</div>
-        </div>
-        <div class="item-info">
-          <div class="item-name">Green Garden Detox</div>
-          <p class="item-desc">Cucumber, lemon, and mint with soda water. Fresh, clean, and revitalizing.</p>
-        </div>
-      </div>
-
-      <div class="item-card">
-        <div class="item-media">
           <img src="images/strawberry-matcha.png" alt="Strawberry Matcha" loading="lazy" onerror="this.style.display='none'">
-          <div class="item-price-badge">€6.50</div>
+          <div class="item-price-badge">€6.90</div>
         </div>
         <div class="item-info">
           <div class="item-name">Strawberry Matcha</div>
-          <p class="item-desc">Iced matcha layered with coconut water and strawberry purée.</p>
+          <p class="item-desc">Matcha with steamed milk and sweet strawberry purée.</p>
+          <span class="item-allergens">(7)</span>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-media">
+          <img src="images/first-chapter-lemonade.png" alt="First Chapter Lemonade" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€6.50</div>
+        </div>
+        <div class="item-info">
+          <div class="item-name">First Chapter Lemonade</div>
+          <p class="item-desc">Our classic Lemonade Cloud with a splash of sweet strawberry syrup. Refreshing, fruity and with a little pink twist.</p>
         </div>
       </div>
 
@@ -815,12 +936,12 @@
 
       <div class="item-card">
         <div class="item-media">
-          <img src="images/rose-berry-spritz.png" alt="Rose & Berry Spritz" loading="lazy" onerror="this.style.display='none'">
+          <img src="images/berry-spritz.png" alt="Berry Spritz" loading="lazy" onerror="this.style.display='none'">
           <div class="item-price-badge">€12.50</div>
         </div>
         <div class="item-info">
-          <div class="item-name">Rose & Berry Spritz</div>
-          <p class="item-desc">Rose, mixed berries, soda water, prosecco. Floral, fruity, and refreshingly light.</p>
+          <div class="item-name">Berry Spritz</div>
+          <p class="item-desc">Strawberry purée, soda water and Prosecco. Floral and fruity.</p>
         </div>
       </div>
 
@@ -831,7 +952,7 @@
         </div>
         <div class="item-info">
           <div class="item-name">Aperol Spritz</div>
-          <p class="item-desc">Bitter-sweet, sparkling, and vibrant — a timeless classic.</p>
+          <p class="item-desc">Aperol, Prosecco and soda water.</p>
         </div>
       </div>
 
@@ -842,7 +963,7 @@
         </div>
         <div class="item-info">
           <div class="item-name">Lemon Spritz</div>
-          <p class="item-desc">Crisp, citrusy, and refreshing with a sparkling finish.</p>
+          <p class="item-desc">Limoncello, Prosecco and soda water. Refreshing with a sparkling finish.</p>
         </div>
       </div>
 
@@ -853,43 +974,18 @@
         </div>
         <div class="item-info">
           <div class="item-name">Mimosa</div>
-          <p class="item-desc">Prosecco topped with fresh orange juice — bright, refreshing, and effortless.</p>
+          <p class="item-desc">Prosecco topped with orange juice and a delicate Prosecco foam.</p>
         </div>
       </div>
 
       <div class="item-card">
         <div class="item-media">
-          <img src="images/prosecco.png" alt="Prosecco" loading="lazy" onerror="this.style.display='none'">
+          <img src="images/house-wines.png" alt="House Wines" loading="lazy" onerror="this.style.display='none'">
           <div class="item-price-badge">€9.50</div>
         </div>
         <div class="item-info">
-          <div class="item-name">Prosecco (Glass)</div>
-          <p class="item-desc">Light, crisp, and perfectly sparkling — made for brunch moments.</p>
-          <span class="item-allergens">(12)</span>
-        </div>
-      </div>
-
-      <div class="item-card">
-        <div class="item-media">
-          <img src="images/white-wine.png" alt="White Wine" loading="lazy" onerror="this.style.display='none'">
-          <div class="item-price-badge">€8.50</div>
-        </div>
-        <div class="item-info">
-          <div class="item-name">White Wine (Glass)</div>
-          <p class="item-desc">Fresh, crisp, and easy to drink — the perfect light pairing.</p>
-          <span class="item-allergens">(12)</span>
-        </div>
-      </div>
-
-      <div class="item-card">
-        <div class="item-media">
-          <img src="images/red-wine.png" alt="Red Wine" loading="lazy" onerror="this.style.display='none'">
-          <div class="item-price-badge">€8.50</div>
-        </div>
-        <div class="item-info">
-          <div class="item-name">Red Wine (Glass)</div>
-          <p class="item-desc">Smooth, balanced, and rich — ideal for a relaxed brunch.</p>
-          <span class="item-allergens">(12)</span>
+          <div class="item-name">House Wines</div>
+          <p class="item-desc">White or red.</p>
         </div>
       </div>
 
@@ -899,190 +995,108 @@
     </div>
   </section>
 
-  <!-- ============ BRUNCH ============ -->
-  <section class="menu-block" id="brunch">
-    <div class="section-header"><h2>Brunch</h2><div class="sub">Daily from 09:00 to 16:00</div></div>
+  <!-- ============ BEVERAGES & JUICES ============ -->
+  <section class="menu-block" id="beverages">
+    <div class="section-header"><h2>Beverages & Juices</h2><div class="sub">Keep it fresh, keep it simple</div></div>
     <div class="menu-grid">
 
       <div class="item-card">
         <div class="item-media">
-          <img src="images/avocado-toast.png" alt="Avocado on Toast" loading="lazy" onerror="this.style.display='none'">
-          <div class="item-price-badge">€14.50</div>
+          <img src="images/pineapple-juice.png" alt="Fresh Pineapple Juice" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€6.50</div>
         </div>
         <div class="item-info">
-          <div class="item-name">Avocado on Toast</div>
-          <p class="item-desc">Creamy smashed avocado on warm focaccia, topped with perfectly poached eggs, parmesan, and balsamic glaze. Add bacon +€3 / Smoked Salmon +€4. Spice it up with crispy chilli.</p>
-          <span class="item-allergens">(1 wheat, 3, 6, 7, 11, 12)</span>
+          <div class="item-name">Fresh Pineapple Juice</div>
+          <p class="item-desc">Fresh pineapple juice with a hint of mint.</p>
         </div>
       </div>
 
       <div class="item-card">
         <div class="item-media">
-          <img src="images/eggs-hemingway.png" alt="Eggs Hemingway" loading="lazy" onerror="this.style.display='none'">
-          <div class="item-price-badge">€15.00</div>
+          <img src="images/strawberry-juice.png" alt="Strawberry Juice" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€5.50</div>
         </div>
         <div class="item-info">
-          <div class="item-name">Eggs Hemingway</div>
-          <p class="item-desc">Smoked salmon, perfectly poached eggs, and rich hollandaise on a toasted English muffin. Smooth, delicate, and made for a slow brunch.</p>
-          <span class="item-allergens">(1 wheat, 3, 4, 7, 12)</span>
+          <div class="item-name">Strawberry Juice</div>
+          <p class="item-desc">Sweet and fruity strawberry juice, served chilled.</p>
         </div>
       </div>
 
       <div class="item-card">
         <div class="item-media">
-          <img src="images/eggs-benedict.png" alt="Eggs Benedict" loading="lazy" onerror="this.style.display='none'">
-          <div class="item-price-badge">€14.50</div>
+          <img src="images/orange-juice.png" alt="Orange Juice" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€4.00</div>
         </div>
         <div class="item-info">
-          <div class="item-name">Eggs Benedict</div>
-          <p class="item-desc">Poached eggs on a toasted English muffin with crispy bacon and silky hollandaise. Served with mixed leaves.</p>
-          <span class="item-allergens">(1 wheat, 3, 7, 12)</span>
+          <div class="item-name">Orange Juice</div>
+          <p class="item-desc">Chilled, ready-to-serve orange juice.</p>
         </div>
       </div>
 
       <div class="item-card">
         <div class="item-media">
-          <img src="images/cheese-bagel.png" alt="Cheese Bagel" loading="lazy" onerror="this.style.display='none'">
-          <div class="item-price-badge">€15.90</div>
+          <img src="images/coke.png" alt="Coca-Cola" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€3.50</div>
         </div>
         <div class="item-info">
-          <div class="item-name">Cheese Bagel</div>
-          <p class="item-desc">Freshly toasted bagel with mixed leaves on the side. Crispy bacon, scrambled eggs & melted cheese / Seasoned chicken with melted cheese.</p>
-          <span class="item-allergens">(1 wheat, 3, 7, 11)</span>
+          <div class="item-name">Coca-Cola</div>
+          <p class="item-desc">A chilled and refreshing classic.</p>
         </div>
       </div>
 
       <div class="item-card">
         <div class="item-media">
-          <img src="images/french-toast.png" alt="French Toast" loading="lazy" onerror="this.style.display='none'">
-          <div class="item-price-badge">€13.90</div>
+          <img src="images/coke-zero.png" alt="Coca-Cola Zero Sugar" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€3.50</div>
         </div>
         <div class="item-info">
-          <div class="item-name">French Toast</div>
-          <p class="item-desc">Golden brioche, perfectly toasted and soft inside. Dulce de Leche with a creamy finish / Crispy Bacon with a touch of maple sweetness.</p>
-          <span class="item-allergens">(1 wheat, 3, 7)</span>
+          <div class="item-name">Coca-Cola Zero Sugar</div>
+          <p class="item-desc">All the classic Coke taste, with zero sugar.</p>
         </div>
       </div>
 
       <div class="item-card">
         <div class="item-media">
-          <img src="images/toast-scrambled-eggs.png" alt="Toast & Scrambled Eggs" loading="lazy" onerror="this.style.display='none'">
-          <div class="item-price-badge">€11.50</div>
+          <img src="images/still-water.png" alt="Still Water" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€3.00</div>
         </div>
         <div class="item-info">
-          <div class="item-name">Toast & Scrambled Eggs</div>
-          <p class="item-desc">Scrambled eggs and cheese served on toasted focaccia, topped with hollandaise sauce. Served with mixed leaves. Add Bacon +€3 / Smoked Salmon +€4.</p>
-          <span class="item-allergens">(1 wheat, 3, 4, 7)</span>
+          <div class="item-name">Still Water</div>
+          <p class="item-desc">Pure and refreshing, served chilled.</p>
+        </div>
+      </div>
+
+      <div class="item-card">
+        <div class="item-media">
+          <img src="images/sparkling-water.png" alt="Sparkling Water" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€3.50</div>
+        </div>
+        <div class="item-info">
+          <div class="item-name">Sparkling Water</div>
+          <p class="item-desc">Lightly sparkling and refreshing.</p>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- ============ BITES & SWEETS ============ -->
-  <section class="menu-block" id="bites-sweets">
-    <div class="section-header"><h2>Bites & Sweets</h2></div>
+  <!-- ============ SMOOTHIES ============ -->
+  <section class="menu-block" id="smoothies">
+    <div class="section-header"><h2>Smoothies</h2></div>
     <div class="menu-grid">
 
       <div class="item-card">
         <div class="item-media">
-          <img src="images/pao-de-queijo.png" alt="Brazilian Cheese Bites" loading="lazy" onerror="this.style.display='none'">
-          <div class="item-price-badge">€3.50</div>
+          <img src="images/strawberry-smoothie.png" alt="Strawberry Smoothie" loading="lazy" onerror="this.style.display='none'">
+          <div class="item-price-badge">€6.50</div>
         </div>
         <div class="item-info">
-          <div class="item-name">Brazilian Cheese Bites</div>
-          <p class="item-desc">Traditional Brazilian cheese bread (Pão de Queijo), light and fluffy, served warm.</p>
-          <span class="item-allergens">(3, 7)</span>
+          <div class="item-name">Strawberry Smoothie</div>
+          <p class="item-desc">Fresh strawberries blended with milk until smooth and creamy.</p>
+          <span class="item-allergens">(7)</span>
         </div>
       </div>
 
-      <div class="item-card">
-        <div class="item-media">
-          <img src="images/croissant.png" alt="Croissant" loading="lazy" onerror="this.style.display='none'">
-          <div class="item-price-badge">€3.50</div>
-        </div>
-        <div class="item-info">
-          <div class="item-name">Croissant (Plain)</div>
-          <p class="item-desc">Buttery, flaky croissant baked fresh daily.</p>
-          <span class="item-allergens">(1 wheat, 3, 7)</span>
-        </div>
-      </div>
-
-      <div class="item-card">
-        <div class="item-media">
-          <img src="images/pistachio-croissant.png" alt="Pistachio Croissant" loading="lazy" onerror="this.style.display='none'">
-          <div class="item-price-badge">€9.99</div>
-        </div>
-        <div class="item-info">
-          <div class="item-name">Pistachio Croissant</div>
-          <p class="item-desc">Flaky croissant filled with rich pistachio cream and finished with a smooth pistachio topping.</p>
-          <span class="item-allergens">(1 wheat, 3, 7, 8 pistachio)</span>
-        </div>
-      </div>
-
-      <div class="item-card">
-        <div class="item-media">
-          <img src="images/acai-bowl.png" alt="Açaí Bowl" loading="lazy" onerror="this.style.display='none'">
-          <div class="item-price-badge">€9.99</div>
-        </div>
-        <div class="item-info">
-          <div class="item-name">Açaí Bowl</div>
-          <p class="item-desc">Refreshing, creamy açaí topped with crunchy granola, strawberries, milk powder & condensed milk.</p>
-          <span class="item-allergens">(1 wheat, 7)</span>
-        </div>
-      </div>
-
-      <div class="item-card">
-        <div class="item-media">
-          <img src="images/brownie.png" alt="Brownie with Ice Cream" loading="lazy" onerror="this.style.display='none'">
-          <div class="item-price-badge">€8.50</div>
-        </div>
-        <div class="item-info">
-          <div class="item-name">Brownie with Ice Cream</div>
-          <p class="item-desc">A gluten-free brownie made with almond flour, served with a scoop of vanilla ice cream.</p>
-          <span class="item-allergens">(3, 7, 8 almond)</span>
-        </div>
-      </div>
-
-      <div class="item-card">
-        <div class="item-media">
-          <img src="images/pancakes.png" alt="Fluffy Pancake Stack" loading="lazy" onerror="this.style.display='none'">
-          <div class="item-price-badge">€9.50</div>
-        </div>
-        <div class="item-info">
-          <div class="item-name">Fluffy Pancake Stack</div>
-          <p class="item-desc">Soft, fluffy pancakes served warm. Dulce de Leche & Vanilla ice cream / Nutella & Fresh Strawberries.</p>
-          <span class="item-allergens">(1 wheat, 3, 7)</span>
-        </div>
-      </div>
-
-      <div class="item-card">
-        <div class="item-media">
-          <img src="images/chocolate-melt-cake.png" alt="Chocolate Melt Cake" loading="lazy" onerror="this.style.display='none'">
-          <div class="item-price-badge">€7.50</div>
-        </div>
-        <div class="item-info">
-          <div class="item-name">Chocolate Melt Cake</div>
-          <p class="item-desc">Warm molten cake with a soft, gooey center. Carrot Cake & Chocolate / Ferrero Rocher / Nutella & Strawberry.</p>
-          <span class="item-allergens">(1 wheat, 3, 7)</span>
-        </div>
-      </div>
-
-      <div class="item-card">
-        <div class="item-media">
-          <img src="images/mini-profiteroles.png" alt="Mini Profiteroles" loading="lazy" onerror="this.style.display='none'">
-          <div class="item-price-badge">€3.50</div>
-        </div>
-        <div class="item-info">
-          <div class="item-name">Mini Profiteroles</div>
-          <p class="item-desc">Coconut, Nutella, or Pistachio.</p>
-          <span class="item-allergens">(1 wheat, 3, 7, 8 pistachio, hazelnut, coconut)</span>
-        </div>
-      </div>
-
-    </div>
-    <div class="section-note">
-      Croissant extras: Bacon €3.50 · Eggs €3 · Cheese €3 · Smoked Salmon €4
     </div>
   </section>
 
@@ -1091,38 +1105,167 @@
     <p class="allergen-list">
       1. Gluten (wheat, rye, barley, oats) · 2. Crustaceans · 3. Eggs · 4. Fish · 5. Peanuts · 6. Soybeans · 7. Milk · 8. Tree Nuts · 9. Celery · 10. Mustard · 11. Sesame Seeds · 12. Sulphites · 13. Lupin · 14. Molluscs
     </p>
-    <p class="warn">As there are nuts and sesame seeds used in our kitchen, despite our best efforts, cross-contamination is possible. If you have an allergy to nuts, sesame, or any of the other listed allergens, please advise a staff member.</p>
+    <p class="warn">As there are nuts and sesame seeds used in our kitchen, despite our best efforts, cross-contamination is possible. If you have an allergy to nuts, sesame, or any of the other listed allergens, please inform a member of staff.</p>
   </footer>
 
 </div>
 
 <script>
-  // LÓGICA DAS ABAS
+  /* ============ EFEITO DE NEVE (TELA INTEIRA) ============ */
+  const canvas = document.getElementById('snowCanvas');
+  const ctx = canvas.getContext('2d');
+  let flakes = [];
+  let animationFrameId;
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  function createFlakes() {
+    flakes = [];
+    // Aumentei um pouco a densidade para cobrir a tela toda
+    const flakeCount = Math.floor(canvas.width / 10); 
+    for (let i = 0; i < flakeCount; i++) {
+      flakes.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 2.5 + 1, 
+        speedY: Math.random() * 0.8 + 0.2,
+        speedX: Math.random() * 0.5 - 0.25,
+        opacity: Math.random() * 0.5 + 0.5, // Flocos bem brancos
+        swing: Math.random() * Math.PI * 2
+      });
+    }
+  }
+
+  function drawFlakes() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    flakes.forEach(f => {
+      ctx.beginPath();
+      ctx.arc(f.x, f.y, f.radius, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255, 255, 255, ${f.opacity})`; // COR BRANCA
+      ctx.fill();
+
+      // Sombra sutil para aparecer no fundo claro
+      ctx.strokeStyle = `rgba(0, 0, 0, 0.15)`;
+      ctx.lineWidth = 0.5;
+      ctx.stroke();
+
+      f.y += f.speedY;
+      f.swing += 0.01;
+      f.x += Math.sin(f.swing) * 0.5 + f.speedX;
+
+      if (f.y > canvas.height) {
+        f.y = -10;
+        f.x = Math.random() * canvas.width;
+      }
+      if (f.x > canvas.width) f.x = 0;
+      if (f.x < 0) f.x = canvas.width;
+    });
+
+    animationFrameId = requestAnimationFrame(drawFlakes);
+  }
+
+  resizeCanvas();
+  createFlakes();
+  drawFlakes();
+
+  window.addEventListener('resize', () => {
+    cancelAnimationFrame(animationFrameId);
+    resizeCanvas();
+    createFlakes();
+    drawFlakes();
+  });
+
+  /* ============ LÓGICA DAS ABAS + GATINHO + SCROLL SPY ============ */
   const tabButtons = document.querySelectorAll('.tab-btn');
   const sections = document.querySelectorAll('.menu-block');
+  const catWalker = document.getElementById('catWalker');
+  const navScroll = document.getElementById('navScroll');
+  const navContainer = document.getElementById('navContainer');
+
+  function moveCatTo(btn) {
+    if (!catWalker || !btn) return;
+    const btnRect = btn.getBoundingClientRect();
+    const containerRect = navScroll.getBoundingClientRect();
+    const btnCenter = (btnRect.left - containerRect.left) + navScroll.scrollLeft + (btnRect.width / 2);
+    const catWidth = catWalker.offsetWidth || 70;
+    const newLeft = btnCenter - (catWidth / 2);
+    catWalker.style.left = newLeft + 'px';
+  }
 
   tabButtons.forEach(btn => {
     btn.addEventListener('click', function() {
       const targetId = this.getAttribute('data-target');
+      const targetSection = document.getElementById(targetId);
+      
       tabButtons.forEach(b => b.classList.remove('active'));
-      sections.forEach(s => s.classList.remove('active'));
       this.classList.add('active');
-      document.getElementById(targetId).classList.add('active');
-      const navHeight = document.querySelector('.nav-container').offsetHeight;
-      const sectionPosition = document.getElementById(targetId).offsetTop;
-      window.scrollTo({ top: sectionPosition - navHeight, behavior: 'smooth' });
+      moveCatTo(this);
+
+      const navHeight = navContainer.offsetHeight;
+      const sectionPosition = targetSection.offsetTop;
+      window.scrollTo({ top: sectionPosition - navHeight + 20, behavior: 'smooth' });
     });
   });
 
-  // BLOQUEIO TOTAL DE ZOOM (PINÇA)
+  window.addEventListener('scroll', () => {
+    const navHeight = navContainer.offsetHeight;
+    let currentSectionId = '';
+
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - navHeight - 50;
+      if (window.scrollY >= sectionTop) {
+        currentSectionId = section.getAttribute('id');
+      }
+    });
+
+    if (currentSectionId) {
+      const activeBtn = document.querySelector(`.tab-btn[data-target="${currentSectionId}"]`);
+      if (activeBtn && !activeBtn.classList.contains('active')) {
+        tabButtons.forEach(b => b.classList.remove('active'));
+        activeBtn.classList.add('active');
+        moveCatTo(activeBtn);
+        
+        const btnRect = activeBtn.getBoundingClientRect();
+        const containerRect = navScroll.getBoundingClientRect();
+        const scrollLeft = navScroll.scrollLeft;
+        const btnLeft = btnRect.left - containerRect.left + scrollLeft;
+        const btnCenter = btnLeft + (btnRect.width / 2);
+        const containerCenter = navScroll.clientWidth / 2;
+        
+        navScroll.scrollTo({ left: btnCenter - containerCenter, behavior: 'smooth' });
+      }
+    }
+  });
+
+  window.addEventListener('load', () => {
+    const activeBtn = document.querySelector('.tab-btn.active');
+    setTimeout(() => moveCatTo(activeBtn), 100);
+  });
+
+  window.addEventListener('resize', () => {
+    const activeBtn = document.querySelector('.tab-btn.active');
+    moveCatTo(activeBtn);
+  });
+
+  navScroll.addEventListener('scroll', () => {
+    const activeBtn = document.querySelector('.tab-btn.active');
+    if (activeBtn) {
+      const btnRect = activeBtn.getBoundingClientRect();
+      const containerRect = navScroll.getBoundingClientRect();
+      const btnCenter = (btnRect.left - containerRect.left) + navScroll.scrollLeft + (btnRect.width / 2);
+      const catWidth = catWalker.offsetWidth || 70;
+      catWalker.style.left = (btnCenter - (catWidth / 2)) + 'px';
+    }
+  });
+
   document.addEventListener('gesturestart', function (e) {
     e.preventDefault();
   });
 
-  // ==========================================
-  // LÓGICA DE ARRASTAR COM O MOUSE (DESKTOP)
-  // ==========================================
-  const navScroll = document.getElementById('navScroll');
   let isDown = false;
   let startX;
   let scrollLeft;
